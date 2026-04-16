@@ -448,7 +448,7 @@ topicId deve ser um de: ${active.join(',')}
 importance: 1=info, 2=relevante, 3=urgente`;
 
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
+    const res=await fetch('https://workerhub.onlirroquenrouseives.workers.dev/',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
