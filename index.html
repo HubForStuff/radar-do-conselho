@@ -478,7 +478,7 @@ async function searchCategory(category) {
   for (const query of category.queries) {
     try {
       // Searching last 8 days instead of 7
-      const url = `https://radar-news-proxy.onlirroquenrouseives.workers.dev?q=${encodeURIComponent(query)}&language=pt,en,zh&country=br,cn&timeframe=8d`;
+const url = `https://radar-news-proxy.onlirroquenrouseives.workers.dev?q=${encodeURIComponent(query)}&language=pt,en,zh&country=br,cn`;
       const response = await fetch(url);
       const data = await response.json();
       
