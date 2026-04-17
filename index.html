@@ -453,7 +453,7 @@ importance: 1=info, 2=relevante, 3=urgente`;
       headers:{'Content-Type':'application/json','Authorization':'Bearer sk-0514f7ed7b8947958bcbeb27a7f8e959'},
       body:JSON.stringify({
         model:'deepseek-chat',
-        max_tokens:1200,
+        max_tokens:4000,
         messages:[{role:'user',content:prompt}]
       })
     });
