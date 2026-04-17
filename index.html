@@ -1,3 +1,6 @@
+Here is the HTML code with the logo thickness doubled, the white circle removed from inside, and the subtitle text size reduced by 0.5 points.
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -55,7 +58,7 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 
 .logo-text-container{display:flex;flex-direction:column;align-items:flex-start}
 .logo-name{font-family:'Playfair Display',serif;font-size:36px;font-weight:600;color:#1a1a1a;letter-spacing:-0.01em;line-height:1;margin-bottom:2px}
-.logo-sub{font-size:12px;color:#1a1a1a;letter-spacing:0.02em;line-height:1.3}
+.logo-sub{font-size:11.5px;color:#1a1a1a;letter-spacing:0.02em;line-height:1.3}
 .live-row{display:flex;align-items:center;padding-left:2px}
 .live-label{font-size:13px;color:var(--green);font-weight:500;letter-spacing:0.03em}
 
@@ -80,24 +83,25 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .sec-label{font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#1a1a1a;font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .sec-label::after{content:'';flex:1;height:0.5px;background:var(--b)}
 
-/* TOPICS - LIGHTER COLORS, LARGER, BETTER ALIGNMENT */
-.topics{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:1.4rem;justify-content:flex-start;width:100%}
+/* TOPICS - LIGHTER COLORS */
+.topics{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.4rem;justify-content:flex-start;width:100%}
 .topics .pill{flex:0 0 auto}
-.pill{font-size:14px;padding:7px 16px;border-radius:100px;border:0.5px solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.2s;background:#f5f0e8;color:#8a7a6a;user-select:none;font-family:'Roboto',sans-serif}
+.pill{font-size:12px;padding:5px 12px;border-radius:100px;border:0.5px solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.2s;background:#f5f0e8;color:#8a7a6a;user-select:none;font-family:'Roboto',sans-serif}
 .pill.on{font-weight:500}
-/* Lighter pastel colors */
-.pill.on.ccbb{background:#fdf5e6;color:#c4882b;border-color:#e8d5b5}
-.pill.on.emergencias{background:#e0f5e8;color:#4aa87a;border-color:#c0e0d0}
-.pill.on.voto{background:#e0f5e8;color:#4aa87a;border-color:#c0e0d0}
-.pill.on.bilateral{background:#e0f5e8;color:#4aa87a;border-color:#c0e0d0}
-.pill.on.negocios{background:#e5f0fa;color:#6a8aaa;border-color:#d0e0f0}
-.pill.on.oportunidades{background:#e5f0fa;color:#6a8aaa;border-color:#d0e0f0}
-.pill.on.imigracao{background:#e5f0fa;color:#6a8aaa;border-color:#d0e0f0}
-.pill.on.esportes{background:#e5f0fa;color:#6a8aaa;border-color:#d0e0f0}
-.pill.on.cultural{background:#e5f0fa;color:#6a8aaa;border-color:#d0e0f0}
-.pill.on.comunidade{background:#e5f0fa;color:#6a8aaa;border-color:#d0e0f0}
-.pill.on.saude{background:#e5f0fa;color:#6a8aaa;border-color:#d0e0f0}
-.pill.on.turismo{background:#e5f0fa;color:#6a8aaa;border-color:#d0e0f0}
+.pill.on.ccbb{background:#fdf8ed;color:#c4983a;border-color:#f0e0c0}
+.pill.on.emergencias{background:#edf8f2;color:#5ab88a;border-color:#d0ead8}
+.pill.on.voto{background:#edf8f2;color:#5ab88a;border-color:#d0ead8}
+.pill.on.bilateral{background:#edf8f2;color:#5ab88a;border-color:#d0ead8}
+.pill.on.negocios{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.oportunidades{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.imigracao{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.esportes{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.cultural{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.comunidade{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.saude{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.turismo{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.eventos{background:#fdf8ed;color:#c4983a;border-color:#f0e0c0}
+.pill.on.emprego{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
 .pill:hover:not(.on){background:#e8e0d5}
 
 /* ACTION BAR */
@@ -108,18 +112,19 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .btn-g{border-color:var(--green-m);background:var(--green-l);color:var(--green-d);font-weight:500}
 .btn-g:hover{background:var(--green-m)}
 
-/* NEWS GRID - single column, all news together */
-.news-grid{display:grid;grid-template-columns:1fr;gap:13px;margin-bottom:1.75rem}
-.news-card{background:var(--card);border:0.5px solid var(--b);border-radius:var(--rl);padding:1.2rem;transition:all 0.15s;cursor:pointer}
+/* NEWS GRID - TWO COLUMNS, LARGER FONTS */
+.news-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:1.75rem}
+@media(max-width:560px){.news-grid{grid-template-columns:1fr}}
+.news-card{background:var(--card);border:0.5px solid var(--b);border-radius:var(--rl);padding:1.4rem;transition:all 0.15s;cursor:pointer}
 .news-card:hover{border-color:var(--bm);transform:translateY(-2px)}
-.news-title{font-size:16px;font-weight:600;line-height:1.4;margin-bottom:8px;color:var(--t1)}
-.news-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:5px}
-.news-source{font-size:11px;color:var(--green-d);font-weight:500}
-.news-date{font-size:10px;color:var(--t3)}
-.news-summary{font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:12px}
-.news-link{font-size:12px;color:var(--blue);text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+.news-title{font-size:18px;font-weight:600;line-height:1.4;margin-bottom:10px;color:var(--t1)}
+.news-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:5px}
+.news-source{font-size:12px;color:var(--green-d);font-weight:500}
+.news-date{font-size:11px;color:var(--t3)}
+.news-summary{font-size:15px;color:var(--t2);line-height:1.6;margin-bottom:12px}
+.news-link{font-size:13px;color:var(--blue);text-decoration:none;display:inline-flex;align-items:center;gap:4px}
 .news-link:hover{text-decoration:underline}
-.topic-tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:12px;margin-bottom:8px;font-weight:500}
+.topic-tag{display:inline-block;font-size:11px;padding:3px 10px;border-radius:12px;margin-bottom:10px;font-weight:500}
 
 /* LOADER */
 .loader{display:flex;gap:8px;align-items:center;padding:3rem;justify-content:center;color:var(--t3);font-size:14px}
@@ -172,21 +177,18 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
       <div class="logo">
         <div class="logo-ring">
           <svg viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="23" cy="23" r="18" stroke="#ddd0bc" stroke-width="5.6"/>
-            <circle cx="23" cy="23" r="18" stroke="#009C3B" stroke-width="5.6" stroke-linecap="round"
+            <!-- Thickness doubled: stroke-width changed from 5.6 to 11.2 -->
+            <circle cx="23" cy="23" r="18" stroke="#ddd0bc" stroke-width="11.2"/>
+            <circle cx="23" cy="23" r="18" stroke="#009C3B" stroke-width="11.2" stroke-linecap="round"
               stroke-dasharray="36 77"
               style="animation:spin-cw 6s linear infinite;transform-origin:23px 23px"/>
-            <circle cx="23" cy="23" r="18" stroke="#FFDF00" stroke-width="5.6" stroke-linecap="round"
+            <circle cx="23" cy="23" r="18" stroke="#FFDF00" stroke-width="11.2" stroke-linecap="round"
               stroke-dasharray="20 93"
               style="animation:spin-cw 9s linear infinite;transform-origin:23px 23px;animation-delay:-2s"/>
-            <circle cx="23" cy="23" r="18" stroke="#002776" stroke-width="5.6" stroke-linecap="round"
+            <circle cx="23" cy="23" r="18" stroke="#002776" stroke-width="11.2" stroke-linecap="round"
               stroke-dasharray="12 101"
               style="animation:spin-cw 12s linear infinite;transform-origin:23px 23px;animation-delay:-4s"/>
-            <circle cx="23" cy="23" r="17" fill="#f8efe2"/>
-            <circle cx="23" cy="23" r="15" fill="white"
-              style="animation:red-core-pulse 1.8s ease-in-out infinite"/>
-            <circle cx="23" cy="23" r="15" fill="none" stroke="white" stroke-width="3"
-              style="animation:red-ring-expand 1.8s ease-out infinite"/>
+            <!-- White circle completely removed -->
           </svg>
         </div>
         <div class="logo-text-container">
@@ -240,18 +242,18 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
     <div class="footer-brand">
       <div class="footer-logo-ring">
         <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="11" cy="11" r="8.5" stroke="#ccc" stroke-width="3"/>
-          <circle cx="11" cy="11" r="8.5" stroke="#009C3B" stroke-width="3" stroke-linecap="round"
+          <!-- Footer logo thickness doubled: stroke-width changed from 3 to 6 -->
+          <circle cx="11" cy="11" r="8.5" stroke="#ccc" stroke-width="6"/>
+          <circle cx="11" cy="11" r="8.5" stroke="#009C3B" stroke-width="6" stroke-linecap="round"
             stroke-dasharray="16 37"
             style="animation:spin-cw 6s linear infinite;transform-origin:11px 11px"/>
-          <circle cx="11" cy="11" r="8.5" stroke="#FFDF00" stroke-width="3" stroke-linecap="round"
+          <circle cx="11" cy="11" r="8.5" stroke="#FFDF00" stroke-width="6" stroke-linecap="round"
             stroke-dasharray="9 44"
             style="animation:spin-cw 9s linear infinite;transform-origin:11px 11px;animation-delay:-2s"/>
-          <circle cx="11" cy="11" r="8.5" stroke="#002776" stroke-width="3" stroke-linecap="round"
+          <circle cx="11" cy="11" r="8.5" stroke="#002776" stroke-width="6" stroke-linecap="round"
             stroke-dasharray="5 48"
             style="animation:spin-cw 12s linear infinite;transform-origin:11px 11px;animation-delay:-4s"/>
-          <circle cx="11" cy="11" r="8" fill="#f8efe2"/>
-          <circle cx="11" cy="11" r="7" fill="white"/>
+          <!-- White circle removed from footer as well -->
         </svg>
       </div>
       <span class="footer-brand-name">Radar Brasil</span>
@@ -310,31 +312,31 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 <script>
 // ============================================
 // REPLACE WITH YOUR NewsData.io API KEY
-// Get your free key at https://newsdata.io
 // ============================================
 const NEWSDATA_API_KEY = 'YOUR_NEWSDATA_API_KEY_HERE';
 
-// CATEGORIES with corrected search terms for Conselho (Beijing)
+// CATEGORIES
 const CATEGORIES = [
-  { id: 'ccbb', name: 'Notícias do Conselho', active: true, color: '#c4882b', bg: '#fdf5e6', tag: 'Conselho', queries: ['"Conselho de Cidadãos Brasileiros" Pequim', '"Conselho de Cidadãos Brasileiros" Beijing', 'conselho brasileiros Pequim', 'Conselho Cidadãos Brasileiros Beijing'] },
-  { id: 'emergencias', name: 'Alertas Consulares China', active: false, color: '#4aa87a', bg: '#e0f5e8', tag: 'Urgente', queries: ['embaixada Brasil China aviso', 'consulado Brasil China alerta', 'alerta consular China brasileiros'] },
-  { id: 'voto', name: 'Voto no Exterior', active: false, color: '#4aa87a', bg: '#e0f5e8', tag: 'Governo', queries: ['voto exterior China brasileiros', 'eleições Brasil China consulado', 'TSE voto China'] },
-  { id: 'bilateral', name: 'Relações Brasil-China', active: false, color: '#4aa87a', bg: '#e0f5e8', tag: 'Governo', queries: ['Brasil China relações governo', 'acordo Brasil China', 'visita oficial Brasil China'] },
-  { id: 'negocios', name: 'Negócios Brasil-China', active: false, color: '#6a8aaa', bg: '#e5f0fa', tag: 'Economia', queries: ['comércio Brasil China', 'investimento China Brasil', 'exportação Brasil China'] },
-  { id: 'oportunidades', name: 'Bolsas & Oportunidades', active: false, color: '#6a8aaa', bg: '#e5f0fa', tag: 'Educação', queries: ['bolsa China brasileiros CSC', 'intercâmbio China Brasil', 'estudar na China brasileiros'] },
-  { id: 'imigracao', name: 'Visto & Imigração China', active: false, color: '#6a8aaa', bg: '#e5f0fa', tag: 'Imigração', queries: ['visto China brasileiros', 'residência China brasileiros', 'imigração China Brasil'] },
-  { id: 'esportes', name: 'Esportes Brasileiros na China', active: false, color: '#6a8aaa', bg: '#e5f0fa', tag: 'Esportes', queries: ['brasileiros futebol China', 'atletas brasileiros China'] },
-  { id: 'cultural', name: 'Ano Cultural Brasil-China', active: false, color: '#6a8aaa', bg: '#e5f0fa', tag: 'Cultura', queries: ['cultura Brasil China evento', 'festival brasileiro China'] },
-  { id: 'comunidade', name: 'Comunidade Brasileira na China', active: false, color: '#6a8aaa', bg: '#e5f0fa', tag: 'Comunidade', queries: ['brasileiros em Pequim', 'comunidade brasileira China', 'eventos brasileiros China'] },
-  { id: 'saude', name: 'Saúde na China', active: false, color: '#6a8aaa', bg: '#e5f0fa', tag: 'Saúde', queries: ['saúde China brasileiros', 'hospital China estrangeiro', 'seguro saúde China'] },
-  { id: 'turismo', name: 'Turismo & Lazer', active: false, color: '#6a8aaa', bg: '#e5f0fa', tag: 'Turismo', queries: ['turismo China brasileiros', 'viajar China dicas', 'pontos turísticos China'] }
+  { id: 'ccbb', name: 'Notícias do Conselho', active: true, color: '#c4983a', bg: '#fdf8ed', tag: 'Conselho', visible: true, queries: ['"Conselho de Cidadãos Brasileiros" Pequim', '"Conselho de Cidadãos Brasileiros" Beijing', '"conselho de cidadãos brasileiros" china', '"conselhobeijing.org"', '"Conselho Cidadãos Brasileiros" China'] },
+  { id: 'emergencias', name: 'Alertas Consulares China', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Consular', visible: true, queries: ['embaixada Brasil China comunicado', 'consulado Brasil China aviso', 'alerta consular China brasileiros', 'recomendação viagem China brasileiros', 'Itamaraty China alerta'] },
+  { id: 'voto', name: 'Voto no Exterior', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Eleitoral', visible: true, queries: ['voto exterior China brasileiros', 'eleições Brasil China consulado', 'TSE voto exterior China', 'seção eleitoral Brasil Pequim', 'cadastro eleitoral brasileiros China'] },
+  { id: 'bilateral', name: 'Relações Brasil-China', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Diplomacia', visible: true, queries: ['Brasil China relações diplomáticas', 'acordo Brasil China comércio', 'Lula China visita', 'presidente China Brasil encontro', 'BRICS China Brasil cooperação', 'Itamaraty China relações'] },
+  { id: 'negocios', name: 'Negócios Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Economia', visible: true, queries: ['investimento chinês Brasil', 'exportação Brasil China soja', 'comércio bilateral Brasil China', 'empresas chinesas no Brasil', 'balança comercial Brasil China', 'agronegócio Brasil China'] },
+  { id: 'oportunidades', name: 'Bolsas & Oportunidades', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Educação', visible: true, queries: ['bolsa CSC China brasileiros', 'intercâmbio China Brasil universidade', 'estudar na China brasileiros', 'programa bolsa governo chinês', 'oportunidades acadêmicas China', 'universidades China brasileiros'] },
+  { id: 'imigracao', name: 'Visto & Imigração China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Imigração', visible: true, queries: ['visto trabalho China brasileiros', 'residência China brasileiros', 'visto estudante China Brasil', 'renovação visto China', 'política imigração China estrangeiros', 'visto turista China brasileiros'] },
+  { id: 'esportes', name: 'Esportes Brasileiros na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Esportes', visible: true, queries: ['jogadores brasileiros futebol China', 'atletas brasileiros competição China', 'futebol chinês brasileiros', 'seleção brasileira China amistoso', 'brasileiros liga chinesa'] },
+  { id: 'cultural', name: 'Ano Cultural Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['festival brasileiro China', 'cultura Brasil China evento', 'exposição arte Brasil China', 'música brasileira China', 'cinema brasileiro China', 'intercâmbio cultural Brasil China'] },
+  { id: 'comunidade', name: 'Comunidade Brasileira na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Comunidade', visible: true, queries: ['brasileiros em Pequim encontro', 'comunidade brasileira Xangai', 'eventos brasileiros China', 'associação brasileiros China', 'brasileiros na China notícias', 'grupo brasileiros China'] },
+  { id: 'saude', name: 'Saúde na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Saúde', visible: true, queries: ['sistema saúde China brasileiros', 'hospital Pequim estrangeiro', 'seguro saúde China brasileiros', 'atendimento médico China', 'farmácia China estrangeiro'] },
+  { id: 'turismo', name: 'Turismo & Lazer', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Turismo', visible: true, queries: ['roteiro China brasileiros', 'destinos turísticos China', 'visto turista China brasileiros', 'dicas viagem China', 'pontos turísticos Pequim'] },
+  { id: 'eventos', name: 'Eventos em Pequim', active: true, color: '#c4983a', bg: '#fdf8ed', tag: 'Eventos', visible: false, queries: ['agenda cultural Pequim', 'exposições Pequim 2026', 'festivais Pequim calendário', 'shows Pequim programação', 'eventos comunidade Pequim', 'feiras Pequim', 'encontros brasileiros Pequim'] },
+  { id: 'emprego', name: 'Oportunidades de Emprego', active: true, color: '#7a9aba', bg: '#f0f5fc', tag: 'Carreira', visible: false, queries: ['vagas China brasileiros', 'emprego Pequim estrangeiros', 'oportunidades trabalho China', 'recrutamento China profissionais', 'carreira China brasileiros', 'trabalho Xangai brasileiros', 'emprego tecnologia China'] }
 ];
 
 let allNews = [];
 let subs = [];
 let newsdataApiKey = localStorage.getItem('newsdata_api_key') || NEWSDATA_API_KEY;
 
-// Load subscribers
 try { subs = JSON.parse(localStorage.getItem('rdc_subs') || '[]'); } catch(e) {}
 
 function nextMonday() {
@@ -345,7 +347,8 @@ function nextMonday() {
 document.getElementById('nextDate').textContent = nextMonday();
 
 function renderTopics() {
-  document.getElementById('topicBar').innerHTML = CATEGORIES.map(cat => {
+  const visibleCategories = CATEGORIES.filter(cat => cat.visible === true);
+  document.getElementById('topicBar').innerHTML = visibleCategories.map(cat => {
     const isActive = cat.active;
     let additionalClass = '';
     let styleAttr = '';
@@ -409,7 +412,7 @@ function heroSubscribe() {
   localStorage.setItem('rdc_subs', JSON.stringify(subs));
   document.getElementById('heroName').value = '';
   document.getElementById('heroEmail').value = '';
-  toast('Inscrito com sucesso! Você receberá a próxima newsletter na segunda-feira.');
+  toast('Inscrito com sucesso!');
 }
 
 function adminAdd() {
@@ -458,7 +461,7 @@ function escapeHtml(str) {
   }); 
 }
 
-function truncateSummary(text, maxWords = 58) {
+function truncateSummary(text, minWords = 23, maxWords = 58) {
   if (!text) return '';
   const words = text.split(/\s+/);
   if (words.length <= maxWords) return text;
@@ -472,19 +475,24 @@ async function searchCategory(category) {
   
   for (const query of category.queries) {
     try {
-      // Use the 'latest' endpoint which is more permissive and avoids timeframe errors
-      const url = `https://newsdata.io/api/1/latest?apikey=${newsdataApiKey}&q=${encodeURIComponent(query)}&language=pt,en,zh&country=br,cn&size=3`;
+      const url = `https://newsdata.io/api/1/latest?apikey=${newsdataApiKey}&q=${encodeURIComponent(query)}&language=pt,en,zh&size=5`;
       const response = await fetch(url);
       const data = await response.json();
       
       if (data.results && data.results.length > 0) {
         for (const article of data.results) {
-          if (!seenUrls.has(article.link) && articles.length < 5) {
+          const title = (article.title || '').toLowerCase();
+          const isRelevant = !title.includes('irã') && !title.includes('iran') && 
+                             !title.includes('trump') && !title.includes('eua') && 
+                             !title.includes('us ') && !title.includes('united states');
+          
+          if (isRelevant && !seenUrls.has(article.link) && articles.length < 6) {
             seenUrls.add(article.link);
+            let summary = article.description || article.ai_summary || 'Clique para ler o artigo completo.';
             articles.push({
               title: article.title,
-              summary: article.description || article.ai_summary || 'Clique para ler o artigo completo.',
-              source: article.source_name || article.source_id || 'NewsData.io',
+              summary: truncateSummary(summary, 23, 58),
+              source: article.source_name || article.source_id || 'Fonte internacional',
               date: article.pubDate ? new Date(article.pubDate).toLocaleDateString('pt-BR') : 'Data recente',
               url: article.link,
               categoryId: category.id,
@@ -496,9 +504,9 @@ async function searchCategory(category) {
           }
         }
       }
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise(resolve => setTimeout(resolve, 200));
     } catch (error) {
-      console.error(`Erro ao buscar para ${category.name} - query: ${query}`, error);
+      console.error(`Erro ao buscar para ${category.name}:`, error);
     }
   }
   return articles;
@@ -521,7 +529,7 @@ function renderNews() {
         <span class="news-source">${escapeHtml(item.source)}</span>
         <span class="news-date">${item.date}</span>
       </div>
-      <div class="news-summary">${escapeHtml(truncateSummary(item.summary, 58))}</div>
+      <div class="news-summary">${escapeHtml(item.summary)}</div>
       <a href="${escapeHtml(item.url)}" target="_blank" class="news-link" onclick="event.stopPropagation()">Ler artigo completo →</a>
     </div>
   `).join('');
@@ -529,14 +537,14 @@ function renderNews() {
 
 async function fetchAllNews() {
   if (!newsdataApiKey || newsdataApiKey === 'YOUR_NEWSDATA_API_KEY_HERE') {
-    document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API do NewsData.io clicando no botão "Admin" e adicionando sua chave.</div>';
-    toast('Por favor, configure sua chave API do NewsData.io primeiro');
+    document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API do NewsData.io clicando no botão "Admin".</div>';
+    toast('Configure sua chave API do NewsData.io');
     return;
   }
   
-  const activeCategories = CATEGORIES.filter(cat => cat.active);
+  const activeCategories = CATEGORIES.filter(cat => cat.active === true);
   if (activeCategories.length === 0) {
-    document.getElementById('newsGrid').innerHTML = '<div class="empty">Selecione pelo menos um tema monitorado para buscar notícias.</div>';
+    document.getElementById('newsGrid').innerHTML = '<div class="empty">Selecione pelo menos um tema monitorado.</div>';
     return;
   }
   
@@ -551,7 +559,6 @@ async function fetchAllNews() {
     allArticles.push(...articles);
   }
   
-  // Remove duplicates by URL
   const uniqueArticles = [];
   const seenUrls = new Set();
   for (const article of allArticles) {
@@ -561,22 +568,21 @@ async function fetchAllNews() {
     }
   }
   
-  // Sort by date (most recent first)
   uniqueArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
   
-  allNews = uniqueArticles;
+  allNews = uniqueArticles.slice(0, 24);
   loader.style.display = 'none';
   renderNews();
   toast(`Veja as notícias encontradas`);
 }
 
-// Initialize
 renderTopics();
 if (newsdataApiKey && newsdataApiKey !== 'YOUR_NEWSDATA_API_KEY_HERE') { 
   fetchAllNews(); 
 } else {
-  document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API do NewsData.io clicando no botão "Admin" e adicionando sua chave.</div>';
+  document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API do NewsData.io clicando no botão "Admin".</div>';
 }
 </script>
 </body>
 </html>
+```
