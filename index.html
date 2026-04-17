@@ -150,9 +150,6 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .spin{width:17px;height:17px;border:1.5px solid var(--b);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .empty{text-align:center;padding:3rem 1rem;color:var(--t3);font-size:16px;line-height:1.7;width:100%;display:flex;align-items:center;justify-content:center;min-height:200px;grid-column:1/-1}
-.api-info{background:var(--blue-l);padding:8px 12px;border-radius:var(--r);font-size:12px;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-.api-info a{color:var(--blue);text-decoration:none;cursor:pointer}
-.api-info a:hover{text-decoration:underline}
 
 /* FOOTER */
 footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
@@ -303,12 +300,12 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 <script>
 // Search queries for each topic (English, Chinese, Portuguese)
 const TOPICS = [
+  {id:'ccbb', label:'Notícias do Conselho', color:'#633806', bg:'#f5e4c0', tag:'Conselho', 
+   queries:['conselhobeijing.org', 'conselho dos cidadaos brasileiros de beijing', 'conselho de cidadãos brasileiros de Pequim', 'conselho cidadãos brasileiros china']},
   {id:'embaixada', label:'Embaixada & Consulado', color:'#085041', bg:'#d6f0e0', tag:'Consular', 
    queries:['Brazil embassy China', 'Brazil consulate China', '巴西驻华大使馆', 'consulado brasileiro China']},
   {id:'mre', label:'MRE / Itamaraty', color:'#085041', bg:'#d6f0e0', tag:'Diplomacia', 
    queries:['Brazil Ministry Foreign Affairs China', 'Itamaraty China', '巴西外交部']},
-  {id:'ccbb', label:'Notícias do Conselho', color:'#633806', bg:'#f5e4c0', tag:'Conselho', 
-   queries:['Brazilians in China community', 'Brazilian community China', '在华巴西人']},
   {id:'voto', label:'Voto no Exterior', color:'#085041', bg:'#d6f0e0', tag:'Eleições', 
    queries:['Brazil overseas voting China', 'Brazilian elections abroad China']},
   {id:'bilateral', label:'Relações Brasil-China', color:'#3C3489', bg:'#e8e6fc', tag:'Bilateral', 
@@ -329,7 +326,7 @@ const TOPICS = [
    queries:['Brazilians in Shanghai', 'Brazilian expats China', '巴西人在中国']}
 ];
 
-let active = ['embaixada', 'mre', 'ccbb', 'esportes', 'imigracao', 'bilateral'];
+let active = ['ccbb']; // Only "Notícias do Conselho" preselected
 let arts = [];
 let subs = [];
 let activeLoc = 'china';
@@ -353,7 +350,11 @@ function renderTopics() {
 }
 
 function toggleTopic(id) {
-  active = active.includes(id) ? active.filter(x => x !== id) : [...active, id];
+  if (active.includes(id)) {
+    active = active.filter(x => x !== id);
+  } else {
+    active = [...active, id];
+  }
   renderTopics();
 }
 
