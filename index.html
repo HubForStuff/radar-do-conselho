@@ -450,7 +450,7 @@ importance: 1=info, 2=relevante, 3=urgente`;
   try{
     const res=await fetch('https://workerhub.onlirroquenrouseives.workers.dev/',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{'Content-Type':'application/json','x-api-key':'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','anthropic-version':'2023-06-01'},
       body:JSON.stringify({
         model:'claude-sonnet-4-20250514',
         max_tokens:1200,
