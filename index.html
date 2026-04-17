@@ -139,7 +139,9 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .sub-remove:hover{color:#A32D2D;background:#FCEBEB}
 .divider{height:0.5px;background:var(--b);margin:14px 0}
 .loc-row{display:flex;gap:6px;flex-wrap:wrap}
-.api-input-group{margin-bottom:16px}
+.api-section{background:var(--blue-l);padding:12px;border-radius:var(--r);margin-bottom:16px}
+.api-section .m-field-label{color:var(--blue)}
+.api-note{font-size:10px;color:var(--blue);margin-top:6px;text-align:center}
 
 /* FOOTER */
 footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
@@ -251,18 +253,19 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 <div class="modal-bg" id="adminModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('adminModal')">✕</button>
-    <h3>Gerenciar inscritos <span class="badge badge-ok2">admin</span></h3>
+    <h3>Configurações <span class="badge badge-ok2">admin</span></h3>
     
     <!-- API KEY CONFIGURATION SECTION -->
-    <div class="api-input-group">
-      <div class="m-field-label">Chave API GNews</div>
+    <div class="api-section">
+      <div class="m-field-label" style="color:var(--blue)">Chave API GNews</div>
       <input type="text" id="apiKeyInput" class="m-input" placeholder="Cole sua chave API do GNews aqui" style="margin-bottom:8px"/>
-      <button class="btn btn-g" onclick="saveApiKey()" style="width:100%; margin-bottom:16px">Salvar Chave API</button>
-      <p style="font-size:11px;color:var(--t3);margin-top:4px">Obtenha sua chave gratuita em <a href="https://gnews.io/" target="_blank" style="color:var(--green-d)">gnews.io</a> (100 requisições/dia grátis)</p>
+      <button class="btn btn-g" onclick="saveApiKey()" style="width:100%">Salvar Chave API</button>
+      <div class="api-note">Obtenha sua chave gratuita em gnews.io (100 requisições/dia)</div>
     </div>
     
     <div class="divider"></div>
     
+    <h3 style="font-size:14px; margin-bottom:12px">Gerenciar inscritos</h3>
     <p style="font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.6">
       Adicione manualmente pessoas que pediram para receber a newsletter.
     </p>
@@ -324,7 +327,13 @@ function renderTopics() {
   document.getElementById('topicBar').innerHTML = CATEGORIES.map(cat => `<div class="pill on" style="background:#d6f0e0;color:#085041;border-color:#08504155">${cat.name}</div>`).join('');
 }
 
-function openModal(id) { document.getElementById(id).classList.add('open'); if(id === 'adminModal') { renderSubs(); document.getElementById('apiKeyInput').value = gnewsApiKey; } }
+function openModal(id) { 
+  document.getElementById(id).classList.add('open'); 
+  if(id === 'adminModal') { 
+    renderSubs(); 
+    document.getElementById('apiKeyInput').value = gnewsApiKey; 
+  } 
+}
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
 function saveApiKey() {
@@ -482,41 +491,4 @@ function renderCategories() {
             <div class="news-meta">
               <span class="news-source">${escapeHtml(item.source)}</span>
               <span class="news-date">${item.date}</span>
-              <span class="news-lang">${item.lang}</span>
-            </div>
-            <div class="news-summary">${escapeHtml(item.summary.length > 150 ? item.summary.substring(0, 150) + '...' : item.summary)}</div>
-            <a href="${escapeHtml(item.url)}" target="_blank" class="news-link" onclick="event.stopPropagation()">Ler artigo completo →</a>
-          </div>
-        `;
-      }
-    }
-    html += `</div></div>`;
-  }
-  container.innerHTML = html;
-}
-
-async function fetchAllNews() {
-  if (!gnewsApiKey) {
-    document.getElementById('categoriesContainer').innerHTML = '<div class="empty">Configure sua chave API do GNews clicando no botão "Admin" e adicionando sua chave.</div>';
-    toast('Por favor, configure sua chave API do GNews primeiro');
-    return;
-  }
-  
-  const container = document.getElementById('categoriesContainer');
-  container.innerHTML = '<div class="loader"><div class="spin"></div>Buscando notícias...</div>';
-  
-  for (const category of CATEGORIES) {
-    allNewsData[category.id] = await searchCategory(category);
-  }
-  renderCategories();
-  toast('Veja as notícias encontradas');
-}
-
-// Initialize
-renderTopics();
-if (gnewsApiKey) { fetchAllNews(); } else {
-  document.getElementById('categoriesContainer').innerHTML = '<div class="empty">Configure sua chave API do GNews clicando no botão "Admin" e adicionando sua chave.</div>';
-}
-</script>
-</body>
-</html>
+              <span class
