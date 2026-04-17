@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radar do Conselho — Inteligência para brasileiros na China</title>
+<title>Radar Brasil — Inteligência para brasileiros na China</title>
 <meta name="description" content="Inteligência semanal para brasileiros na China. Embaixada, MRE, Copa do Mundo, vistos, cultura e muito mais.">
-<meta property="og:title" content="Radar do Conselho">
+<meta property="og:title" content="Radar Brasil">
 <meta property="og:description" content="Newsletter semanal toda segunda-feira para brasileiros na China.">
 <meta name="theme-color" content="#009C3B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -191,12 +191,12 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
           </svg>
         </div>
         <div>
-          <div class="logo-name">Radar do Conselho</div>
+          <div class="logo-name">Radar Brasil</div>
           <div class="logo-sub">Inteligência para brasileiros na China</div>
         </div>
       </div>
       <div class="live-row">
-        <span class="live-label">ao vivo</span>
+        <span class="live-label"></span>
       </div>
     </div>
     <div class="header-right">
@@ -223,12 +223,6 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
   <!-- TOPICS -->
   <div class="sec-label">Temas monitorados</div>
   <div class="topics" id="topicBar"></div>
-
-  <!-- API INFO -->
-  <div class="api-info" id="apiInfo">
-    <span>Buscando notícias reais (Inglês, Chinês, Português)</span>
-    <a href="#" onclick="openApiModal()">Configurar API Key</a>
-  </div>
 
   <!-- ACTION BAR -->
   <div class="action-bar">
@@ -264,7 +258,7 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
           <circle cx="11" cy="11" r="2" fill="white"/>
         </svg>
       </div>
-      <span class="footer-brand-name">Radar do Conselho</span>
+      <span class="footer-brand-name">Radar Brasil</span>
     </div>
     <div class="footer-note">Toda segunda-feira em seu email</div>
   </footer>
@@ -272,20 +266,6 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
-
-<!-- API KEY MODAL -->
-<div class="modal-bg" id="apiModal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('apiModal')">✕</button>
-    <h3>Configuração da API GNews</h3>
-    <p style="font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.6">
-      Obtenha sua chave API gratuita em <a href="https://gnews.io/" target="_blank" style="color:var(--green-d)">gnews.io</a> (100 requisições/dia grátis).
-    </p>
-    <div class="m-field-label">Chave API</div>
-    <input type="text" id="apiKeyInput" class="m-input" placeholder="Digite sua chave API do GNews" style="margin-bottom:16px">
-    <button class="btn btn-g" onclick="saveApiKey()" style="width:100%">Salvar Chave API</button>
-  </div>
-</div>
 
 <!-- ADMIN MODAL -->
 <div class="modal-bg" id="adminModal">
@@ -391,7 +371,6 @@ document.getElementById('locPills')?.addEventListener('click', e => {
 
 function openModal(id) { document.getElementById(id).classList.add('open'); if(id === 'adminModal') renderSubs(); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-function openApiModal() { openModal('apiModal'); }
 
 function saveApiKey() {
   const key = document.getElementById('apiKeyInput').value.trim();
@@ -510,8 +489,7 @@ function showDetail(i) {
 async function fetchNews() {
   if (!active.length) { toast('Selecione pelo menos um tema.'); return; }
   if (!gnewsApiKey) { 
-    toast('Por favor, configure sua chave API do GNews primeiro (clique em Configurar API Key)'); 
-    openApiModal();
+    toast('Por favor, configure sua chave API do GNews primeiro'); 
     return;
   }
   
@@ -610,7 +588,6 @@ renderTopics();
 if (!gnewsApiKey) {
   setTimeout(() => {
     toast('Por favor, configure sua chave API do GNews para buscar notícias reais');
-    openApiModal();
   }, 1000);
 } else {
   fetchNews();
