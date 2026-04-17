@@ -53,7 +53,7 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 @keyframes red-core-pulse{0%,100%{opacity:1}50%{opacity:0.5}}
 @keyframes red-ring-expand{0%{r:4.5;opacity:0.5;stroke-width:1.5}100%{r:10;opacity:0;stroke-width:0.3}}
 
-.logo-name{font-family:'Playfair Display',serif;font-size:26px;font-weight:600;color:#1a1a1a;letter-spacing:-0.01em;line-height:1}
+.logo-name{font-family:'Playfair Display',serif;font-size:28px;font-weight:600;color:#1a1a1a;letter-spacing:-0.01em;line-height:1}
 .logo-sub{font-size:13px;color:#1a1a1a;letter-spacing:0.02em;margin-top:4px}
 .live-row{display:flex;align-items:center;padding-left:2px}
 .live-label{font-size:13px;color:var(--green);font-weight:500;letter-spacing:0.03em}
@@ -572,8 +572,8 @@ async function fetchNews() {
   loader.style.display = 'none';
   
   if (allArticles.length === 0) {
-    grid.innerHTML = '<div class="empty">Nenhuma notícia real encontrada nos últimos 7 dias.<br><br>Certifique-se de ter uma chave API GNews válida.<br>Obtenha sua chave gratuita em <a href="https://gnews.io/" target="_blank" style="color:var(--green-d)">gnews.io</a><br><br>Tente selecionar temas diferentes ou verifique sua chave API.</div>';
-    toast('Nenhuma notícia encontrada. Verifique sua chave API e tente novamente.');
+    grid.innerHTML = '<div class="empty">Nenhuma notícia encontrada nos últimos 7 dias.</div>';
+    toast('Nenhuma notícia encontrada. Tente novamente mais tarde.');
     return;
   }
   
