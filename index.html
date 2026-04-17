@@ -127,10 +127,12 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .loader{display:flex;gap:8px;align-items:center;padding:3rem;justify-content:center;color:var(--t3);font-size:14px}
 .spin{width:17px;height:17px;border:1.5px solid var(--b);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.empty{text-align:center;padding:3rem 1rem;color:var(--t3);font-size:16px;line-height:1.7;width:100%;display:flex;align-items:center;justify-content:center;min-height:200px;grid-column:1 / -1}
 
-/* TOAST */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--green-d);color:#d6f0e0;font-size:13px;padding:10px 22px;border-radius:100px;opacity:0;transition:opacity 0.25s;pointer-events:none;z-index:100;white-space:nowrap;font-family:'Roboto',sans-serif}
+/* EMPTY STATE - CENTERED ON PAGE */
+.empty{text-align:center;padding:3rem 1rem;color:var(--t3);font-size:16px;line-height:1.7;width:100%;display:flex;align-items:center;justify-content:center;min-height:60vh;grid-column:1/-1}
+
+/* TOAST - HIGHER POSITION, MATCHING SUB-HERO GREEN */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(124,239,90,0.9);color:#1a1a1a;font-size:13px;padding:10px 22px;border-radius:100px;opacity:0;transition:opacity 0.25s;pointer-events:none;z-index:100;white-space:nowrap;font-family:'Roboto',sans-serif;font-weight:500;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
 .toast.show{opacity:1}
 
 /* MODAL */
