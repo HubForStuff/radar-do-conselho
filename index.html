@@ -448,18 +448,17 @@ topicId deve ser um de: ${active.join(',')}
 importance: 1=info, 2=relevante, 3=urgente`;
 
   try{
-    const res=await fetch('https://workerhub.onlirroquenrouseives.workers.dev/',{
+    const res=await fetch('https://api.deepseek.com/chat/completions',{
       method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':'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','anthropic-version':'2023-06-01'},
+      headers:{'Content-Type':'application/json','Authorization':'Bearer sk-0514f7ed7b8947958bcbeb27a7f8e959'},
       body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
+        model:'deepseek-chat',
         max_tokens:1200,
-        tools:[{type:'web_search_20250305',name:'web_search'}],
         messages:[{role:'user',content:prompt}]
       })
     });
     const data=await res.json();
-    const text=data.content.map(b=>b.type==='text'?b.text:'').join('');
+    const text=data.choices?.[0]?.message?.content||'';
     const clean=text.replace(/```json|```/g,'').trim();
     arts=JSON.parse(clean).articles||[];
     loader.style.display='none';
