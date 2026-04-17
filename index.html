@@ -1,6 +1,3 @@
-Here is the complete HTML code with all the requested fixes: user-friendly error messages (no technical API details visible to regular users), toast popup positioned higher with the correct green background, and empty state message centered on the page.
-
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -88,20 +85,22 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .topics .pill{flex:0 0 auto}
 .pill{font-size:12px;padding:5px 12px;border-radius:100px;border:0.5px solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.2s;background:#f5f0e8;color:#8a7a6a;user-select:none;font-family:'Roboto',sans-serif}
 .pill.on{font-weight:500}
+.pill.on.todos{background:rgba(124,239,90,0.73);color:#1a5a2a;border-color:#7aef5a}
 .pill.on.ccbb{background:#fdf8ed;color:#c4983a;border-color:#f0e0c0}
 .pill.on.emergencias{background:#edf8f2;color:#5ab88a;border-color:#d0ead8}
 .pill.on.voto{background:#edf8f2;color:#5ab88a;border-color:#d0ead8}
 .pill.on.bilateral{background:#edf8f2;color:#5ab88a;border-color:#d0ead8}
 .pill.on.negocios{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
 .pill.on.oportunidades{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
-.pill.on.imigracao{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.imigracao{background:#edf8f2;color:#5ab88a;border-color:#d0ead8}
 .pill.on.esportes{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
 .pill.on.cultural{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
-.pill.on.comunidade{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.comunidade{background:#fdf8ed;color:#c4983a;border-color:#f0e0c0}
 .pill.on.saude{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
 .pill.on.turismo{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
 .pill.on.eventos{background:#fdf8ed;color:#c4983a;border-color:#f0e0c0}
 .pill.on.emprego{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.tecnologia{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
 .pill:hover:not(.on){background:#e8e0d5}
 
 /* ACTION BAR */
@@ -131,11 +130,11 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .spin{width:17px;height:17px;border:1.5px solid var(--b);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* EMPTY STATE - CENTERED ON PAGE, USER-FRIENDLY MESSAGE */
+/* EMPTY STATE */
 .empty{text-align:center;padding:3rem 1rem;color:var(--t3);font-size:16px;line-height:1.7;width:100%;display:flex;align-items:center;justify-content:center;min-height:60vh;grid-column:1/-1}
 
-/* TOAST - HIGHER POSITION, MATCHING SUB-HERO GREEN */
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(124,239,90,0.9);color:#1a1a1a;font-size:13px;padding:10px 22px;border-radius:100px;opacity:0;transition:opacity 0.25s;pointer-events:none;z-index:100;white-space:nowrap;font-family:'Roboto',sans-serif;font-weight:500;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+/* TOAST - HIGHER, LARGER, CENTERED */
+.toast{position:fixed;top:30%;left:50%;transform:translateX(-50%);background:rgba(124,239,90,0.95);color:#1a5a2a;font-size:16px;font-weight:600;padding:14px 32px;border-radius:50px;opacity:0;transition:opacity 0.3s ease;pointer-events:none;z-index:1000;white-space:nowrap;font-family:'Roboto',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.15);border:1px solid rgba(124,239,90,0.8);letter-spacing:0.5px}
 .toast.show{opacity:1}
 
 /* MODAL */
@@ -165,8 +164,8 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 .footer-brand{display:flex;align-items:center;gap:10px}
 .footer-logo-ring{width:22px;height:22px;flex-shrink:0}
 .footer-logo-ring svg{width:22px;height:22px}
-.footer-brand-name{font-family:'Playfair Display',serif;font-size:16px;color:#888888;font-weight:500}
-.footer-note{font-size:14px;color:#888888}
+.footer-brand-name{font-family:'Playfair Display',serif;font-size:16px;color:#1a1a1a;font-weight:500}
+.footer-note{font-size:14px;color:#1a1a1a}
 </style>
 </head>
 <body>
@@ -310,7 +309,6 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 <script>
 // ============================================
 // YOUR BREVO API KEY - PASTE HERE
-// Get it from: Brevo Dashboard → SMTP & API → API Keys
 // ============================================
 const BREVO_API_KEY = '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';
 
@@ -319,22 +317,24 @@ const BREVO_API_KEY = 'xkeysib-f18cac060edc096213408041ad3e945914a9f4d1fbfce62e8
 // ============================================
 const NEWSDATA_API_KEY = 'pub_ab546bab2eee494fb85264efc74f457a';
 
-// CATEGORIES
+// CATEGORIES - UPDATED ORDER AND COLORS
 const CATEGORIES = [
-  { id: 'ccbb', name: 'Notícias do Conselho', active: true, color: '#c4983a', bg: '#fdf8ed', tag: 'Conselho', visible: true, queries: ['"Conselho de Cidadãos Brasileiros" Pequim', '"Conselho de Cidadãos Brasileiros" Beijing', '"conselho de cidadãos brasileiros" china', '"conselhobeijing.org"'] },
+  { id: 'todos', name: 'Todos', active: true, color: '#1a5a2a', bg: 'rgba(124,239,90,0.73)', tag: 'Geral', visible: true, isSpecial: true },
+  { id: 'ccbb', name: 'Notícias do Conselho', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Conselho', visible: true, queries: ['"Conselho de Cidadãos Brasileiros" Pequim', '"Conselho de Cidadãos Brasileiros" Beijing', '"conselho de cidadãos brasileiros" china', '"conselhobeijing.org"'] },
   { id: 'emergencias', name: 'Alertas Consulares', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Consular', visible: true, queries: ['embaixada Brasil China comunicado', 'consulado Brasil China aviso', 'alerta consular China brasileiros'] },
   { id: 'voto', name: 'Voto no Exterior', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Eleitoral', visible: true, queries: ['voto exterior China brasileiros', 'eleições Brasil China consulado', 'TSE voto exterior China'] },
   { id: 'bilateral', name: 'Relações Brasil-China', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Diplomacia', visible: true, queries: ['Brasil China relações diplomáticas', 'acordo Brasil China comércio', 'BRICS China Brasil'] },
   { id: 'negocios', name: 'Negócios Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Economia', visible: true, queries: ['investimento chinês Brasil', 'comércio bilateral Brasil China', 'empresas chinesas no Brasil'] },
   { id: 'oportunidades', name: 'Bolsas & Oportunidades', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Oportunidades', visible: true, queries: ['bolsa CSC China brasileiros', 'estudar na China brasileiros', 'MBA China brasileiros', 'curso China brasileiros', 'intercâmbio China Brasil'] },
-  { id: 'imigracao', name: 'Visto & Imigração China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Imigração', visible: true, queries: ['visto trabalho China brasileiros', 'residência China brasileiros', 'visto estudante China Brasil'] },
+  { id: 'imigracao', name: 'Visto & Imigração', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Imigração', visible: true, queries: ['visto trabalho China brasileiros', 'residência China brasileiros', 'visto estudante China Brasil'] },
   { id: 'esportes', name: 'Notícias Esportivas', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Esportes', visible: true, queries: ['brasileiros futebol China', 'atletas brasileiros China', 'jogadores brasileiros China'] },
   { id: 'cultural', name: 'Ano Cultural Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['festival brasileiro China', 'cultura Brasil China evento', 'exposição arte Brasil China'] },
-  { id: 'comunidade', name: 'Comunidade Brasileira na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Comunidade', visible: true, queries: ['brasileiros em Pequim', 'comunidade brasileira Xangai', 'eventos brasileiros China'] },
+  { id: 'comunidade', name: 'Comunidade Brasileira na China', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Comunidade', visible: true, queries: ['brasileiros em Pequim', 'comunidade brasileira Xangai', 'eventos brasileiros China'] },
   { id: 'saude', name: 'Saúde na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Saúde', visible: true, queries: ['sistema saúde China brasileiros', 'seguro saúde China', 'atendimento médico China'] },
   { id: 'turismo', name: 'Turismo & Lazer', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Turismo', visible: true, queries: ['turismo China brasileiros', 'dicas viagem China', 'destinos turísticos China'] },
   { id: 'eventos', name: 'Eventos em Beijing', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Eventos', visible: true, queries: ['eventos Pequim', 'exposições Pequim', 'festivais Pequim', 'shows Pequim', 'encontros brasileiros Pequim'] },
-  { id: 'emprego', name: 'Oportunidades de Emprego', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Carreira', visible: true, queries: ['vagas China brasileiros', 'emprego Pequim', 'trabalho China brasileiros', 'oportunidades trabalho China'] }
+  { id: 'emprego', name: 'Oportunidades de Emprego', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Carreira', visible: true, queries: ['vagas China brasileiros', 'emprego Pequim', 'trabalho China brasileiros', 'oportunidades trabalho China'] },
+  { id: 'tecnologia', name: 'Tecnologia na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Tecnologia', visible: true, queries: ['tecnologia China brasileiros', 'inovação China Brasil', 'startups China', 'inteligência artificial China', '5G China notícias'] }
 ];
 
 let allNews = [];
@@ -354,11 +354,14 @@ function renderTopics() {
   const visibleCategories = CATEGORIES.filter(cat => cat.visible === true);
   document.getElementById('topicBar').innerHTML = visibleCategories.map(cat => {
     const isActive = cat.active;
-    let additionalClass = '';
+    let additionalClass = ` ${cat.id}`;
     let styleAttr = '';
     if (isActive) {
-      additionalClass = ` ${cat.id}`;
-      styleAttr = `style="background:${cat.bg};color:${cat.color};border-color:${cat.color}80"`;
+      if (cat.id === 'todos') {
+        styleAttr = `style="background:${cat.bg};color:${cat.color};border-color:#7aef5a"`;
+      } else {
+        styleAttr = `style="background:${cat.bg};color:${cat.color};border-color:${cat.color}80"`;
+      }
     }
     return `<div class="pill on${additionalClass}" ${styleAttr} onclick="toggleTopic('${cat.id}')">${cat.name}</div>`;
   }).join('');
@@ -367,8 +370,22 @@ function renderTopics() {
 function toggleTopic(id) {
   const category = CATEGORIES.find(c => c.id === id);
   if (category) {
-    category.active = !category.active;
+    if (id === 'todos') {
+      // If "Todos" is clicked, select all other topics
+      const wasActive = category.active;
+      CATEGORIES.forEach(c => {
+        if (c.id !== 'todos') c.active = !wasActive;
+      });
+      category.active = !wasActive;
+    } else {
+      category.active = !category.active;
+      // Check if all non-todos are active to sync "Todos"
+      const allOthersActive = CATEGORIES.filter(c => c.id !== 'todos' && c.visible).every(c => c.active === true);
+      const todosCategory = CATEGORIES.find(c => c.id === 'todos');
+      if (todosCategory) todosCategory.active = allOthersActive;
+    }
     renderTopics();
+    fetchAllNews();
   }
 }
 
@@ -394,9 +411,6 @@ function saveApiKey() {
   }
 }
 
-// ============================================
-// SUBSCRIBE FUNCTION WITH BREVO EMAIL
-// ============================================
 async function heroSubscribe() {
   const name = document.getElementById('heroName').value.trim();
   const email = document.getElementById('heroEmail').value.trim();
@@ -406,16 +420,15 @@ async function heroSubscribe() {
     return; 
   }
   
-  // Get selected topics
   const selectedTopics = [];
   document.querySelectorAll('.pill.on').forEach(pill => {
-    selectedTopics.push(pill.innerText);
+    const topicName = pill.innerText;
+    if (topicName !== 'Todos') selectedTopics.push(topicName);
   });
   
   toast('Enviando inscrição...');
   
   try {
-    // Send email via Brevo
     const emailResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
       headers: {
@@ -440,18 +453,14 @@ async function heroSubscribe() {
     });
     
     if (emailResponse.ok) {
-      // Save to localStorage
       if (!subs.find(s => s.email === email)) {
         subs.push({ name: name || email.split('@')[0], email, topics: selectedTopics, date: new Date().toLocaleDateString('pt-BR') });
         localStorage.setItem('rdc_subs', JSON.stringify(subs));
       }
-      
       toast('Inscrito com sucesso! Você receberá a newsletter toda segunda-feira.');
       document.getElementById('heroName').value = '';
       document.getElementById('heroEmail').value = '';
     } else {
-      const error = await emailResponse.json();
-      console.error('Brevo error:', error);
       toast('Erro ao enviar email. Tente novamente.');
     }
   } catch (error) {
@@ -494,7 +503,7 @@ function removeSub(i) { subs.splice(i, 1); localStorage.setItem('rdc_subs', JSON
 function toast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3800);
+  setTimeout(() => t.classList.remove('show'), 3000);
 }
 
 function escapeHtml(str) { 
@@ -515,6 +524,7 @@ function truncateSummary(text, maxWords = 58) {
 }
 
 async function searchCategory(category) {
+  if (category.id === 'todos') return [];
   if (!newsdataApiKey || newsdataApiKey === 'YOUR_NEWSDATA_API_KEY_HERE') return [];
   const articles = [];
   const seenUrls = new Set();
@@ -561,7 +571,6 @@ function renderNews() {
   if (!container) return;
   
   if (allNews.length === 0) {
-    // User-friendly message - no technical API details
     container.innerHTML = '<div class="empty">Nenhuma notícia encontrada no momento. Tente novamente mais tarde ou selecione outros temas.</div>';
     return;
   }
@@ -582,13 +591,12 @@ function renderNews() {
 
 async function fetchAllNews() {
   if (!newsdataApiKey || newsdataApiKey === 'YOUR_NEWSDATA_API_KEY_HERE') {
-    // User-friendly message - no technical API details
     document.getElementById('newsGrid').innerHTML = '<div class="empty">Nenhuma notícia disponível no momento. Tente novamente mais tarde.</div>';
     toast('Serviço de notícias temporariamente indisponível');
     return;
   }
   
-  const activeCategories = CATEGORIES.filter(cat => cat.active === true);
+  const activeCategories = CATEGORIES.filter(cat => cat.active === true && cat.id !== 'todos');
   if (activeCategories.length === 0) {
     document.getElementById('newsGrid').innerHTML = '<div class="empty">Selecione pelo menos um tema monitorado para buscar notícias.</div>';
     return;
@@ -619,18 +627,15 @@ async function fetchAllNews() {
   allNews = uniqueArticles.slice(0, 24);
   loader.style.display = 'none';
   renderNews();
-  toast(`Veja as notícias encontradas`);
+  toast('Veja as notícias encontradas');
 }
 
-// Initialize
 renderTopics();
 if (newsdataApiKey && newsdataApiKey !== 'YOUR_NEWSDATA_API_KEY_HERE') { 
   fetchAllNews(); 
 } else {
-  // User-friendly initial message
   document.getElementById('newsGrid').innerHTML = '<div class="empty">Carregando notícias...</div>';
 }
 </script>
 </body>
 </html>
-```
