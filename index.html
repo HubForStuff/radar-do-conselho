@@ -359,14 +359,19 @@ function renderTopics() {
     const isActive = cat.active;
     let additionalClass = ` ${cat.id}`;
     let styleAttr = '';
+    
     if (isActive) {
+      // Selected button - has 'on' class and colors
       if (cat.id === 'todos') {
         styleAttr = `style="background:${cat.bg};color:${cat.color};border-color:#7aef5a"`;
       } else {
         styleAttr = `style="background:${cat.bg};color:${cat.color};border-color:${cat.color}80"`;
       }
+      return `<div class="pill on${additionalClass}" ${styleAttr} onclick="toggleTopic('${cat.id}')">${cat.name}</div>`;
+    } else {
+      // NOT selected - NO 'on' class, NO colors
+      return `<div class="pill${additionalClass}" onclick="toggleTopic('${cat.id}')">${cat.name}</div>`;
     }
-    return `<div class="pill on${additionalClass}" ${styleAttr} onclick="toggleTopic('${cat.id}')">${cat.name}</div>`;
   }).join('');
 }
 
