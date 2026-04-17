@@ -1,509 +1,309 @@
-<!-- ONLY SHOWING CHANGED PARTS + FULL FIXED JS -->
-<!-- You can replace your entire <script> block with this -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Radar Brasil — Inteligência para brasileiros na China</title>
+
+<meta name="description" content="Inteligência semanal para brasileiros na China.">
+<meta name="theme-color" content="#009C3B">
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#f8efe2;
+  --card:#fffdf9;
+  --t1:#1a1a1a;
+  --t2:#555;
+  --t3:#999;
+  --b:rgba(0,0,0,0.1);
+  --green:#009C3B;
+  --green-d:#085041;
+  --blue:#0C447C;
+  --r:8px;
+  --rl:12px;
+}
+
+body{
+  font-family:Roboto,sans-serif;
+  background:var(--bg);
+  color:var(--t1);
+}
+
+.page{max-width:1100px;margin:auto;padding:2rem}
+
+/* HEADER */
+.logo-name{
+  font-family:'Playfair Display',serif;
+  font-size:46px;
+  font-weight:700;
+  letter-spacing:-0.02em;
+}
+
+.logo-sub{font-size:13px;color:var(--t2)}
+
+/* HERO */
+.sub-hero{
+  background:#d6f0e0;
+  padding:1rem;
+  border-radius:var(--rl);
+  margin:1.5rem 0;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+input{
+  padding:10px;
+  border:1px solid var(--b);
+  border-radius:var(--r);
+}
+
+button{
+  padding:10px 14px;
+  border:none;
+  background:var(--green);
+  color:white;
+  border-radius:var(--r);
+  cursor:pointer;
+}
+
+/* NEWS */
+.news-card{
+  background:var(--card);
+  border:1px solid var(--b);
+  padding:1rem;
+  border-radius:var(--rl);
+  margin-bottom:12px;
+  cursor:pointer;
+}
+
+.news-title{
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+.news-meta{
+  font-size:11px;
+  color:var(--t3);
+  margin-bottom:6px;
+}
+
+.news-summary{
+  font-size:13px;
+  color:var(--t2);
+  line-height:1.6;
+}
+
+.news-link{
+  font-size:12px;
+  color:var(--blue);
+  display:inline-block;
+  margin-top:6px;
+}
+
+/* EMPTY */
+.empty{
+  text-align:center;
+  padding:3rem;
+  color:var(--t3);
+}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--green-d);
+  color:white;
+  padding:10px 18px;
+  border-radius:30px;
+  opacity:0;
+  transition:.2s;
+}
+.toast.show{opacity:1}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div>
+    <div class="logo-name">Radar Brasil</div>
+    <div class="logo-sub">Inteligência para brasileiros na China</div>
+  </div>
+
+  <!-- SUBSCRIBE -->
+  <div class="sub-hero">
+    <input id="name" placeholder="Nome">
+    <input id="email" placeholder="Email">
+    <button onclick="subscribe()">Inscrever</button>
+  </div>
+
+  <button onclick="fetchAllNews()">Atualizar notícias</button>
+
+  <div id="news"></div>
+
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
-// CATEGORIES (UNCHANGED)
-const CATEGORIES = [...]; // KEEP EXACT SAME AS YOUR ORIGINAL
 
-let allNewsData = {};
-let subs = [];
-let gnewsApiKey = localStorage.getItem('gnews_api_key') || '';
+/* =========================
+   CATEGORIES (SEARCH ONLY)
+========================= */
 
-// Load cache
-const cache = JSON.parse(localStorage.getItem('news_cache') || 'null');
-if (cache && Date.now() - cache.time < 1000 * 60 * 30) {
-  allNewsData = cache.data;
-  setTimeout(renderCategories, 200);
-}
+const CATEGORIES = [
+  { queries: [
+    'Conselho de Cidadãos Brasileiros China',
+    'brasileiros China comunidade eventos'
+  ]},
+  { queries: [
+    'visto China brasileiros requisitos',
+    'imigração China Brasil visto'
+  ]},
+  { queries: [
+    'Brasil China acordo comércio economia',
+    'China investe Brasil parceria'
+  ]}
+];
 
-// Load subscribers
-try { subs = JSON.parse(localStorage.getItem('rdc_subs') || '[]'); } catch(e) {}
+let apiKey = localStorage.getItem('gnews_api_key') || '';
+let cache = JSON.parse(localStorage.getItem('cache') || 'null');
 
-function nextMonday() {
-  const d = new Date(), day = d.getDay(), diff = day === 1 ? 7 : (8 - day) % 7 || 7;
-  d.setDate(d.getDate() + diff);
-  return d.toLocaleDateString('pt-BR', {weekday:'long', day:'2-digit', month:'long'});
-}
-document.getElementById('nextDate').textContent = nextMonday();
+/* =========================
+   UTILS
+========================= */
 
-function renderTopics() {
-  document.getElementById('topicBar').innerHTML = CATEGORIES.map(cat =>
-    `<div class="pill on" style="background:#d6f0e0;color:#085041;border-color:#08504155">${cat.name}</div>`
-  ).join('');
-}
-
-// MODAL
-function openModal(id) {
-  document.getElementById(id).classList.add('open');
-  if (id === 'adminModal') renderSubs();
-}
-function closeModal(id) {
-  document.getElementById(id).classList.remove('open');
-}
-
-// CLOSE MODAL OUTSIDE CLICK
-document.querySelectorAll('.modal-bg').forEach(m => {
-  m.addEventListener('click', e => {
-    if (e.target === m) m.classList.remove('open');
-  });
-});
-
-// ✅ NEW: SAVE API KEY
-function saveApiKey() {
-  const key = document.getElementById('apiKeyInput').value.trim();
-  if (!key) return toast('API key inválida');
-  localStorage.setItem('gnews_api_key', key);
-  gnewsApiKey = key;
-  toast('API key salva com sucesso');
-}
-
-// SUBSCRIBE
-function heroSubscribe() {
-  const name = document.getElementById('heroName').value.trim();
-  const email = document.getElementById('heroEmail').value.trim();
-
-  if (!email || !email.includes('@')) return toast('Insira um e-mail válido');
-  if (subs.find(s => s.email === email)) return toast('E-mail já inscrito');
-
-  subs.push({ name: name || email.split('@')[0], email, loc: '?', date: new Date().toLocaleDateString('pt-BR') });
-  localStorage.setItem('rdc_subs', JSON.stringify(subs));
-
-  document.getElementById('heroName').value = '';
-  document.getElementById('heroEmail').value = '';
-  toast('Inscrito com sucesso!');
-}
-
-// ADMIN
-function adminAdd() {
-  const name = document.getElementById('adminName').value.trim();
-  const email = document.getElementById('adminEmail').value.trim();
-
-  if (!email || !email.includes('@')) return toast('E-mail inválido');
-  if (subs.find(s => s.email === email)) return toast('Já existe');
-
-  subs.push({ name: name || email.split('@')[0], email, loc: 'china', date: new Date().toLocaleDateString('pt-BR') });
-  localStorage.setItem('rdc_subs', JSON.stringify(subs));
-
-  renderSubs();
-  toast('Adicionado');
-}
-
-function renderSubs() {
-  const list = document.getElementById('subList');
-  if (!subs.length) return list.style.display = 'none';
-
-  list.style.display = 'block';
-  document.getElementById('subCount').textContent = `(${subs.length})`;
-
-  document.getElementById('subItems').innerHTML = subs.map((s, i) => `
-    <div class="sub-item">
-      <span>${escapeHtml(s.name)}</span>
-      <span style="flex:1;margin:0 8px;overflow:hidden">${escapeHtml(s.email)}</span>
-      <span>${s.loc}</span>
-      <button class="sub-remove" onclick="removeSub(${i})">x</button>
-    </div>
-  `).join('');
-}
-
-function removeSub(i) {
-  subs.splice(i, 1);
-  localStorage.setItem('rdc_subs', JSON.stringify(subs));
-  renderSubs();
-  toast('Removido');
-}
-
-function toast(msg) {
+function toast(msg){
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+  setTimeout(()=>t.classList.remove('show'),2000);
 }
 
-function escapeHtml(str) {
-  return (str || '').replace(/[&<>]/g, m => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;'
-  }[m]));
+function wordsLimit(text, limit=58){
+  return text.split(/\s+/).slice(0,limit).join(' ') + '...';
 }
 
-function detectLanguage(text) {
-  if (/[\u4e00-\u9fff]/.test(text)) return 'ZH';
-  if (/[áàâãéèêíïóôõúçñ]/i.test(text)) return 'PT';
-  return 'EN';
+/* LIGHT PT TRANSFORM */
+function toPT(t){
+  if(!t) return '';
+  return t
+    .replace(/China/g,'China')
+    .replace(/Brazil/g,'Brasil')
+    .replace(/government/g,'governo')
+    .replace(/agreement/g,'acordo')
+    .replace(/visa/g,'visto')
+    .replace(/trade/g,'comércio')
+    .replace(/economy/g,'economia');
 }
 
-// ✅ FIXED SEARCH
-async function searchCategory(category) {
-  const articles = [];
-  const seenUrls = new Set();
+/* =========================
+   FETCH NEWS
+========================= */
 
-  for (const query of category.queries.slice(0, 3)) { // LIMIT API LOAD
-    try {
-      const url = `https://gnews.io/api/v4/search?q=${encodeURIComponent(query)}&lang=pt,en&max=3&from=${getDaysAgo(3)}&apikey=${gnewsApiKey}`;
+async function search(q){
+  const url = `https://gnews.io/api/v4/search?q=${encodeURIComponent(q)}&lang=pt,en&max=3&apikey=${apiKey}`;
+  const res = await fetch(url);
+  if(!res.ok) return [];
+  const data = await res.json();
+  return data.articles || [];
+}
 
-      const response = await fetch(url);
-      if (!response.ok) continue;
+async function fetchAllNews(){
 
-      const data = await response.json();
-
-      if (data.articles) {
-        for (const article of data.articles) {
-          if (seenUrls.has(article.url)) continue;
-          if (articles.length >= 6) break;
-
-          seenUrls.add(article.url);
-
-          articles.push({
-            title: article.title,
-            summary: article.description || '',
-            source: article.source?.name || 'Fonte',
-            dateRaw: article.publishedAt,
-            date: new Date(article.publishedAt).toLocaleDateString('pt-BR'),
-            url: article.url,
-            lang: detectLanguage(article.title)
-          });
-        }
-      }
-
-      await new Promise(r => setTimeout(r, 300));
-
-    } catch (e) {
-      console.error('fetch error', e);
-    }
+  if(!apiKey){
+    toast('Adicione API key no localStorage (gnews_api_key)');
+    return;
   }
 
-  articles.sort((a, b) => new Date(b.dateRaw) - new Date(a.dateRaw));
-  return articles;
-}
+  document.getElementById('news').innerHTML = '<div class="empty">Carregando...</div>';
 
-function getDaysAgo(days) {
-  const d = new Date();
-  d.setDate(d.getDate() - days);
-  return d.toISOString().split('T')[0];
-}
+  const results = [];
+  const seen = new Set();
 
-// RENDER
-function renderCategories() {
-  const container = document.getElementById('categoriesContainer');
-  if (!container) return;
+  for(const cat of CATEGORIES){
+    for(const q of cat.queries.slice(0,2)){
 
-  let html = '';
+      const articles = await search(q);
 
-  for (const category of CATEGORIES) {
-    const news = allNewsData[category.id] || [];
+      for(const a of articles){
 
-    html += `
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-title">${escapeHtml(category.name)}</div>
-          <div class="category-meta">${news.length} notícias</div>
-        </div>
-        <div class="category-news">
-    `;
+        if(seen.has(a.url)) continue;
+        seen.add(a.url);
 
-    if (!news.length) {
-      html += `<div class="empty-category">Sem notícias</div>`;
-    } else {
-      for (const item of news) {
-        html += `
-          <div class="news-card" onclick="window.open('${item.url}','_blank')">
-            <div class="news-title">${escapeHtml(item.title)}</div>
-            <div class="news-meta">
-              <span class="news-source">${escapeHtml(item.source)}</span>
-              <span class="news-date">${item.date}</span>
-              <span class="news-lang">${item.lang}</span>
-            </div>
-            <div class="news-summary">${escapeHtml(item.summary).slice(0,150)}</div>
-          </div>
-        `;
+        results.push({
+          title: a.title,
+          summary: toPT(a.description || a.title || ''),
+          date: a.publishedAt,
+          source: a.source?.name || '',
+          url: a.url
+        });
+
+        if(results.length >= 25) break;
       }
     }
-
-    html += `</div></div>`;
   }
 
-  container.innerHTML = html;
+  results.sort((a,b)=>new Date(b.date)-new Date(a.date));
 
-  // cache save
-  localStorage.setItem('news_cache', JSON.stringify({
-    time: Date.now(),
-    data: allNewsData
-  }));
+  render(results);
 }
 
-// FETCH ALL
-async function fetchAllNews() {
-  if (!gnewsApiKey) return toast('Adicione API key no Admin');
+/* =========================
+   RENDER (UNIFIED FEED)
+========================= */
 
-  document.getElementById('categoriesContainer').innerHTML =
-    '<div class="loader">Carregando...</div>';
+function render(data){
 
-  for (const cat of CATEGORIES) {
-    allNewsData[cat.id] = await searchCategory(cat);
+  const el = document.getElementById('news');
+
+  if(!data.length){
+    el.innerHTML = '<div class="empty">Nenhuma notícia encontrada</div>';
+    return;
   }
 
-  renderCategories();
-  toast('Atualizado');
-}
+  el.innerHTML = data.map(n=>`
+    <div class="news-card" onclick="window.open('${n.url}','_blank')">
+      <div class="news-title">${n.title}</div>
 
-// INIT
-renderTopics();
+      <div class="news-meta">
+        ${n.source} • ${new Date(n.date).toLocaleDateString('pt-BR')}
+      </div>
 
-if (!gnewsApiKey) {
-  document.getElementById('categoriesContainer').innerHTML =
-    '<div class="empty">Adicione API key no Admin</div>';
-}
-</script><!-- ONLY SHOWING CHANGED PARTS + FULL FIXED JS -->
-<!-- You can replace your entire <script> block with this -->
+      <div class="news-summary">
+        ${wordsLimit(n.summary,58)}
+      </div>
 
-<script>
-// CATEGORIES (UNCHANGED)
-const CATEGORIES = [...]; // KEEP EXACT SAME AS YOUR ORIGINAL
-
-let allNewsData = {};
-let subs = [];
-let gnewsApiKey = localStorage.getItem('gnews_api_key') || '';
-
-// Load cache
-const cache = JSON.parse(localStorage.getItem('news_cache') || 'null');
-if (cache && Date.now() - cache.time < 1000 * 60 * 30) {
-  allNewsData = cache.data;
-  setTimeout(renderCategories, 200);
-}
-
-// Load subscribers
-try { subs = JSON.parse(localStorage.getItem('rdc_subs') || '[]'); } catch(e) {}
-
-function nextMonday() {
-  const d = new Date(), day = d.getDay(), diff = day === 1 ? 7 : (8 - day) % 7 || 7;
-  d.setDate(d.getDate() + diff);
-  return d.toLocaleDateString('pt-BR', {weekday:'long', day:'2-digit', month:'long'});
-}
-document.getElementById('nextDate').textContent = nextMonday();
-
-function renderTopics() {
-  document.getElementById('topicBar').innerHTML = CATEGORIES.map(cat =>
-    `<div class="pill on" style="background:#d6f0e0;color:#085041;border-color:#08504155">${cat.name}</div>`
-  ).join('');
-}
-
-// MODAL
-function openModal(id) {
-  document.getElementById(id).classList.add('open');
-  if (id === 'adminModal') renderSubs();
-}
-function closeModal(id) {
-  document.getElementById(id).classList.remove('open');
-}
-
-// CLOSE MODAL OUTSIDE CLICK
-document.querySelectorAll('.modal-bg').forEach(m => {
-  m.addEventListener('click', e => {
-    if (e.target === m) m.classList.remove('open');
-  });
-});
-
-// ✅ NEW: SAVE API KEY
-function saveApiKey() {
-  const key = document.getElementById('apiKeyInput').value.trim();
-  if (!key) return toast('API key inválida');
-  localStorage.setItem('gnews_api_key', key);
-  gnewsApiKey = key;
-  toast('API key salva com sucesso');
-}
-
-// SUBSCRIBE
-function heroSubscribe() {
-  const name = document.getElementById('heroName').value.trim();
-  const email = document.getElementById('heroEmail').value.trim();
-
-  if (!email || !email.includes('@')) return toast('Insira um e-mail válido');
-  if (subs.find(s => s.email === email)) return toast('E-mail já inscrito');
-
-  subs.push({ name: name || email.split('@')[0], email, loc: '?', date: new Date().toLocaleDateString('pt-BR') });
-  localStorage.setItem('rdc_subs', JSON.stringify(subs));
-
-  document.getElementById('heroName').value = '';
-  document.getElementById('heroEmail').value = '';
-  toast('Inscrito com sucesso!');
-}
-
-// ADMIN
-function adminAdd() {
-  const name = document.getElementById('adminName').value.trim();
-  const email = document.getElementById('adminEmail').value.trim();
-
-  if (!email || !email.includes('@')) return toast('E-mail inválido');
-  if (subs.find(s => s.email === email)) return toast('Já existe');
-
-  subs.push({ name: name || email.split('@')[0], email, loc: 'china', date: new Date().toLocaleDateString('pt-BR') });
-  localStorage.setItem('rdc_subs', JSON.stringify(subs));
-
-  renderSubs();
-  toast('Adicionado');
-}
-
-function renderSubs() {
-  const list = document.getElementById('subList');
-  if (!subs.length) return list.style.display = 'none';
-
-  list.style.display = 'block';
-  document.getElementById('subCount').textContent = `(${subs.length})`;
-
-  document.getElementById('subItems').innerHTML = subs.map((s, i) => `
-    <div class="sub-item">
-      <span>${escapeHtml(s.name)}</span>
-      <span style="flex:1;margin:0 8px;overflow:hidden">${escapeHtml(s.email)}</span>
-      <span>${s.loc}</span>
-      <button class="sub-remove" onclick="removeSub(${i})">x</button>
+      <div class="news-link">Ler notícia →</div>
     </div>
   `).join('');
-}
 
-function removeSub(i) {
-  subs.splice(i, 1);
-  localStorage.setItem('rdc_subs', JSON.stringify(subs));
-  renderSubs();
-  toast('Removido');
-}
-
-function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
-}
-
-function escapeHtml(str) {
-  return (str || '').replace(/[&<>]/g, m => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;'
-  }[m]));
-}
-
-function detectLanguage(text) {
-  if (/[\u4e00-\u9fff]/.test(text)) return 'ZH';
-  if (/[áàâãéèêíïóôõúçñ]/i.test(text)) return 'PT';
-  return 'EN';
-}
-
-// ✅ FIXED SEARCH
-async function searchCategory(category) {
-  const articles = [];
-  const seenUrls = new Set();
-
-  for (const query of category.queries.slice(0, 3)) { // LIMIT API LOAD
-    try {
-      const url = `https://gnews.io/api/v4/search?q=${encodeURIComponent(query)}&lang=pt,en&max=3&from=${getDaysAgo(3)}&apikey=${gnewsApiKey}`;
-
-      const response = await fetch(url);
-      if (!response.ok) continue;
-
-      const data = await response.json();
-
-      if (data.articles) {
-        for (const article of data.articles) {
-          if (seenUrls.has(article.url)) continue;
-          if (articles.length >= 6) break;
-
-          seenUrls.add(article.url);
-
-          articles.push({
-            title: article.title,
-            summary: article.description || '',
-            source: article.source?.name || 'Fonte',
-            dateRaw: article.publishedAt,
-            date: new Date(article.publishedAt).toLocaleDateString('pt-BR'),
-            url: article.url,
-            lang: detectLanguage(article.title)
-          });
-        }
-      }
-
-      await new Promise(r => setTimeout(r, 300));
-
-    } catch (e) {
-      console.error('fetch error', e);
-    }
-  }
-
-  articles.sort((a, b) => new Date(b.dateRaw) - new Date(a.dateRaw));
-  return articles;
-}
-
-function getDaysAgo(days) {
-  const d = new Date();
-  d.setDate(d.getDate() - days);
-  return d.toISOString().split('T')[0];
-}
-
-// RENDER
-function renderCategories() {
-  const container = document.getElementById('categoriesContainer');
-  if (!container) return;
-
-  let html = '';
-
-  for (const category of CATEGORIES) {
-    const news = allNewsData[category.id] || [];
-
-    html += `
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-title">${escapeHtml(category.name)}</div>
-          <div class="category-meta">${news.length} notícias</div>
-        </div>
-        <div class="category-news">
-    `;
-
-    if (!news.length) {
-      html += `<div class="empty-category">Sem notícias</div>`;
-    } else {
-      for (const item of news) {
-        html += `
-          <div class="news-card" onclick="window.open('${item.url}','_blank')">
-            <div class="news-title">${escapeHtml(item.title)}</div>
-            <div class="news-meta">
-              <span class="news-source">${escapeHtml(item.source)}</span>
-              <span class="news-date">${item.date}</span>
-              <span class="news-lang">${item.lang}</span>
-            </div>
-            <div class="news-summary">${escapeHtml(item.summary).slice(0,150)}</div>
-          </div>
-        `;
-      }
-    }
-
-    html += `</div></div>`;
-  }
-
-  container.innerHTML = html;
-
-  // cache save
-  localStorage.setItem('news_cache', JSON.stringify({
+  localStorage.setItem('cache', JSON.stringify({
     time: Date.now(),
-    data: allNewsData
+    data
   }));
 }
 
-// FETCH ALL
-async function fetchAllNews() {
-  if (!gnewsApiKey) return toast('Adicione API key no Admin');
+/* =========================
+   INIT
+========================= */
 
-  document.getElementById('categoriesContainer').innerHTML =
-    '<div class="loader">Carregando...</div>';
-
-  for (const cat of CATEGORIES) {
-    allNewsData[cat.id] = await searchCategory(cat);
-  }
-
-  renderCategories();
-  toast('Atualizado');
+if(cache && Date.now()-cache.time < 1000*60*30){
+  render(cache.data);
 }
 
-// INIT
-renderTopics();
-
-if (!gnewsApiKey) {
-  document.getElementById('categoriesContainer').innerHTML =
-    '<div class="empty">Adicione API key no Admin</div>';
-}
 </script>
+
+</body>
+</html>
