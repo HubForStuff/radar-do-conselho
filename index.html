@@ -257,10 +257,10 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
     
     <!-- API KEY CONFIGURATION SECTION -->
     <div class="api-section">
-      <div class="m-field-label" style="color:var(--blue)">Chave API GNews</div>
-      <input type="text" id="apiKeyInput" class="m-input" placeholder="Cole sua chave API do GNews aqui" style="margin-bottom:8px"/>
+      <div class="m-field-label" style="color:var(--blue)">Chave API NewsData.io</div>
+      <input type="text" id="apiKeyInput" class="m-input" placeholder="Cole sua chave API do NewsData.io aqui" style="margin-bottom:8px"/>
       <button class="btn btn-g" onclick="saveApiKey()" style="width:100%">Salvar Chave API</button>
-      <div class="api-note">Obtenha sua chave gratuita em gnews.io (100 requisições/dia)</div>
+      <div class="api-note">Obtenha sua chave gratuita em newsdata.io</div>
     </div>
     
     <div class="divider"></div>
@@ -295,6 +295,12 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 </div>
 
 <script>
+// ============================================
+// IMPORTANT: Replace with your NewsData.io API key
+// Get your free key at https://newsdata.io
+// ============================================
+const NEWSDATA_API_KEY = 'YOUR_NEWSDATA_API_KEY_HERE';  // <-- PASTE YOUR KEY HERE
+
 // CATEGORIES - EXACTLY AS SPECIFIED
 const CATEGORIES = [
   { id: 'ccbb', name: 'Notícias do Conselho', queries: ['Conselho de Cidadãos Brasileiros China', 'Conselho de Cidadãos Brasileiros Pequim eventos', 'conselho brasileiros China atividades oficiais', 'Conselho de Cidadãos Brasileiros reunião ata China', 'iniciativas comunidade brasileira China conselho'] },
@@ -311,7 +317,7 @@ const CATEGORIES = [
 
 let allNewsData = {};
 let subs = [];
-let gnewsApiKey = localStorage.getItem('gnews_api_key') || '';
+let newsdataApiKey = localStorage.getItem('newsdata_api_key') || NEWSDATA_API_KEY;
 
 // Load subscribers
 try { subs = JSON.parse(localStorage.getItem('rdc_subs') || '[]'); } catch(e) {}
@@ -331,7 +337,7 @@ function openModal(id) {
   document.getElementById(id).classList.add('open'); 
   if(id === 'adminModal') { 
     renderSubs(); 
-    document.getElementById('apiKeyInput').value = gnewsApiKey; 
+    document.getElementById('apiKeyInput').value = newsdataApiKey; 
   } 
 }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
@@ -339,8 +345,8 @@ function closeModal(id) { document.getElementById(id).classList.remove('open'); 
 function saveApiKey() {
   const key = document.getElementById('apiKeyInput').value.trim();
   if (key) {
-    gnewsApiKey = key;
-    localStorage.setItem('gnews_api_key', key);
+    newsdataApiKey = key;
+    localStorage.setItem('newsdata_api_key', key);
     toast('Chave API salva! Buscando notícias...');
     closeModal('adminModal');
     fetchAllNews();
@@ -432,32 +438,34 @@ function getDaysAgo(days) {
 }
 
 async function searchCategory(category) {
-  if (!gnewsApiKey) return [];
+  if (!newsdataApiKey || newsdataApiKey === 'YOUR_NEWSDATA_API_KEY_HERE') return [];
   const articles = [];
   const seenUrls = new Set();
   
   for (const query of category.queries) {
     try {
-      const url = `https://gnews.io/api/v4/search?q=${encodeURIComponent(query)}&lang=pt,en&max=3&from=${getDaysAgo(3)}&apikey=${gnewsApiKey}`;
+      // Using NewsData.io API - searches last 7 days, multiple languages
+      const url = `https://newsdata.io/api/1/news?apikey=${newsdataApiKey}&q=${encodeURIComponent(query)}&language=pt,en,zh&country=br,cn&timeframe=7d&size=5`;
       const response = await fetch(url);
       const data = await response.json();
       
-      if (data.articles) {
-        for (const article of data.articles) {
-          if (!seenUrls.has(article.url) && articles.length < 8) {
-            seenUrls.add(article.url);
+      if (data.results && data.results.length > 0) {
+        for (const article of data.results) {
+          if (!seenUrls.has(article.link) && articles.length < 8) {
+            seenUrls.add(article.link);
             articles.push({
               title: article.title,
-              summary: article.description || 'Clique para ler o artigo completo.',
-              source: article.source?.name || 'Fonte internacional',
-              date: new Date(article.publishedAt).toLocaleDateString('pt-BR'),
-              url: article.url,
-              lang: detectLanguage(article.title)
+              summary: article.description || article.ai_summary || 'Clique para ler o artigo completo.',
+              source: article.source_name || article.source_id || 'NewsData.io',
+              date: article.pubDate ? new Date(article.pubDate).toLocaleDateString('pt-BR') : 'Últimos 7 dias',
+              url: article.link,
+              lang: detectLanguage(article.title),
+              sentiment: article.sentiment || 'neutral'
             });
           }
         }
       }
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise(resolve => setTimeout(resolve, 300));
     } catch (error) {
       console.error(`Erro ao buscar para ${category.name} - query: ${query}`, error);
     }
@@ -491,4 +499,43 @@ function renderCategories() {
             <div class="news-meta">
               <span class="news-source">${escapeHtml(item.source)}</span>
               <span class="news-date">${item.date}</span>
-              <span class
+              <span class="news-lang">${item.lang}</span>
+            </div>
+            <div class="news-summary">${escapeHtml(item.summary.length > 150 ? item.summary.substring(0, 150) + '...' : item.summary)}</div>
+            <a href="${escapeHtml(item.url)}" target="_blank" class="news-link" onclick="event.stopPropagation()">Ler artigo completo →</a>
+          </div>
+        `;
+      }
+    }
+    html += `</div></div>`;
+  }
+  container.innerHTML = html;
+}
+
+async function fetchAllNews() {
+  if (!newsdataApiKey || newsdataApiKey === 'YOUR_NEWSDATA_API_KEY_HERE') {
+    document.getElementById('categoriesContainer').innerHTML = '<div class="empty">Configure sua chave API do NewsData.io clicando no botão "Admin" e adicionando sua chave.</div>';
+    toast('Por favor, configure sua chave API do NewsData.io primeiro');
+    return;
+  }
+  
+  const container = document.getElementById('categoriesContainer');
+  container.innerHTML = '<div class="loader"><div class="spin"></div>Buscando notícias...</div>';
+  
+  for (const category of CATEGORIES) {
+    allNewsData[category.id] = await searchCategory(category);
+  }
+  renderCategories();
+  toast('Veja as notícias encontradas');
+}
+
+// Initialize
+renderTopics();
+if (newsdataApiKey && newsdataApiKey !== 'YOUR_NEWSDATA_API_KEY_HERE') { 
+  fetchAllNews(); 
+} else {
+  document.getElementById('categoriesContainer').innerHTML = '<div class="empty">Configure sua chave API do NewsData.io clicando no botão "Admin" e adicionando sua chave.</div>';
+}
+</script>
+</body>
+</html>
