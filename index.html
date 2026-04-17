@@ -81,8 +81,8 @@ body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:va
 .sec-label{font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#1a1a1a;font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .sec-label::after{content:'';flex:1;height:0.5px;background:var(--b)}
 
-/* TOPICS - 2 ROWS (restored) */
-.topics{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.4rem;justify-content:flex-start;width:100%}
+/* TOPICS - FORCED 2 ROWS */
+.topics{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.4rem;justify-content:flex-start;width:100%;max-width:700px}
 .topics .pill{flex:0 0 auto}
 .pill{font-size:12px;padding:5px 12px;border-radius:100px;border:0.5px solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.2s;background:#f5f0e8;color:#8a7a6a;user-select:none;font-family:'Inter',sans-serif}
 .pill.on{font-weight:500}
@@ -140,38 +140,21 @@ body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:va
 .toast{position:fixed;bottom:120px;left:50%;transform:translateX(-50%);background:rgba(124,239,90,0.73);color:#1a5a2a;font-size:14px;font-weight:500;padding:10px 24px;border-radius:50px;opacity:0;transition:opacity 0.3s ease;pointer-events:none;z-index:1000;white-space:nowrap;font-family:'Inter',sans-serif;box-shadow:0 2px 10px rgba(0,0,0,0.1);border:0.5px solid rgba(124,239,90,0.5)}
 .toast.show{opacity:1}
 
-/* MODAL BASE */
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:50;align-items:center;justify-content:center;padding:1rem}
-.modal-bg.open{display:flex}
-.modal{background:var(--bg);border-radius:var(--rl);padding:1.6rem;max-width:1000px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:fadeUp 0.2s ease}
-.modal h3{font-size:16px;font-weight:500;color:var(--t1);margin-bottom:12px}
-.badge{font-size:11px;padding:2px 9px;border-radius:100px;font-weight:500}
-.badge-ok2{background:var(--gold-l);color:#633806}
-.modal-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:15px;cursor:pointer;color:var(--t3);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.modal-close:hover{background:var(--bg2)}
-.m-field-label{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--t3);font-weight:500;margin-bottom:6px}
-.m-input{font-family:'Inter',sans-serif;font-size:14px;width:100%;padding:9px 12px;border-radius:var(--r);border:0.5px solid var(--b);background:var(--card);color:var(--t1);outline:none}
-.m-input:focus{border-color:var(--bm)}
-.divider{height:0.5px;background:var(--b);margin:14px 0}
-.loc-row{display:flex;gap:6px;flex-wrap:wrap}
-.api-section{background:var(--blue-l);padding:12px;border-radius:var(--r);margin-bottom:16px}
-.api-section .m-field-label{color:var(--blue)}
-.api-note{font-size:10px;color:var(--blue);margin-top:6px;text-align:center}
-
-/* DASHBOARD STYLES - PROFESSIONAL, NO EMOJIS */
-.dashboard-nav{display:flex;gap:4px;margin-bottom:24px;border-bottom:1px solid var(--b);padding-bottom:8px}
-.dash-nav-item{background:none;border:none;padding:8px 16px;font-size:13px;font-weight:500;color:var(--t3);cursor:pointer;border-radius:var(--r);transition:all 0.2s}
-.dash-nav-item:hover{background:var(--bg2);color:var(--t1)}
-.dash-nav-item.active{background:var(--green-l);color:var(--green-d)}
+/* DASHBOARD SECTION - INTEGRATED AFTER FOOTER */
+.dashboard-section{background:white;border-radius:16px;padding:24px;margin-top:2rem;border:1px solid var(--b)}
+.dashboard-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+.dashboard-header h3{font-size:18px;font-weight:600}
+.dashboard-tabs{display:flex;gap:4px;border-bottom:1px solid var(--b);margin-bottom:20px}
+.dash-tab{background:none;border:none;padding:8px 16px;font-size:13px;font-weight:500;color:var(--t3);cursor:pointer;border-radius:var(--r);transition:all 0.2s}
+.dash-tab:hover{background:var(--bg2);color:var(--t1)}
+.dash-tab.active{background:var(--green-l);color:var(--green-d)}
 .dashboard-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
-.stat-card{background:white;border-radius:12px;padding:20px;border:1px solid var(--b);transition:all 0.2s}
-.stat-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.05)}
+.stat-card{background:var(--bg);border-radius:12px;padding:20px;border:1px solid var(--b)}
 .stat-number{font-size:32px;font-weight:700;color:var(--green-d);margin-bottom:4px}
 .stat-label{font-size:13px;color:var(--t3)}
 .stat-change{font-size:11px;margin-top:8px;color:var(--t2)}
 .stat-change.up{color:var(--green-d)}
-.stat-change.down{color:var(--red)}
-.chart-container{background:white;border-radius:12px;padding:20px;margin-bottom:24px;border:1px solid var(--b)}
+.chart-container{background:var(--bg);border-radius:12px;padding:20px;margin-bottom:24px;border:1px solid var(--b)}
 .chart-container h4{font-size:14px;margin-bottom:16px;color:var(--t1);font-weight:600}
 .subscriber-table{width:100%;border-collapse:collapse}
 .subscriber-table th,.subscriber-table td{padding:12px;text-align:left;border-bottom:1px solid var(--b);font-size:13px}
@@ -180,27 +163,31 @@ body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:va
 .status-badge{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px}
 .status-badge.active{background:var(--green-d)}
 .status-badge.inactive{background:var(--t3)}
-.remove-btn{background:none;border:none;cursor:pointer;font-size:14px;color:var(--t3);padding:4px 8px;border-radius:var(--r);transition:all 0.2s}
+.remove-btn{background:none;border:none;cursor:pointer;font-size:13px;color:var(--t3);padding:4px 8px;border-radius:var(--r);transition:all 0.2s}
 .remove-btn:hover{background:#FCEBEB;color:var(--red)}
-.campaign-card{background:white;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid var(--b);transition:all 0.2s}
-.campaign-card:hover{transform:translateY(-1px);border-color:var(--green-m)}
+.add-subscriber-form{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.add-subscriber-form input{flex:1;min-width:150px}
+.campaign-card{background:var(--bg);border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid var(--b)}
 .campaign-title{font-weight:600;margin-bottom:8px}
-.campaign-meta{font-size:12px;color:var(--t3);margin-bottom:12px;display:flex;gap:16px}
+.campaign-meta{font-size:12px;color:var(--t3);margin-bottom:12px}
 .campaign-stats{display:flex;gap:24px}
-.campaign-stat{text-align:center}
 .campaign-stat-value{font-weight:700;color:var(--t1)}
 .campaign-stat-label{font-size:11px;color:var(--t3)}
-.login-error{color:red;font-size:12px;margin-top:8px;text-align:center}
-.avatar{width:32px;height:32px;border-radius:50%;background:var(--green-d);color:white;display:inline-flex;align-items:center;justify-content:center;font-weight:600;margin-right:10px;font-size:12px}
+.login-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:1000;display:none;align-items:center;justify-content:center}
+.login-box{background:var(--bg);border-radius:16px;padding:24px;width:320px}
+.login-box input{width:100%;margin-bottom:12px}
+.login-box button{width:100%}
+.api-note{font-size:10px;color:var(--blue);margin-top:6px;text-align:center}
 .topic-badge{display:inline-block;background:var(--green-l);color:var(--green-d);padding:4px 10px;border-radius:20px;font-size:11px;margin:2px}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--green-d);color:white;display:inline-flex;align-items:center;justify-content:center;font-weight:600;margin-right:10px;font-size:12px}
 
-/* FOOTER - Admin access via circle on left */
+/* FOOTER - letter color #888888 */
 footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .footer-brand{display:flex;align-items:center;gap:10px}
 .footer-logo-ring{width:22px;height:22px;flex-shrink:0;cursor:pointer}
 .footer-logo-ring svg{width:22px;height:22px}
-.footer-brand-name{font-family:'Playfair Display',serif;font-size:16px;color:#1a1a1a;font-weight:500}
-.footer-note{font-size:14px;color:#1a1a1a}
+.footer-brand-name{font-family:'Playfair Display',serif;font-size:16px;color:#888888;font-weight:500}
+.footer-note{font-size:14px;color:#888888}
 </style>
 </head>
 <body>
@@ -271,6 +258,72 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
     <div class="spin"></div>Buscando notícias...
   </div>
 
+  <!-- DASHBOARD SECTION - INTEGRATED AFTER FOOTER -->
+  <div class="dashboard-section" id="dashboardSection" style="display:none">
+    <div class="dashboard-header">
+      <h3>Painel de controle</h3>
+      <button class="btn" onclick="logoutAdmin()" style="background:#f0e4d0">Sair</button>
+    </div>
+    
+    <div class="dashboard-tabs">
+      <button class="dash-tab active" onclick="showDashTab('home')">Visão geral</button>
+      <button class="dash-tab" onclick="showDashTab('audience')">Audiência</button>
+      <button class="dash-tab" onclick="showDashTab('campaigns')">Campanhas</button>
+      <button class="dash-tab" onclick="showDashTab('settings')">Configurações</button>
+    </div>
+    
+    <div id="dash-home">
+      <div class="dashboard-stats">
+        <div class="stat-card"><div class="stat-number" id="statTotal">0</div><div class="stat-label">Inscritos</div><div class="stat-change up" id="statGrowth">+0 esta semana</div></div>
+        <div class="stat-card"><div class="stat-number" id="statActive">0</div><div class="stat-label">Ativos (30d)</div></div>
+        <div class="stat-card"><div class="stat-number" id="statInactive">0</div><div class="stat-label">Inativos</div></div>
+        <div class="stat-card"><div class="stat-number" id="statOpenRate">0%</div><div class="stat-label">Abertura última campanha</div></div>
+      </div>
+      <div class="chart-container"><h4>Crescimento de inscritos</h4><canvas id="growthChart" height="120" style="max-height:150px"></canvas></div>
+      <div class="chart-container"><h4>Últimas campanhas</h4><div id="recentCampaigns"></div></div>
+    </div>
+    
+    <div id="dash-audience" style="display:none">
+      <div class="dashboard-stats" style="grid-template-columns:repeat(3,1fr)">
+        <div class="stat-card"><div class="stat-number" id="audTotal">0</div><div class="stat-label">Total</div></div>
+        <div class="stat-card"><div class="stat-number" id="audActive">0</div><div class="stat-label">Ativos</div></div>
+        <div class="stat-card"><div class="stat-number" id="audNew">0</div><div class="stat-label">Novos (30d)</div></div>
+      </div>
+      <div style="background:var(--bg);border-radius:12px;border:1px solid var(--b);overflow:auto">
+        <table class="subscriber-table"><thead><tr><th>Inscrito</th><th>Email</th><th>Temas</th><th>Data</th><th>Status</th><th></th></tr></thead><tbody id="audienceTableBody"></tbody></table>
+      </div>
+      <div class="add-subscriber-form">
+        <input type="text" id="newSubName" class="m-input" placeholder="Nome" style="flex:1">
+        <input type="email" id="newSubEmail" class="m-input" placeholder="Email" style="flex:1">
+        <button class="btn btn-g" onclick="addSubscriber()">Adicionar inscrito</button>
+      </div>
+    </div>
+    
+    <div id="dash-campaigns" style="display:none">
+      <div style="margin-bottom:16px"><button class="btn btn-g" onclick="createNewCampaign()">Nova campanha</button></div>
+      <div id="campaignsList"></div>
+    </div>
+    
+    <div id="dash-settings" style="display:none">
+      <div class="api-section" style="background:var(--blue-l);padding:16px;border-radius:12px">
+        <div class="m-field-label">Chave API NewsData.io</div>
+        <input type="text" id="apiKeyInput" class="m-input" placeholder="Cole sua chave API" style="margin-bottom:8px"/>
+        <button class="btn btn-g" onclick="saveApiKey()" style="width:100%">Salvar</button>
+        <div class="api-note">Obtenha sua chave gratuita em newsdata.io</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGIN OVERLAY -->
+  <div id="loginOverlay" class="login-overlay">
+    <div class="login-box">
+      <h3 style="margin-bottom:16px">Acesso administrativo</h3>
+      <input type="password" id="adminPasswordInput" class="m-input" placeholder="Senha">
+      <button class="btn btn-g" onclick="checkAdminPassword()">Entrar</button>
+      <div id="loginErrorMsg" style="color:red;font-size:12px;margin-top:8px;text-align:center"></div>
+    </div>
+  </div>
+
   <footer>
     <div class="footer-brand">
       <div class="footer-logo-ring" ondblclick="showAdminLogin()">
@@ -296,72 +349,6 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- ADMIN LOGIN MODAL -->
-<div class="modal-bg" id="adminLoginModal">
-  <div class="modal" style="max-width:400px">
-    <button class="modal-close" onclick="closeModal('adminLoginModal')">✕</button>
-    <h3>Acesso administrativo</h3>
-    <div class="api-section">
-      <div class="m-field-label">Senha</div>
-      <input type="password" id="adminPassword" class="m-input" placeholder="Digite a senha" style="margin-bottom:8px"/>
-      <button class="btn btn-g" onclick="checkAdminPassword()" style="width:100%">Entrar</button>
-      <div id="loginError" class="login-error"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ADMIN DASHBOARD MODAL -->
-<div class="modal-bg" id="adminModal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('adminModal')">✕</button>
-    
-    <div style="margin-bottom:20px">
-      <h3 style="margin:0">Radar Brasil</h3>
-      <p style="font-size:12px;color:var(--t3);margin-top:4px">Painel de controle</p>
-    </div>
-    
-    <div class="dashboard-nav">
-      <button class="dash-nav-item active" onclick="showDashboardTab('home')">Visão geral</button>
-      <button class="dash-nav-item" onclick="showDashboardTab('audience')">Audiência</button>
-      <button class="dash-nav-item" onclick="showDashboardTab('campaigns')">Campanhas</button>
-      <button class="dash-nav-item" onclick="showDashboardTab('settings')">Configurações</button>
-    </div>
-    
-    <div id="tab-home" class="dashboard-tab">
-      <div class="dashboard-stats">
-        <div class="stat-card"><div class="stat-number" id="statTotal">0</div><div class="stat-label">Inscritos</div><div class="stat-change up" id="statGrowth">+0 esta semana</div></div>
-        <div class="stat-card"><div class="stat-number" id="statActive">0</div><div class="stat-label">Ativos (30d)</div></div>
-        <div class="stat-card"><div class="stat-number" id="statInactive">0</div><div class="stat-label">Inativos</div></div>
-        <div class="stat-card"><div class="stat-number" id="statOpenRate">0%</div><div class="stat-label">Abertura última campanha</div></div>
-      </div>
-      <div class="chart-container"><h4>Crescimento de inscritos</h4><canvas id="growthChart" height="120" style="max-height:150px"></canvas></div>
-      <div class="chart-container"><h4>Últimas campanhas</h4><div id="recentCampaigns"></div></div>
-    </div>
-    
-    <div id="tab-audience" class="dashboard-tab" style="display:none">
-      <div class="dashboard-stats" style="grid-template-columns:repeat(3,1fr)">
-        <div class="stat-card"><div class="stat-number" id="audTotal">0</div><div class="stat-label">Total</div></div>
-        <div class="stat-card"><div class="stat-number" id="audActive">0</div><div class="stat-label">Ativos</div></div>
-        <div class="stat-card"><div class="stat-number" id="audNew">0</div><div class="stat-label">Novos (30d)</div></div>
-      </div>
-      <div style="background:white;border-radius:12px;border:1px solid var(--b);overflow:auto">
-        <table class="subscriber-table"><thead><tr><th>Inscrito</th><th>Email</th><th>Temas</th><th>Data</th><th>Status</th><th></th></tr></thead><tbody id="audienceTableBody"></tbody></table>
-      </div>
-    </div>
-    
-    <div id="tab-campaigns" class="dashboard-tab" style="display:none">
-      <div style="margin-bottom:16px"><button class="btn btn-g" onclick="createNewCampaign()" style="width:auto">Nova campanha</button></div>
-      <div id="campaignsList"></div>
-    </div>
-    
-    <div id="tab-settings" class="dashboard-tab" style="display:none">
-      <div class="api-section"><div class="m-field-label">Chave API NewsData.io</div><input type="text" id="apiKeyInput" class="m-input" placeholder="Cole sua chave API" style="margin-bottom:8px"/><button class="btn btn-g" onclick="saveApiKey()" style="width:100%">Salvar</button></div>
-      <div class="divider"></div>
-      <button class="btn" onclick="logoutAdmin()" style="width:100%;background:#f0e4d0">Sair do painel</button>
-    </div>
-  </div>
-</div>
-
 <script>
 const ADMIN_PASSWORD = 'radar2024';
 const BREVO_API_KEY = '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';
@@ -369,6 +356,7 @@ const NEWSDATA_API_KEY = 'pub_ab546bab2eee494fb85264efc74f457a';
 
 let campaigns = JSON.parse(localStorage.getItem('rdc_campaigns') || '[]');
 let allNews = [], subs = [], newsdataApiKey = localStorage.getItem('newsdata_api_key') || NEWSDATA_API_KEY, growthChart = null;
+let isAdminLoggedIn = localStorage.getItem('admin_logged_in') === 'true';
 try { subs = JSON.parse(localStorage.getItem('rdc_subs') || '[]'); } catch(e) {}
 
 const CATEGORIES = [
@@ -430,21 +418,40 @@ function toggleTopic(id) {
   fetchAllNews();
 }
 
-function showAdminLogin() { openModal('adminLoginModal'); }
-function checkAdminPassword() {
-  if (document.getElementById('adminPassword').value === ADMIN_PASSWORD) {
-    localStorage.setItem('admin_logged_in', 'true');
-    closeModal('adminLoginModal');
-    openAdminDashboard();
-  } else { document.getElementById('loginError').innerHTML = 'Senha incorreta'; }
+function showAdminLogin() {
+  document.getElementById('loginOverlay').style.display = 'flex';
 }
-function logoutAdmin() { localStorage.removeItem('admin_logged_in'); closeModal('adminModal'); toast('Desconectado'); }
-function openAdminDashboard() { openModal('adminModal'); updateDashboardData(); document.getElementById('apiKeyInput').value = newsdataApiKey; }
 
-function showDashboardTab(tab) {
-  document.querySelectorAll('.dashboard-tab').forEach(t => t.style.display = 'none');
-  document.getElementById(`tab-${tab}`).style.display = 'block';
-  document.querySelectorAll('.dash-nav-item').forEach(n => n.classList.remove('active'));
+function checkAdminPassword() {
+  const password = document.getElementById('adminPasswordInput').value;
+  if (password === ADMIN_PASSWORD) {
+    isAdminLoggedIn = true;
+    localStorage.setItem('admin_logged_in', 'true');
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('dashboardSection').style.display = 'block';
+    updateDashboardData();
+    renderAudienceTable();
+    renderCampaignsList();
+    document.getElementById('apiKeyInput').value = newsdataApiKey;
+  } else {
+    document.getElementById('loginErrorMsg').innerHTML = 'Senha incorreta';
+  }
+}
+
+function logoutAdmin() {
+  isAdminLoggedIn = false;
+  localStorage.removeItem('admin_logged_in');
+  document.getElementById('dashboardSection').style.display = 'none';
+  toast('Desconectado');
+}
+
+function showDashTab(tab) {
+  document.getElementById('dash-home').style.display = 'none';
+  document.getElementById('dash-audience').style.display = 'none';
+  document.getElementById('dash-campaigns').style.display = 'none';
+  document.getElementById('dash-settings').style.display = 'none';
+  document.getElementById(`dash-${tab}`).style.display = 'block';
+  document.querySelectorAll('.dash-tab').forEach(t => t.classList.remove('active'));
   event.target.classList.add('active');
   if (tab === 'home') updateDashboardData();
   if (tab === 'audience') renderAudienceTable();
@@ -478,7 +485,14 @@ function renderAudienceTable() {
     const firstLetter = s.name ? s.name.charAt(0).toUpperCase() : '?';
     const isActive = s.lastOpen ? new Date(s.lastOpen) > thirtyDaysAgo : false;
     const topicsHtml = (s.topics || []).slice(0,3).map(t => `<span class="topic-badge">${escapeHtml(t)}</span>`).join('');
-    return `<tr><td><span class="avatar">${escapeHtml(firstLetter)}</span> ${escapeHtml(s.name)}</td><td>${escapeHtml(s.email)}</td><td>${topicsHtml || '<span class="topic-badge">Todos</span>'}</td><td>${s.date || '-'}</td><td><span class="status-badge ${isActive ? 'active' : 'inactive'}"></span> ${isActive ? 'Ativo' : 'Inativo'}</td><td><button class="remove-btn" onclick="removeSubscriber(${i})">Remover</button></td></tr>`;
+    return `<tr>
+      <td><span class="avatar">${escapeHtml(firstLetter)}</span> ${escapeHtml(s.name)}</td>
+      <td>${escapeHtml(s.email)}</td>
+      <td>${topicsHtml || '<span class="topic-badge">Todos</span>'}</td>
+      <td>${s.date || '-'}</td>
+      <td><span class="status-badge ${isActive ? 'active' : 'inactive'}"></span> ${isActive ? 'Ativo' : 'Inativo'}</td>
+      <td><button class="remove-btn" onclick="removeSubscriber(${i})">Remover</button></td>
+    </tr>`;
   }).join('');
   document.getElementById('audTotal').textContent = subs.length;
   document.getElementById('audActive').textContent = subs.filter(s => s.lastOpen ? new Date(s.lastOpen) > thirtyDaysAgo : false).length;
@@ -502,13 +516,29 @@ function createNewCampaign() {
   toast('Campanha criada');
 }
 
+function addSubscriber() {
+  const name = document.getElementById('newSubName').value.trim();
+  const email = document.getElementById('newSubEmail').value.trim();
+  if (!email || !email.includes('@')) { toast('E-mail inválido'); return; }
+  if (subs.find(s => s.email === email)) { toast('Já na lista'); return; }
+  subs.push({ name: name || email.split('@')[0], email, topics: [], date: new Date().toLocaleDateString('pt-BR') });
+  localStorage.setItem('rdc_subs', JSON.stringify(subs));
+  document.getElementById('newSubName').value = '';
+  document.getElementById('newSubEmail').value = '';
+  renderAudienceTable();
+  updateDashboardData();
+  toast('Inscrito adicionado');
+}
+
 function removeSubscriber(i) {
   if (confirm('Remover este inscrito?')) { subs.splice(i, 1); localStorage.setItem('rdc_subs', JSON.stringify(subs)); renderAudienceTable(); updateDashboardData(); toast('Removido'); }
 }
 
-function openModal(id) { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-function saveApiKey() { const key = document.getElementById('apiKeyInput').value.trim(); if (key) { newsdataApiKey = key; localStorage.setItem('newsdata_api_key', key); toast('Chave salva'); closeModal('adminModal'); fetchAllNews(); } else toast('Chave inválida'); }
+function saveApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (key) { newsdataApiKey = key; localStorage.setItem('newsdata_api_key', key); toast('Chave salva'); fetchAllNews(); }
+  else toast('Chave inválida');
+}
 
 async function heroSubscribe() {
   const name = document.getElementById('heroName').value.trim();
@@ -572,6 +602,14 @@ async function fetchAllNews() {
   loader.style.display = 'none';
   renderNews();
   toast('Notícias atualizadas');
+}
+
+if (isAdminLoggedIn) {
+  document.getElementById('dashboardSection').style.display = 'block';
+  updateDashboardData();
+  renderAudienceTable();
+  renderCampaignsList();
+  document.getElementById('apiKeyInput').value = newsdataApiKey;
 }
 
 renderTopics();
