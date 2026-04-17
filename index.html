@@ -450,4 +450,177 @@ async function heroSubscribe() {
       toast('Erro ao enviar email. Tente novamente.');
     }
   } catch (error) {
-    console.error('Subscribe
+    console.error('Subscribe error:', error);
+    toast('Erro de conexão. Tente novamente.');
+  }
+}
+
+function adminAdd() {
+  const activeLoc = document.querySelector('#locPills .pill.on')?.dataset.loc || 'china';
+  const name = document.getElementById('adminName').value.trim();
+  const email = document.getElementById('adminEmail').value.trim();
+  if (!email || !email.includes('@')) { toast('E-mail inválido.'); return; }
+  if (subs.find(s => s.email === email)) { toast('Já na lista.'); return; }
+  subs.push({ name: name || email.split('@')[0], email, loc: activeLoc, date: new Date().toLocaleDateString('pt-BR') });
+  localStorage.setItem('rdc_subs', JSON.stringify(subs));
+  document.getElementById('adminName').value = '';
+  document.getElementById('adminEmail').value = '';
+  renderSubs();
+  toast(`${name || email} adicionado.`);
+}
+
+function renderSubs() {
+  const list = document.getElementById('subList');
+  if (!subs.length) { list.style.display = 'none'; return; }
+  list.style.display = 'block';
+  document.getElementById('subCount').textContent = `(${subs.length})`;
+  document.getElementById('subItems').innerHTML = subs.map((s, i) => `
+    <div class="sub-item">
+      <span style="color:var(--t1);font-weight:500">${escapeHtml(s.name)}</span>
+      <span style="color:var(--t2);flex:1;margin:0 8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(s.email)}</span>
+      <span style="color:var(--t3);font-size:11px;margin-right:8px">${s.loc || '-'}</span>
+      <span style="color:var(--t3);font-size:10px;margin-right:8px">${s.topics ? s.topics.length : 0} temas</span>
+      <button class="sub-remove" onclick="removeSub(${i})">remover</button>
+    </div>`).join('');
+}
+
+function removeSub(i) { subs.splice(i, 1); localStorage.setItem('rdc_subs', JSON.stringify(subs)); renderSubs(); toast('Removido.'); }
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3800);
+}
+
+function escapeHtml(str) { 
+  if (!str) return '';
+  return str.replace(/[&<>]/g, function(m) { 
+    if (m === '&') return '&amp;'; 
+    if (m === '<') return '&lt;'; 
+    if (m === '>') return '&gt;'; 
+    return m; 
+  }); 
+}
+
+function truncateSummary(text, maxWords = 58) {
+  if (!text) return '';
+  const words = text.split(/\s+/);
+  if (words.length <= maxWords) return text;
+  return words.slice(0, maxWords).join(' ') + '...';
+}
+
+async function searchCategory(category) {
+  if (!newsdataApiKey || newsdataApiKey === 'YOUR_NEWSDATA_API_KEY_HERE') return [];
+  const articles = [];
+  const seenUrls = new Set();
+  
+  for (const query of category.queries) {
+    try {
+      const url = `https://radar-news-proxy.onlirroquenrouseives.workers.dev/news?q=${encodeURIComponent(query)}&language=pt,en,zh&size=3`;
+      const response = await fetch(url);
+      const data = await response.json();
+      
+      if (data.results && data.results.length > 0) {
+        for (const article of data.results) {
+          const title = (article.title || '').toLowerCase();
+          const isRelevant = !title.includes('irã') && !title.includes('iran') && 
+                             !title.includes('trump') && !title.includes('eua');
+          
+          if (isRelevant && !seenUrls.has(article.link) && articles.length < 5) {
+            seenUrls.add(article.link);
+            articles.push({
+              title: article.title,
+              summary: article.description || article.ai_summary || 'Clique para ler o artigo completo.',
+              source: article.source_name || article.source_id || 'Fonte internacional',
+              date: article.pubDate ? new Date(article.pubDate).toLocaleDateString('pt-BR') : 'Data recente',
+              url: article.link,
+              categoryId: category.id,
+              categoryName: category.name,
+              categoryColor: category.color,
+              categoryBg: category.bg,
+              categoryTag: category.tag
+            });
+          }
+        }
+      }
+      await new Promise(resolve => setTimeout(resolve, 200));
+    } catch (error) {
+      console.error(`Erro ao buscar para ${category.name}:`, error);
+    }
+  }
+  return articles;
+}
+
+function renderNews() {
+  const container = document.getElementById('newsGrid');
+  if (!container) return;
+  
+  if (allNews.length === 0) {
+    container.innerHTML = '<div class="empty">Nenhuma notícia encontrada. Tente selecionar outros temas ou verifique sua chave API.</div>';
+    return;
+  }
+  
+  container.innerHTML = allNews.map(item => `
+    <div class="news-card" onclick="window.open('${escapeHtml(item.url)}', '_blank')">
+      <div class="topic-tag" style="background:${item.categoryBg}; color:${item.categoryColor}">${item.categoryTag}</div>
+      <div class="news-title">${escapeHtml(item.title)}</div>
+      <div class="news-meta">
+        <span class="news-source">${escapeHtml(item.source)}</span>
+        <span class="news-date">${item.date}</span>
+      </div>
+      <div class="news-summary">${escapeHtml(truncateSummary(item.summary, 58))}</div>
+      <a href="${escapeHtml(item.url)}" target="_blank" class="news-link" onclick="event.stopPropagation()">Ler artigo completo →</a>
+    </div>
+  `).join('');
+}
+
+async function fetchAllNews() {
+  if (!newsdataApiKey || newsdataApiKey === 'YOUR_NEWSDATA_API_KEY_HERE') {
+    document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API do NewsData.io clicando no botão "Admin".</div>';
+    toast('Configure sua chave API do NewsData.io');
+    return;
+  }
+  
+  const activeCategories = CATEGORIES.filter(cat => cat.active === true);
+  if (activeCategories.length === 0) {
+    document.getElementById('newsGrid').innerHTML = '<div class="empty">Selecione pelo menos um tema monitorado.</div>';
+    return;
+  }
+  
+  const grid = document.getElementById('newsGrid');
+  const loader = document.getElementById('loader');
+  grid.innerHTML = '';
+  loader.style.display = 'flex';
+  
+  const allArticles = [];
+  for (const category of activeCategories) {
+    const articles = await searchCategory(category);
+    allArticles.push(...articles);
+  }
+  
+  const uniqueArticles = [];
+  const seenUrls = new Set();
+  for (const article of allArticles) {
+    if (!seenUrls.has(article.url)) {
+      seenUrls.add(article.url);
+      uniqueArticles.push(article);
+    }
+  }
+  
+  uniqueArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
+  
+  allNews = uniqueArticles.slice(0, 24);
+  loader.style.display = 'none';
+  renderNews();
+  toast(`Veja as notícias encontradas`);
+}
+
+renderTopics();
+if (newsdataApiKey && newsdataApiKey !== 'YOUR_NEWSDATA_API_KEY_HERE') { 
+  fetchAllNews(); 
+} else {
+  document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API do NewsData.io clicando no botão "Admin".</div>';
+}
+</script>
+</body>
+</html>
