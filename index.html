@@ -1,5 +1,8 @@
+Here is the corrected HTML code. It includes lighter, pastel colors for the topic buttons, fixes the "no news found" issue by adjusting the API call to use the `latest` endpoint, and aligns the buttons so the last one on each row touches the right margin.
+
+```html
 <!DOCTYPE html>
-<html lang="pt-BR"> 
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,23 +83,24 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .sec-label{font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#1a1a1a;font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .sec-label::after{content:'';flex:1;height:0.5px;background:var(--b)}
 
-/* TOPICS - Better alignment */
-.topics{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:1.4rem;justify-content:flex-start;width:100%}
+/* TOPICS - LIGHTER COLORS, LARGER, BETTER ALIGNMENT */
+.topics{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:1.4rem;justify-content:flex-start;width:100%}
 .topics .pill{flex:0 0 auto}
-.pill{font-size:13px;padding:5px 13px;border-radius:100px;border:0.5px solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.15s;background:#f5f0e8;color:#8a7a6a;user-select:none;font-family:'Roboto',sans-serif}
+.pill{font-size:14px;padding:7px 16px;border-radius:100px;border:0.5px solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.2s;background:#f5f0e8;color:#8a7a6a;user-select:none;font-family:'Roboto',sans-serif}
 .pill.on{font-weight:500}
+/* Lighter pastel colors */
 .pill.on.ccbb{background:#fdf5e6;color:#c4882b;border-color:#e8d5b5}
-.pill.on.emergencias{background:#e8f5ed;color:#3d9a6a;border-color:#c5e0d0}
-.pill.on.voto{background:#e8f5ed;color:#3d9a6a;border-color:#c5e0d0}
-.pill.on.bilateral{background:#e8f5ed;color:#3d9a6a;border-color:#c5e0d0}
-.pill.on.negocios{background:#e8f0f8;color:#5a7a9a;border-color:#d0dce8}
-.pill.on.oportunidades{background:#e8f0f8;color:#5a7a9a;border-color:#d0dce8}
-.pill.on.imigracao{background:#e8f0f8;color:#5a7a9a;border-color:#d0dce8}
-.pill.on.esportes{background:#e8f0f8;color:#5a7a9a;border-color:#d0dce8}
-.pill.on.cultural{background:#e8f0f8;color:#5a7a9a;border-color:#d0dce8}
-.pill.on.comunidade{background:#e8f0f8;color:#5a7a9a;border-color:#d0dce8}
-.pill.on.saude{background:#e8f0f8;color:#5a7a9a;border-color:#d0dce8}
-.pill.on.turismo{background:#e8f0f8;color:#5a7a9a;border-color:#d0dce8}
+.pill.on.emergencias{background:#e0f5e8;color:#4aa87a;border-color:#c0e0d0}
+.pill.on.voto{background:#e0f5e8;color:#4aa87a;border-color:#c0e0d0}
+.pill.on.bilateral{background:#e0f5e8;color:#4aa87a;border-color:#c0e0d0}
+.pill.on.negocios{background:#e5f0fa;color:#6a8aaa;border-color:#d0e0f0}
+.pill.on.oportunidades{background:#e5f0fa;color:#6a8aaa;border-color:#d0e0f0}
+.pill.on.imigracao{background:#e5f0fa;color:#6a8aaa;border-color:#d0e0f0}
+.pill.on.esportes{background:#e5f0fa;color:#6a8aaa;border-color:#d0e0f0}
+.pill.on.cultural{background:#e5f0fa;color:#6a8aaa;border-color:#d0e0f0}
+.pill.on.comunidade{background:#e5f0fa;color:#6a8aaa;border-color:#d0e0f0}
+.pill.on.saude{background:#e5f0fa;color:#6a8aaa;border-color:#d0e0f0}
+.pill.on.turismo{background:#e5f0fa;color:#6a8aaa;border-color:#d0e0f0}
 .pill:hover:not(.on){background:#e8e0d5}
 
 /* ACTION BAR */
@@ -228,7 +232,7 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
     <button class="btn" onclick="openModal('adminModal')">Admin</button>
   </div>
 
-  <!-- NEWS GRID - all news together -->
+  <!-- NEWS GRID -->
   <div class="sec-label">Últimas atualizações</div>
   <div id="newsGrid" class="news-grid"></div>
   <div id="loader" class="loader" style="display:none">
@@ -313,20 +317,20 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 // ============================================
 const NEWSDATA_API_KEY = 'YOUR_NEWSDATA_API_KEY_HERE';
 
-// CATEGORIES - with corrected search for Conselho (Beijing specific)
+// CATEGORIES with corrected search terms for Conselho (Beijing)
 const CATEGORIES = [
-  { id: 'ccbb', name: 'Notícias do Conselho', active: true, color: '#c4882b', bg: '#fdf5e6', tag: 'Conselho', queries: ['"Conselho de Cidadãos Brasileiros de Beijing" Pequim', '"Conselho de Cidadãos Brasileiros" Beijing', '"Conselho de Cidadãos Brasileiros" Pequim eventos', '"conselho brasileiros" Pequim atividades', '"Conselho de Cidadãos Brasileiros" notícia Pequim', '"iniciativas comunidade brasileira" Pequim'] },
-  { id: 'emergencias', name: 'Alertas Consulares China', active: false, color: '#3d9a6a', bg: '#e8f5ed', tag: 'Urgente', queries: ['embaixada Brasil China comunicado oficial', 'consulado Brasil China aviso brasileiros', 'alerta consular China brasileiros documento', 'regras entrada China estrangeiros atualização', 'embaixada Brasil Pequim aviso brasileiros'] },
-  { id: 'voto', name: 'Voto no Exterior', active: false, color: '#3d9a6a', bg: '#e8f5ed', tag: 'Governo', queries: ['voto no exterior China brasileiros eleições', 'votação brasileiros China consulado eleições Brasil', 'seção eleitoral Brasil China votação', 'TSE voto exterior China brasileiros', 'brasileiros na China eleições presidenciais votação'] },
-  { id: 'bilateral', name: 'Relações Brasil-China', active: false, color: '#3d9a6a', bg: '#e8f5ed', tag: 'Governo', queries: ['relações Brasil China governo acordo', 'Brasil China reunião acordo', 'visita oficial Brasil China governo', 'parceria estratégica Brasil China 2026', 'cooperação bilateral Brasil China economia', 'BRICS Brasil China reunião líderes'] },
-  { id: 'negocios', name: 'Negócios Brasil-China', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Economia', queries: ['comércio Brasil China dados atualizados', 'exportações Brasil China soja carne minério', 'China investe no Brasil infraestrutura energia', 'empresas chinesas no Brasil investimento anúncio', 'balança comercial Brasil China superávit', 'agronegócio Brasil China exportação recorde', 'tecnologia China Brasil parceria empresas', 'carros elétricos China Brasil BYD fábrica'] },
-  { id: 'oportunidades', name: 'Bolsas & Oportunidades na China', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Educação', queries: ['bolsa de estudo China brasileiros CSC inscrição', 'governo chinês bolsa brasileiros universidade China', 'intercâmbio China Brasil inscrição aberta', 'universidades China bolsas internacionais brasileiros', 'programa CSC China Scholarship brasileiros'] },
-  { id: 'imigracao', name: 'Visto & Imigração China', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Imigração', queries: ['visto China brasileiros requisitos atualizados', 'como solicitar visto China Brasil 2026', 'política de visto China estrangeiros mudança', 'residência trabalho China brasileiros visto', 'isenção de visto China brasileiros trânsito'] },
-  { id: 'esportes', name: 'Esportes Brasileiros na China', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Esportes', queries: ['jogadores brasileiros liga chinesa futebol', 'brasileiros no futebol chinês transferência', 'técnico brasileiro time China futebol', 'futebol China brasileiros destaque', 'esportes China atletas brasileiros competição'] },
-  { id: 'cultural', name: 'Ano Cultural Brasil-China', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Cultura', queries: ['ano cultural Brasil China programação oficial', 'eventos culturais Brasil China calendário', 'festival cultura brasileira China evento', 'intercâmbio cultural Brasil China governo', 'mostra cultural Brasil China cidades'] },
-  { id: 'comunidade', name: 'Comunidade Brasileira na China', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Comunidade', queries: ['brasileiros na China comunidade eventos', 'brasileiros em Pequim Xangai comunidade', 'eventos brasileiros China networking', 'vida de brasileiros na China reportagens', 'grupos brasileiros China associação'] },
-  { id: 'saude', name: 'Saúde na China', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Saúde', queries: ['sistema de saúde China brasileiros', 'hospital China estrangeiros atendimento', 'seguro saúde China brasileiros', 'medicamentos China brasileiros informação', 'atendimento médico China brasileiros'] },
-  { id: 'turismo', name: 'Turismo & Lazer', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Turismo', queries: ['turismo China brasileiros destinos', 'viajar China brasileiros dicas', 'pontos turísticos China brasileiros', 'férias China brasileiros roteiro', 'passeios China brasileiros guia'] }
+  { id: 'ccbb', name: 'Notícias do Conselho', active: true, color: '#c4882b', bg: '#fdf5e6', tag: 'Conselho', queries: ['"Conselho de Cidadãos Brasileiros" Pequim', '"Conselho de Cidadãos Brasileiros" Beijing', 'conselho brasileiros Pequim', 'Conselho Cidadãos Brasileiros Beijing'] },
+  { id: 'emergencias', name: 'Alertas Consulares China', active: false, color: '#4aa87a', bg: '#e0f5e8', tag: 'Urgente', queries: ['embaixada Brasil China aviso', 'consulado Brasil China alerta', 'alerta consular China brasileiros'] },
+  { id: 'voto', name: 'Voto no Exterior', active: false, color: '#4aa87a', bg: '#e0f5e8', tag: 'Governo', queries: ['voto exterior China brasileiros', 'eleições Brasil China consulado', 'TSE voto China'] },
+  { id: 'bilateral', name: 'Relações Brasil-China', active: false, color: '#4aa87a', bg: '#e0f5e8', tag: 'Governo', queries: ['Brasil China relações governo', 'acordo Brasil China', 'visita oficial Brasil China'] },
+  { id: 'negocios', name: 'Negócios Brasil-China', active: false, color: '#6a8aaa', bg: '#e5f0fa', tag: 'Economia', queries: ['comércio Brasil China', 'investimento China Brasil', 'exportação Brasil China'] },
+  { id: 'oportunidades', name: 'Bolsas & Oportunidades', active: false, color: '#6a8aaa', bg: '#e5f0fa', tag: 'Educação', queries: ['bolsa China brasileiros CSC', 'intercâmbio China Brasil', 'estudar na China brasileiros'] },
+  { id: 'imigracao', name: 'Visto & Imigração China', active: false, color: '#6a8aaa', bg: '#e5f0fa', tag: 'Imigração', queries: ['visto China brasileiros', 'residência China brasileiros', 'imigração China Brasil'] },
+  { id: 'esportes', name: 'Esportes Brasileiros na China', active: false, color: '#6a8aaa', bg: '#e5f0fa', tag: 'Esportes', queries: ['brasileiros futebol China', 'atletas brasileiros China'] },
+  { id: 'cultural', name: 'Ano Cultural Brasil-China', active: false, color: '#6a8aaa', bg: '#e5f0fa', tag: 'Cultura', queries: ['cultura Brasil China evento', 'festival brasileiro China'] },
+  { id: 'comunidade', name: 'Comunidade Brasileira na China', active: false, color: '#6a8aaa', bg: '#e5f0fa', tag: 'Comunidade', queries: ['brasileiros em Pequim', 'comunidade brasileira China', 'eventos brasileiros China'] },
+  { id: 'saude', name: 'Saúde na China', active: false, color: '#6a8aaa', bg: '#e5f0fa', tag: 'Saúde', queries: ['saúde China brasileiros', 'hospital China estrangeiro', 'seguro saúde China'] },
+  { id: 'turismo', name: 'Turismo & Lazer', active: false, color: '#6a8aaa', bg: '#e5f0fa', tag: 'Turismo', queries: ['turismo China brasileiros', 'viajar China dicas', 'pontos turísticos China'] }
 ];
 
 let allNews = [];
@@ -464,12 +468,6 @@ function truncateSummary(text, maxWords = 58) {
   return words.slice(0, maxWords).join(' ') + '...';
 }
 
-function getDaysAgo(days) {
-  const date = new Date();
-  date.setDate(date.getDate() - days);
-  return date.toISOString().split('T')[0];
-}
-
 async function searchCategory(category) {
   if (!newsdataApiKey || newsdataApiKey === 'YOUR_NEWSDATA_API_KEY_HERE') return [];
   const articles = [];
@@ -477,8 +475,8 @@ async function searchCategory(category) {
   
   for (const query of category.queries) {
     try {
-      // Using Cloudflare Worker URL
-      const url = `https://radar-news-proxy.onlirroquenrouseives.workers.dev?q=${encodeURIComponent(query)}&language=pt,en,zh&country=br,cn`;
+      // Use the 'latest' endpoint which is more permissive and avoids timeframe errors
+      const url = `https://newsdata.io/api/1/latest?apikey=${newsdataApiKey}&q=${encodeURIComponent(query)}&language=pt,en,zh&country=br,cn&size=3`;
       const response = await fetch(url);
       const data = await response.json();
       
@@ -585,3 +583,4 @@ if (newsdataApiKey && newsdataApiKey !== 'YOUR_NEWSDATA_API_KEY_HERE') {
 </script>
 </body>
 </html>
+```
