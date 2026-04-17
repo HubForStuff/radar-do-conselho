@@ -311,7 +311,7 @@ const WORKER_URL = 'https://radar-news-proxy.onlirroquenrouseives.workers.dev';
 // ============================================
 // REPLACE WITH YOUR NewsData.io API KEY
 // ============================================
-const NEWSDATA_API_KEY = 'YOUR_NEWSDATA_API_KEY_HERE';
+const NEWSDATA_API_KEY = 'pub_ab546bab2eee494fb85264efc74f457a';
 
 // CATEGORIES
 const CATEGORIES = [
@@ -488,7 +488,7 @@ function truncateSummary(text, maxWords = 58) {
 }
 
 async function searchCategory(category) {
-  if (!newsdataApiKey || newsdataApiKey === 'YOUR_NEWSDATA_API_KEY_HERE') return [];
+  if (!newsdataApiKey || newsdataApiKey === 'pub_ab546bab2eee494fb85264efc74f457a') return [];
   const articles = [];
   const seenUrls = new Set();
   
@@ -553,7 +553,7 @@ function renderNews() {
 }
 
 async function fetchAllNews() {
-  if (!newsdataApiKey || newsdataApiKey === 'YOUR_NEWSDATA_API_KEY_HERE') {
+  if (!newsdataApiKey || newsdataApiKey === 'pub_ab546bab2eee494fb85264efc74f457a') {
     document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API do NewsData.io clicando no botão "Admin".</div>';
     toast('Configure sua chave API do NewsData.io');
     return;
@@ -594,7 +594,7 @@ async function fetchAllNews() {
 }
 
 renderTopics();
-if (newsdataApiKey && newsdataApiKey !== 'YOUR_NEWSDATA_API_KEY_HERE') { 
+if (newsdataApiKey && newsdataApiKey !== 'pub_ab546bab2eee494fb85264efc74f457a') { 
   fetchAllNews(); 
 } else {
   document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API do NewsData.io clicando no botão "Admin".</div>';
