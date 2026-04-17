@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Radar Brasil — Inteligência para brasileiros na China</title>
-<meta name="description" content="Inteligência semanal para brasileiros na China. Embaixada, MRE, Copa do Mundo, vistos, cultura e muito mais.">
+<meta name="description" content="Inteligência semanal para brasileiros na China. Embaixada, MRE, vistos, cultura e muito mais.">
 <meta property="og:title" content="Radar Brasil">
 <meta property="og:description" content="Newsletter semanal toda segunda-feira para brasileiros na China.">
 <meta name="theme-color" content="#009C3B">
@@ -111,34 +111,11 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .news-link:hover{text-decoration:underline}
 .empty-category{text-align:center;padding:2rem;color:var(--t3);font-size:13px;background:var(--card);border-radius:var(--rl)}
 
-/* NEWS GRID (legacy) */
-.news-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-bottom:1.75rem}
-@media(max-width:560px){.news-grid{grid-template-columns:1fr}}
-.card{background:var(--card);border:0.5px solid var(--b);border-radius:var(--rl);padding:1.1rem 1.2rem;cursor:pointer;transition:all 0.15s;animation:fadeUp 0.3s ease both}
-.card:hover{border-color:var(--bm);transform:translateY(-1px)}
-.card.urgent{border-left:2.5px solid #E24B4A;border-radius:0 var(--rl) var(--rl) 0}
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.card-tag{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:7px;display:flex;align-items:center;gap:5px}
-.cdot{width:5px;height:5px;border-radius:50%;display:inline-block;flex-shrink:0}
-.card-title{font-size:15px;font-weight:500;line-height:1.45;margin-bottom:5px;color:var(--t1)}
-.card-subtitle{font-size:12px;color:var(--t2);font-style:italic;margin-bottom:7px;line-height:1.4}
-.card-meta{font-size:12px;color:var(--t3);display:flex;justify-content:space-between;margin-bottom:7px}
-.card-summary{font-size:13px;color:var(--t2);line-height:1.65;padding-top:8px;border-top:0.5px solid var(--b)}
-.imp{display:inline-flex;gap:2px;align-items:center}
-.id{width:4px;height:4px;border-radius:50%;background:var(--b)}
-.idon{background:var(--gold)}
-
-/* DETAIL PANEL */
-.detail{background:var(--card);border:0.5px solid var(--bm);border-radius:var(--rl);padding:1.6rem;margin-bottom:1.75rem;animation:fadeUp 0.2s ease}
-.detail h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:500;line-height:1.4;margin:7px 0 4px;color:var(--t1)}
-.detail-subtitle{font-size:13px;color:var(--t2);font-style:italic;margin-bottom:12px;line-height:1.4}
-.detail-src{font-size:12px;color:var(--t3);margin-bottom:14px}
-.detail-body{font-size:14px;line-height:1.9;color:var(--t2)}
-.detail-foot{display:flex;gap:8px;margin-top:16px;padding-top:13px;border-top:0.5px solid var(--b);flex-wrap:wrap;align-items:center}
-.detail-link{color:var(--green-d);text-decoration:none;font-size:13px;word-break:break-all}
-.detail-link:hover{text-decoration:underline}
-.dclose{background:none;border:none;font-size:13px;cursor:pointer;color:var(--t3);margin-left:auto;padding:4px 9px;border-radius:var(--r);font-family:'Roboto',sans-serif}
-.dclose:hover{background:var(--bg2)}
+/* LOADER */
+.loader{display:flex;gap:8px;align-items:center;padding:3rem;justify-content:center;color:var(--t3);font-size:14px}
+.spin{width:17px;height:17px;border:1.5px solid var(--b);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty{text-align:center;padding:3rem 1rem;color:var(--t3);font-size:16px;line-height:1.7;width:100%;display:flex;align-items:center;justify-content:center;min-height:200px;grid-column:1/-1}
 
 /* TOAST */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--green-d);color:#d6f0e0;font-size:13px;padding:10px 22px;border-radius:100px;opacity:0;transition:opacity 0.25s;pointer-events:none;z-index:100;white-space:nowrap;font-family:'Roboto',sans-serif}
@@ -162,12 +139,7 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .sub-remove:hover{color:#A32D2D;background:#FCEBEB}
 .divider{height:0.5px;background:var(--b);margin:14px 0}
 .loc-row{display:flex;gap:6px;flex-wrap:wrap}
-
-/* LOADER */
-.loader{display:flex;gap:8px;align-items:center;padding:3rem;justify-content:center;color:var(--t3);font-size:14px}
-.spin{width:17px;height:17px;border:1.5px solid var(--b);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.empty{text-align:center;padding:3rem 1rem;color:var(--t3);font-size:16px;line-height:1.7;width:100%;display:flex;align-items:center;justify-content:center;min-height:200px;grid-column:1/-1}
+.api-input-group{margin-bottom:16px}
 
 /* FOOTER */
 footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
@@ -235,7 +207,7 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
     </div>
   </div>
 
-  <!-- TOPICS - EXACTLY AS SPECIFIED, NO CHANGES -->
+  <!-- TOPICS -->
   <div class="sec-label">Temas monitorados</div>
   <div class="topics" id="topicBar"></div>
 
@@ -280,6 +252,17 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
   <div class="modal">
     <button class="modal-close" onclick="closeModal('adminModal')">✕</button>
     <h3>Gerenciar inscritos <span class="badge badge-ok2">admin</span></h3>
+    
+    <!-- API KEY CONFIGURATION SECTION -->
+    <div class="api-input-group">
+      <div class="m-field-label">Chave API GNews</div>
+      <input type="text" id="apiKeyInput" class="m-input" placeholder="Cole sua chave API do GNews aqui" style="margin-bottom:8px"/>
+      <button class="btn btn-g" onclick="saveApiKey()" style="width:100%; margin-bottom:16px">Salvar Chave API</button>
+      <p style="font-size:11px;color:var(--t3);margin-top:4px">Obtenha sua chave gratuita em <a href="https://gnews.io/" target="_blank" style="color:var(--green-d)">gnews.io</a> (100 requisições/dia grátis)</p>
+    </div>
+    
+    <div class="divider"></div>
+    
     <p style="font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.6">
       Adicione manualmente pessoas que pediram para receber a newsletter.
     </p>
@@ -309,122 +292,18 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 </div>
 
 <script>
-// CATEGORIES - EXACTLY AS SPECIFIED, NO CHANGES, NO ADDITIONS, NO REMOVALS
+// CATEGORIES - EXACTLY AS SPECIFIED
 const CATEGORIES = [
-  {
-    id: 'ccbb',
-    name: 'Notícias do Conselho',
-    queries: [
-      'Conselho de Cidadãos Brasileiros China',
-      'Conselho de Cidadãos Brasileiros Pequim eventos',
-      'conselho brasileiros China atividades oficiais',
-      'Conselho de Cidadãos Brasileiros reunião ata China',
-      'iniciativas comunidade brasileira China conselho'
-    ]
-  },
-  {
-    id: 'voto',
-    name: 'Voto no Exterior',
-    queries: [
-      'voto no exterior China brasileiros eleições',
-      'votação brasileiros China consulado eleições Brasil',
-      'seção eleitoral Brasil China votação',
-      'TSE voto exterior China brasileiros',
-      'brasileiros na China eleições presidenciais votação'
-    ]
-  },
-  {
-    id: 'bilateral',
-    name: 'Relações Brasil-China',
-    queries: [
-      'relações Brasil China governo acordo',
-      'Lula China reunião acordo Brasil China',
-      'visita oficial Brasil China governo',
-      'parceria estratégica Brasil China 2026',
-      'cooperação bilateral Brasil China economia',
-      'BRICS Brasil China reunião líderes'
-    ]
-  },
-  {
-    id: 'oportunidades',
-    name: 'Bolsas & Oportunidades na China',
-    queries: [
-      'bolsa de estudo China brasileiros CSC inscrição',
-      'governo chinês bolsa brasileiros universidade China',
-      'intercâmbio China Brasil inscrição aberta',
-      'universidades China bolsas internacionais brasileiros',
-      'programa CSC China Scholarship brasileiros'
-    ]
-  },
-  {
-    id: 'emergencias',
-    name: 'Alertas Consulares China',
-    queries: [
-      'embaixada Brasil China comunicado oficial',
-      'consulado Brasil China aviso brasileiros',
-      'alerta consular China brasileiros documento',
-      'regras entrada China estrangeiros atualização',
-      'embaixada Brasil Pequim aviso brasileiros'
-    ]
-  },
-  {
-    id: 'negocios',
-    name: 'Negócios Brasil-China',
-    queries: [
-      'comércio Brasil China dados atualizados',
-      'exportações Brasil China soja carne minério',
-      'China investe no Brasil infraestrutura energia',
-      'empresas chinesas no Brasil investimento anúncio',
-      'balança comercial Brasil China superávit',
-      'agronegócio Brasil China exportação recorde',
-      'tecnologia China Brasil parceria empresas',
-      'carros elétricos China Brasil BYD fábrica'
-    ]
-  },
-  {
-    id: 'imigracao',
-    name: 'Visto & Imigração China',
-    queries: [
-      'visto China brasileiros requisitos atualizados',
-      'como solicitar visto China Brasil 2026',
-      'política de visto China estrangeiros mudança',
-      'residência trabalho China brasileiros visto',
-      'isenção de visto China brasileiros trânsito'
-    ]
-  },
-  {
-    id: 'esportes',
-    name: 'Esportes Brasileiros na China',
-    queries: [
-      'jogadores brasileiros liga chinesa futebol',
-      'brasileiros no futebol chinês transferência',
-      'técnico brasileiro time China futebol',
-      'futebol China brasileiros destaque',
-      'esportes China atletas brasileiros competição'
-    ]
-  },
-  {
-    id: 'cultural',
-    name: 'Ano Cultural Brasil-China',
-    queries: [
-      'ano cultural Brasil China programação oficial',
-      'eventos culturais Brasil China calendário',
-      'festival cultura brasileira China evento',
-      'intercâmbio cultural Brasil China governo',
-      'mostra cultural Brasil China cidades'
-    ]
-  },
-  {
-    id: 'comunidade',
-    name: 'Comunidade Brasileira na China',
-    queries: [
-      'brasileiros na China comunidade eventos',
-      'brasileiros em Pequim Xangai comunidade',
-      'eventos brasileiros China networking',
-      'vida de brasileiros na China reportagens',
-      'grupos brasileiros China associação'
-    ]
-  }
+  { id: 'ccbb', name: 'Notícias do Conselho', queries: ['Conselho de Cidadãos Brasileiros China', 'Conselho de Cidadãos Brasileiros Pequim eventos', 'conselho brasileiros China atividades oficiais', 'Conselho de Cidadãos Brasileiros reunião ata China', 'iniciativas comunidade brasileira China conselho'] },
+  { id: 'voto', name: 'Voto no Exterior', queries: ['voto no exterior China brasileiros eleições', 'votação brasileiros China consulado eleições Brasil', 'seção eleitoral Brasil China votação', 'TSE voto exterior China brasileiros', 'brasileiros na China eleições presidenciais votação'] },
+  { id: 'bilateral', name: 'Relações Brasil-China', queries: ['relações Brasil China governo acordo', 'Lula China reunião acordo Brasil China', 'visita oficial Brasil China governo', 'parceria estratégica Brasil China 2026', 'cooperação bilateral Brasil China economia', 'BRICS Brasil China reunião líderes'] },
+  { id: 'oportunidades', name: 'Bolsas & Oportunidades na China', queries: ['bolsa de estudo China brasileiros CSC inscrição', 'governo chinês bolsa brasileiros universidade China', 'intercâmbio China Brasil inscrição aberta', 'universidades China bolsas internacionais brasileiros', 'programa CSC China Scholarship brasileiros'] },
+  { id: 'emergencias', name: 'Alertas Consulares China', queries: ['embaixada Brasil China comunicado oficial', 'consulado Brasil China aviso brasileiros', 'alerta consular China brasileiros documento', 'regras entrada China estrangeiros atualização', 'embaixada Brasil Pequim aviso brasileiros'] },
+  { id: 'negocios', name: 'Negócios Brasil-China', queries: ['comércio Brasil China dados atualizados', 'exportações Brasil China soja carne minério', 'China investe no Brasil infraestrutura energia', 'empresas chinesas no Brasil investimento anúncio', 'balança comercial Brasil China superávit', 'agronegócio Brasil China exportação recorde', 'tecnologia China Brasil parceria empresas', 'carros elétricos China Brasil BYD fábrica'] },
+  { id: 'imigracao', name: 'Visto & Imigração China', queries: ['visto China brasileiros requisitos atualizados', 'como solicitar visto China Brasil 2026', 'política de visto China estrangeiros mudança', 'residência trabalho China brasileiros visto', 'isenção de visto China brasileiros trânsito'] },
+  { id: 'esportes', name: 'Esportes Brasileiros na China', queries: ['jogadores brasileiros liga chinesa futebol', 'brasileiros no futebol chinês transferência', 'técnico brasileiro time China futebol', 'futebol China brasileiros destaque', 'esportes China atletas brasileiros competição'] },
+  { id: 'cultural', name: 'Ano Cultural Brasil-China', queries: ['ano cultural Brasil China programação oficial', 'eventos culturais Brasil China calendário', 'festival cultura brasileira China evento', 'intercâmbio cultural Brasil China governo', 'mostra cultural Brasil China cidades'] },
+  { id: 'comunidade', name: 'Comunidade Brasileira na China', queries: ['brasileiros na China comunidade eventos', 'brasileiros em Pequim Xangai comunidade', 'eventos brasileiros China networking', 'vida de brasileiros na China reportagens', 'grupos brasileiros China associação'] }
 ];
 
 let allNewsData = {};
@@ -442,17 +321,35 @@ function nextMonday() {
 document.getElementById('nextDate').textContent = nextMonday();
 
 function renderTopics() {
-  document.getElementById('topicBar').innerHTML = CATEGORIES.map(cat => {
-    const on = true; // All categories are always active for this view
-    return `<div class="pill on" style="background:#d6f0e0;color:#085041;border-color:#08504155">${cat.name}</div>`;
-  }).join('');
+  document.getElementById('topicBar').innerHTML = CATEGORIES.map(cat => `<div class="pill on" style="background:#d6f0e0;color:#085041;border-color:#08504155">${cat.name}</div>`).join('');
 }
 
-function openModal(id) { document.getElementById(id).classList.add('open'); if(id === 'adminModal') renderSubs(); }
+function openModal(id) { document.getElementById(id).classList.add('open'); if(id === 'adminModal') { renderSubs(); document.getElementById('apiKeyInput').value = gnewsApiKey; } }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function saveApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (key) {
+    gnewsApiKey = key;
+    localStorage.setItem('gnews_api_key', key);
+    toast('Chave API salva! Buscando notícias...');
+    closeModal('adminModal');
+    fetchAllNews();
+  } else {
+    toast('Por favor, insira uma chave API válida');
+  }
+}
 
 document.querySelectorAll('.modal-bg').forEach(m => {
   m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
+});
+
+document.getElementById('locPills')?.addEventListener('click', e => {
+  const p = e.target.closest('[data-loc]');
+  if (!p) return;
+  document.querySelectorAll('#locPills .pill').forEach(x => { x.classList.remove('on'); x.removeAttribute('style'); });
+  p.classList.add('on');
+  p.style.cssText = 'background:#ddeaf7;color:#0C447C;border-color:#85B7EB';
 });
 
 function heroSubscribe() {
@@ -468,11 +365,12 @@ function heroSubscribe() {
 }
 
 function adminAdd() {
+  const activeLoc = document.querySelector('#locPills .pill.on')?.dataset.loc || 'china';
   const name = document.getElementById('adminName').value.trim();
   const email = document.getElementById('adminEmail').value.trim();
   if (!email || !email.includes('@')) { toast('E-mail inválido.'); return; }
   if (subs.find(s => s.email === email)) { toast('Já na lista.'); return; }
-  subs.push({ name: name || email.split('@')[0], email, loc: 'china', date: new Date().toLocaleDateString('pt-BR') });
+  subs.push({ name: name || email.split('@')[0], email, loc: activeLoc, date: new Date().toLocaleDateString('pt-BR') });
   localStorage.setItem('rdc_subs', JSON.stringify(subs));
   document.getElementById('adminName').value = '';
   document.getElementById('adminEmail').value = '';
@@ -518,13 +416,19 @@ function detectLanguage(text) {
   return 'EN';
 }
 
+function getDaysAgo(days) {
+  const date = new Date();
+  date.setDate(date.getDate() - days);
+  return date.toISOString().split('T')[0];
+}
+
 async function searchCategory(category) {
+  if (!gnewsApiKey) return [];
   const articles = [];
   const seenUrls = new Set();
   
   for (const query of category.queries) {
     try {
-      // Try GNews API first (English/Portuguese content)
       const url = `https://gnews.io/api/v4/search?q=${encodeURIComponent(query)}&lang=pt,en&max=3&from=${getDaysAgo(3)}&apikey=${gnewsApiKey}`;
       const response = await fetch(url);
       const data = await response.json();
@@ -544,23 +448,13 @@ async function searchCategory(category) {
           }
         }
       }
-      
       await new Promise(resolve => setTimeout(resolve, 500));
-      
     } catch (error) {
       console.error(`Erro ao buscar para ${category.name} - query: ${query}`, error);
     }
   }
-  
-  // Sort by date (most recent first)
   articles.sort((a, b) => new Date(b.date) - new Date(a.date));
   return articles;
-}
-
-function getDaysAgo(days) {
-  const date = new Date();
-  date.setDate(date.getDate() - days);
-  return date.toISOString().split('T')[0];
 }
 
 function renderCategories() {
@@ -574,11 +468,10 @@ function renderCategories() {
       <div class="category-section">
         <div class="category-header">
           <div class="category-title">${escapeHtml(category.name)}</div>
-          <div class="category-meta">${news.length} notícias encontradas</div>
+          <div class="category-meta">${news.length} notícias</div>
         </div>
         <div class="category-news">
     `;
-    
     if (news.length === 0) {
       html += `<div class="empty-category">Nenhuma notícia encontrada para este tema.</div>`;
     } else {
@@ -597,18 +490,14 @@ function renderCategories() {
         `;
       }
     }
-    
-    html += `
-        </div>
-      </div>
-    `;
+    html += `</div></div>`;
   }
-  
   container.innerHTML = html;
 }
 
 async function fetchAllNews() {
   if (!gnewsApiKey) {
+    document.getElementById('categoriesContainer').innerHTML = '<div class="empty">Configure sua chave API do GNews clicando no botão "Admin" e adicionando sua chave.</div>';
     toast('Por favor, configure sua chave API do GNews primeiro');
     return;
   }
@@ -619,22 +508,14 @@ async function fetchAllNews() {
   for (const category of CATEGORIES) {
     allNewsData[category.id] = await searchCategory(category);
   }
-  
   renderCategories();
-  toast(`Veja as notícias encontradas`);
+  toast('Veja as notícias encontradas');
 }
 
 // Initialize
 renderTopics();
-
-// Check if API key exists on load
-if (!gnewsApiKey) {
-  setTimeout(() => {
-    toast('Por favor, configure sua chave API do GNews para buscar notícias reais');
-  }, 1000);
+if (gnewsApiKey) { fetchAllNews(); } else {
   document.getElementById('categoriesContainer').innerHTML = '<div class="empty">Configure sua chave API do GNews clicando no botão "Admin" e adicionando sua chave.</div>';
-} else {
-  fetchAllNews();
 }
 </script>
 </body>
