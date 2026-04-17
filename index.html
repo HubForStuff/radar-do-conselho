@@ -80,11 +80,12 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .sec-label{font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#1a1a1a;font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .sec-label::after{content:'';flex:1;height:0.5px;background:var(--b)}
 
-/* TOPICS */
+/* TOPICS - Default (not selected) */
 .topics{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.4rem;justify-content:flex-start;width:100%}
 .topics .pill{flex:0 0 auto}
 .pill{font-size:12px;padding:5px 12px;border-radius:100px;border:0.5px solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.2s;background:#f5f0e8;color:#8a7a6a;user-select:none;font-family:'Roboto',sans-serif}
 .pill.on{font-weight:500}
+
 /* Colors ONLY when selected (on) */
 .pill.on.todos{background:rgba(124,239,90,0.73);color:#1a5a2a;border-color:#7aef5a}
 .pill.on.ccbb{background:#fdf8ed;color:#c4983a;border-color:#f0e0c0}
@@ -102,8 +103,9 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .pill.on.eventos{background:#fdf8ed;color:#c4983a;border-color:#f0e0c0}
 .pill.on.emprego{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
 .pill.on.tecnologia{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
-.pill:hover:not(.on){background:#e8e0d5}
 
+/* Hover effect for non-selected buttons */
+.pill:hover:not(.on){background:#e8e0d5}
 /* ACTION BAR */
 .action-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.6rem;align-items:center}
 .btn{font-family:'Roboto',sans-serif;font-size:14px;padding:9px 16px;border-radius:var(--r);cursor:pointer;transition:all 0.15s;font-weight:400;border:0.5px solid var(--bm);background:var(--card);color:var(--t1)}
