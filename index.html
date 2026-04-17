@@ -46,7 +46,7 @@ body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:va
 /* HEADER */
 .header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:2rem}
 .header-left{display:flex;flex-direction:column;gap:10px}
-.logo{display:flex;align-items:center;gap:14px;cursor:pointer}
+.logo{display:flex;align-items:center;gap:14px}
 .logo-ring{width:46px;height:46px;flex-shrink:0}
 .logo-ring svg{width:46px;height:46px}
 
@@ -81,8 +81,8 @@ body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:va
 .sec-label{font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#1a1a1a;font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .sec-label::after{content:'';flex:1;height:0.5px;background:var(--b)}
 
-/* TOPICS */
-.topics{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.4rem;justify-content:flex-start;width:100%;max-width:800px}
+/* TOPICS - 2 ROWS (restored) */
+.topics{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.4rem;justify-content:flex-start;width:100%}
 .topics .pill{flex:0 0 auto}
 .pill{font-size:12px;padding:5px 12px;border-radius:100px;border:0.5px solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.2s;background:#f5f0e8;color:#8a7a6a;user-select:none;font-family:'Inter',sans-serif}
 .pill.on{font-weight:500}
@@ -144,7 +144,7 @@ body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:va
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:50;align-items:center;justify-content:center;padding:1rem}
 .modal-bg.open{display:flex}
 .modal{background:var(--bg);border-radius:var(--rl);padding:1.6rem;max-width:1000px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:fadeUp 0.2s ease}
-.modal h3{font-size:16px;font-weight:500;color:var(--t1);margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.modal h3{font-size:16px;font-weight:500;color:var(--t1);margin-bottom:12px}
 .badge{font-size:11px;padding:2px 9px;border-radius:100px;font-weight:500}
 .badge-ok2{background:var(--gold-l);color:#633806}
 .modal-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:15px;cursor:pointer;color:var(--t3);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center}
@@ -158,20 +158,20 @@ body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:va
 .api-section .m-field-label{color:var(--blue)}
 .api-note{font-size:10px;color:var(--blue);margin-top:6px;text-align:center}
 
-/* DASHBOARD STYLES - MODERN & MINIMAL */
+/* DASHBOARD STYLES - PROFESSIONAL, NO EMOJIS */
 .dashboard-nav{display:flex;gap:4px;margin-bottom:24px;border-bottom:1px solid var(--b);padding-bottom:8px}
 .dash-nav-item{background:none;border:none;padding:8px 16px;font-size:13px;font-weight:500;color:var(--t3);cursor:pointer;border-radius:var(--r);transition:all 0.2s}
 .dash-nav-item:hover{background:var(--bg2);color:var(--t1)}
 .dash-nav-item.active{background:var(--green-l);color:var(--green-d)}
 .dashboard-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
-.stat-card{background:white;border-radius:16px;padding:20px;border:1px solid var(--b);transition:all 0.2s}
+.stat-card{background:white;border-radius:12px;padding:20px;border:1px solid var(--b);transition:all 0.2s}
 .stat-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.05)}
 .stat-number{font-size:32px;font-weight:700;color:var(--green-d);margin-bottom:4px}
 .stat-label{font-size:13px;color:var(--t3)}
 .stat-change{font-size:11px;margin-top:8px;color:var(--t2)}
 .stat-change.up{color:var(--green-d)}
 .stat-change.down{color:var(--red)}
-.chart-container{background:white;border-radius:16px;padding:20px;margin-bottom:24px;border:1px solid var(--b)}
+.chart-container{background:white;border-radius:12px;padding:20px;margin-bottom:24px;border:1px solid var(--b)}
 .chart-container h4{font-size:14px;margin-bottom:16px;color:var(--t1);font-weight:600}
 .subscriber-table{width:100%;border-collapse:collapse}
 .subscriber-table th,.subscriber-table td{padding:12px;text-align:left;border-bottom:1px solid var(--b);font-size:13px}
@@ -182,7 +182,7 @@ body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:va
 .status-badge.inactive{background:var(--t3)}
 .remove-btn{background:none;border:none;cursor:pointer;font-size:14px;color:var(--t3);padding:4px 8px;border-radius:var(--r);transition:all 0.2s}
 .remove-btn:hover{background:#FCEBEB;color:var(--red)}
-.campaign-card{background:white;border-radius:16px;padding:16px;margin-bottom:12px;border:1px solid var(--b);transition:all 0.2s}
+.campaign-card{background:white;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid var(--b);transition:all 0.2s}
 .campaign-card:hover{transform:translateY(-1px);border-color:var(--green-m)}
 .campaign-title{font-weight:600;margin-bottom:8px}
 .campaign-meta{font-size:12px;color:var(--t3);margin-bottom:12px;display:flex;gap:16px}
@@ -191,13 +191,13 @@ body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:va
 .campaign-stat-value{font-weight:700;color:var(--t1)}
 .campaign-stat-label{font-size:11px;color:var(--t3)}
 .login-error{color:red;font-size:12px;margin-top:8px;text-align:center}
-.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg, #009C3B, #00c04b);color:white;display:inline-flex;align-items:center;justify-content:center;font-weight:600;margin-right:10px;font-size:12px}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--green-d);color:white;display:inline-flex;align-items:center;justify-content:center;font-weight:600;margin-right:10px;font-size:12px}
 .topic-badge{display:inline-block;background:var(--green-l);color:var(--green-d);padding:4px 10px;border-radius:20px;font-size:11px;margin:2px}
 
-/* FOOTER */
+/* FOOTER - Admin access via circle on left */
 footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .footer-brand{display:flex;align-items:center;gap:10px}
-.footer-logo-ring{width:22px;height:22px;flex-shrink:0}
+.footer-logo-ring{width:22px;height:22px;flex-shrink:0;cursor:pointer}
 .footer-logo-ring svg{width:22px;height:22px}
 .footer-brand-name{font-family:'Playfair Display',serif;font-size:16px;color:#1a1a1a;font-weight:500}
 .footer-note{font-size:14px;color:#1a1a1a}
@@ -210,7 +210,7 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
   <!-- HEADER -->
   <div class="header">
     <div class="header-left">
-      <div class="logo" ondblclick="showAdminLogin()">
+      <div class="logo">
         <div class="logo-ring">
           <svg viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="23" cy="23" r="18" stroke="#ddd0bc" stroke-width="7"/>
@@ -273,7 +273,7 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 
   <footer>
     <div class="footer-brand">
-      <div class="footer-logo-ring">
+      <div class="footer-logo-ring" ondblclick="showAdminLogin()">
         <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="8.5" stroke="#ccc" stroke-width="4"/>
           <circle cx="11" cy="11" r="8.5" stroke="#009C3B" stroke-width="4" stroke-linecap="round"
@@ -300,7 +300,7 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 <div class="modal-bg" id="adminLoginModal">
   <div class="modal" style="max-width:400px">
     <button class="modal-close" onclick="closeModal('adminLoginModal')">✕</button>
-    <h3>Acesso Administrativo</h3>
+    <h3>Acesso administrativo</h3>
     <div class="api-section">
       <div class="m-field-label">Senha</div>
       <input type="password" id="adminPassword" class="m-input" placeholder="Digite a senha" style="margin-bottom:8px"/>
@@ -310,126 +310,67 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
   </div>
 </div>
 
-<!-- ADMIN DASHBOARD MODAL - MODERN & MINIMAL -->
+<!-- ADMIN DASHBOARD MODAL -->
 <div class="modal-bg" id="adminModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('adminModal')">✕</button>
     
-    <!-- Header -->
     <div style="margin-bottom:20px">
       <h3 style="margin:0">Radar Brasil</h3>
       <p style="font-size:12px;color:var(--t3);margin-top:4px">Painel de controle</p>
     </div>
     
-    <!-- Navigation Tabs -->
     <div class="dashboard-nav">
-      <button class="dash-nav-item active" onclick="showDashboardTab('home')">📊 Visão Geral</button>
-      <button class="dash-nav-item" onclick="showDashboardTab('audience')">👥 Audiência</button>
-      <button class="dash-nav-item" onclick="showDashboardTab('campaigns')">📧 Campanhas</button>
-      <button class="dash-nav-item" onclick="showDashboardTab('settings')">⚙️ Configurações</button>
+      <button class="dash-nav-item active" onclick="showDashboardTab('home')">Visão geral</button>
+      <button class="dash-nav-item" onclick="showDashboardTab('audience')">Audiência</button>
+      <button class="dash-nav-item" onclick="showDashboardTab('campaigns')">Campanhas</button>
+      <button class="dash-nav-item" onclick="showDashboardTab('settings')">Configurações</button>
     </div>
     
-    <!-- Tab: Home -->
     <div id="tab-home" class="dashboard-tab">
       <div class="dashboard-stats">
-        <div class="stat-card">
-          <div class="stat-number" id="statTotal">0</div>
-          <div class="stat-label">Inscritos</div>
-          <div class="stat-change up" id="statGrowth">+0 esta semana</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number" id="statActive">0</div>
-          <div class="stat-label">Ativos (30d)</div>
-          <div class="stat-change">últimos 30 dias</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number" id="statInactive">0</div>
-          <div class="stat-label">Inativos</div>
-          <div class="stat-change">+60 dias sem abertura</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number" id="statOpenRate">0%</div>
-          <div class="stat-label">Taxa de abertura</div>
-          <div class="stat-change">última campanha</div>
-        </div>
+        <div class="stat-card"><div class="stat-number" id="statTotal">0</div><div class="stat-label">Inscritos</div><div class="stat-change up" id="statGrowth">+0 esta semana</div></div>
+        <div class="stat-card"><div class="stat-number" id="statActive">0</div><div class="stat-label">Ativos (30d)</div></div>
+        <div class="stat-card"><div class="stat-number" id="statInactive">0</div><div class="stat-label">Inativos</div></div>
+        <div class="stat-card"><div class="stat-number" id="statOpenRate">0%</div><div class="stat-label">Abertura última campanha</div></div>
       </div>
-      
-      <div class="chart-container">
-        <h4>Crescimento de inscritos</h4>
-        <canvas id="growthChart" height="120" style="max-height:150px"></canvas>
-      </div>
-      
-      <div class="chart-container">
-        <h4>Últimas campanhas</h4>
-        <div id="recentCampaigns"></div>
-      </div>
+      <div class="chart-container"><h4>Crescimento de inscritos</h4><canvas id="growthChart" height="120" style="max-height:150px"></canvas></div>
+      <div class="chart-container"><h4>Últimas campanhas</h4><div id="recentCampaigns"></div></div>
     </div>
     
-    <!-- Tab: Audience -->
     <div id="tab-audience" class="dashboard-tab" style="display:none">
       <div class="dashboard-stats" style="grid-template-columns:repeat(3,1fr)">
-        <div class="stat-card">
-          <div class="stat-number" id="audTotal">0</div>
-          <div class="stat-label">Total</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number" id="audActive">0</div>
-          <div class="stat-label">Ativos</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number" id="audNew">0</div>
-          <div class="stat-label">Novos (30d)</div>
-        </div>
+        <div class="stat-card"><div class="stat-number" id="audTotal">0</div><div class="stat-label">Total</div></div>
+        <div class="stat-card"><div class="stat-number" id="audActive">0</div><div class="stat-label">Ativos</div></div>
+        <div class="stat-card"><div class="stat-number" id="audNew">0</div><div class="stat-label">Novos (30d)</div></div>
       </div>
-      
-      <div style="background:white;border-radius:16px;border:1px solid var(--b);overflow:auto">
-        <table class="subscriber-table">
-          <thead>
-            <tr><th>Inscrito</th><th>Email</th><th>Temas</th><th>Data</th><th>Status</th><th></th></tr>
-          </thead>
-          <tbody id="audienceTableBody"></tbody>
-        </table>
+      <div style="background:white;border-radius:12px;border:1px solid var(--b);overflow:auto">
+        <table class="subscriber-table"><thead><tr><th>Inscrito</th><th>Email</th><th>Temas</th><th>Data</th><th>Status</th><th></th></tr></thead><tbody id="audienceTableBody"></tbody></table>
       </div>
     </div>
     
-    <!-- Tab: Campaigns -->
     <div id="tab-campaigns" class="dashboard-tab" style="display:none">
-      <div style="margin-bottom:16px">
-        <button class="btn btn-g" onclick="createNewCampaign()" style="width:auto">+ Nova campanha</button>
-      </div>
+      <div style="margin-bottom:16px"><button class="btn btn-g" onclick="createNewCampaign()" style="width:auto">Nova campanha</button></div>
       <div id="campaignsList"></div>
     </div>
     
-    <!-- Tab: Settings -->
     <div id="tab-settings" class="dashboard-tab" style="display:none">
-      <div class="api-section">
-        <div class="m-field-label">Chave API NewsData.io</div>
-        <input type="text" id="apiKeyInput" class="m-input" placeholder="Cole sua chave API" style="margin-bottom:8px"/>
-        <button class="btn btn-g" onclick="saveApiKey()" style="width:100%">Salvar</button>
-      </div>
+      <div class="api-section"><div class="m-field-label">Chave API NewsData.io</div><input type="text" id="apiKeyInput" class="m-input" placeholder="Cole sua chave API" style="margin-bottom:8px"/><button class="btn btn-g" onclick="saveApiKey()" style="width:100%">Salvar</button></div>
       <div class="divider"></div>
       <button class="btn" onclick="logoutAdmin()" style="width:100%;background:#f0e4d0">Sair do painel</button>
     </div>
-    
   </div>
 </div>
 
 <script>
-// ============================================
-// ADMIN PASSWORD
-// ============================================
 const ADMIN_PASSWORD = 'radar2024';
-
-// ============================================
-// API KEYS
-// ============================================
 const BREVO_API_KEY = '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';
 const NEWSDATA_API_KEY = 'pub_ab546bab2eee494fb85264efc74f457a';
 
-// CAMPAIGNS STORAGE
 let campaigns = JSON.parse(localStorage.getItem('rdc_campaigns') || '[]');
+let allNews = [], subs = [], newsdataApiKey = localStorage.getItem('newsdata_api_key') || NEWSDATA_API_KEY, growthChart = null;
+try { subs = JSON.parse(localStorage.getItem('rdc_subs') || '[]'); } catch(e) {}
 
-// CATEGORIES
 const CATEGORIES = [
   { id: 'todos', name: 'Todos', active: true, color: '#1a5a2a', bg: 'rgba(124,239,90,0.73)', tag: 'Geral', visible: true, isSpecial: true },
   { id: 'ccbb', name: 'Notícias do Conselho', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Conselho', visible: true, queries: ['"Conselho de Cidadãos Brasileiros" Pequim', '"Conselho dos Cidadãos Brasileiros" Beijing'] },
@@ -451,13 +392,6 @@ const CATEGORIES = [
   { id: 'curiosidades', name: 'Curiosidades Cultura Chinesa', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['cultura chinesa curiosidades', 'Chinese culture interesting facts'] }
 ];
 
-let allNews = [];
-let subs = [];
-let newsdataApiKey = localStorage.getItem('newsdata_api_key') || NEWSDATA_API_KEY;
-let growthChart = null;
-
-try { subs = JSON.parse(localStorage.getItem('rdc_subs') || '[]'); } catch(e) {}
-
 function nextMonday() {
   const d = new Date(), day = d.getDay(), diff = day === 1 ? 7 : (8 - day) % 7 || 7;
   d.setDate(d.getDate() + diff);
@@ -466,72 +400,51 @@ function nextMonday() {
 document.getElementById('nextDate').textContent = nextMonday();
 
 function renderTopics() {
-  const visibleCategories = CATEGORIES.filter(cat => cat.visible === true);
-  document.getElementById('topicBar').innerHTML = visibleCategories.map(cat => {
+  const visible = CATEGORIES.filter(c => c.visible === true);
+  document.getElementById('topicBar').innerHTML = visible.map(cat => {
     const isActive = cat.active;
-    let additionalClass = ` ${cat.id}`;
-    let styleAttr = '';
+    let style = '';
     if (isActive) {
-      if (cat.id === 'todos') {
-        styleAttr = `style="background:${cat.bg};color:${cat.color};border-color:#7aef5a"`;
-      } else {
-        styleAttr = `style="background:${cat.bg};color:${cat.color};border-color:${cat.color}80"`;
-      }
-      return `<div class="pill on${additionalClass}" ${styleAttr} onclick="toggleTopic('${cat.id}')">${cat.name}</div>`;
+      style = `style="background:${cat.bg};color:${cat.color};border-color:${cat.color}80"`;
+      return `<div class="pill on ${cat.id}" ${style} onclick="toggleTopic('${cat.id}')">${cat.name}</div>`;
     } else {
-      return `<div class="pill${additionalClass}" onclick="toggleTopic('${cat.id}')">${cat.name}</div>`;
+      return `<div class="pill ${cat.id}" onclick="toggleTopic('${cat.id}')">${cat.name}</div>`;
     }
   }).join('');
 }
 
 function toggleTopic(id) {
-  const category = CATEGORIES.find(c => c.id === id);
-  if (category) {
-    if (id === 'todos') {
-      const wasActive = category.active;
-      CATEGORIES.forEach(c => { if (c.id !== 'todos') c.active = !wasActive; });
-      category.active = !wasActive;
-    } else {
-      category.active = !category.active;
-      const allOthersActive = CATEGORIES.filter(c => c.id !== 'todos' && c.visible).every(c => c.active === true);
-      const todosCategory = CATEGORIES.find(c => c.id === 'todos');
-      if (todosCategory) todosCategory.active = allOthersActive;
-    }
-    renderTopics();
-    fetchAllNews();
+  const cat = CATEGORIES.find(c => c.id === id);
+  if (!cat) return;
+  if (id === 'todos') {
+    const wasActive = cat.active;
+    CATEGORIES.forEach(c => { if (c.id !== 'todos') c.active = !wasActive; });
+    cat.active = !wasActive;
+  } else {
+    cat.active = !cat.active;
+    const allOthersActive = CATEGORIES.filter(c => c.id !== 'todos' && c.visible).every(c => c.active === true);
+    const todos = CATEGORIES.find(c => c.id === 'todos');
+    if (todos) todos.active = allOthersActive;
   }
+  renderTopics();
+  fetchAllNews();
 }
 
 function showAdminLogin() { openModal('adminLoginModal'); }
-
 function checkAdminPassword() {
-  const password = document.getElementById('adminPassword').value;
-  if (password === ADMIN_PASSWORD) {
+  if (document.getElementById('adminPassword').value === ADMIN_PASSWORD) {
     localStorage.setItem('admin_logged_in', 'true');
     closeModal('adminLoginModal');
     openAdminDashboard();
-    document.getElementById('loginError').innerHTML = '';
-  } else {
-    document.getElementById('loginError').innerHTML = 'Senha incorreta';
-  }
+  } else { document.getElementById('loginError').innerHTML = 'Senha incorreta'; }
 }
-
-function logoutAdmin() {
-  localStorage.removeItem('admin_logged_in');
-  closeModal('adminModal');
-  toast('Desconectado');
-}
-
-function openAdminDashboard() {
-  openModal('adminModal');
-  updateDashboardData();
-  document.getElementById('apiKeyInput').value = newsdataApiKey;
-}
+function logoutAdmin() { localStorage.removeItem('admin_logged_in'); closeModal('adminModal'); toast('Desconectado'); }
+function openAdminDashboard() { openModal('adminModal'); updateDashboardData(); document.getElementById('apiKeyInput').value = newsdataApiKey; }
 
 function showDashboardTab(tab) {
   document.querySelectorAll('.dashboard-tab').forEach(t => t.style.display = 'none');
   document.getElementById(`tab-${tab}`).style.display = 'block';
-  document.querySelectorAll('.dash-nav-item').forEach(nav => nav.classList.remove('active'));
+  document.querySelectorAll('.dash-nav-item').forEach(n => n.classList.remove('active'));
   event.target.classList.add('active');
   if (tab === 'home') updateDashboardData();
   if (tab === 'audience') renderAudienceTable();
@@ -539,95 +452,43 @@ function showDashboardTab(tab) {
 }
 
 function updateDashboardData() {
-  const now = new Date();
-  const thirtyDaysAgo = new Date(now.setDate(now.getDate() - 30));
-  const sevenDaysAgo = new Date(now.setDate(now.getDate() - 7));
-  
-  const activeSubs = subs.filter(s => {
-    if (!s.lastOpen) return false;
-    const lastOpen = new Date(s.lastOpen);
-    return lastOpen > thirtyDaysAgo;
-  }).length;
-  
-  const inactiveSubs = subs.filter(s => {
-    if (!s.lastOpen) return true;
-    const lastOpen = new Date(s.lastOpen);
-    return lastOpen < thirtyDaysAgo;
-  }).length;
-  
-  const newThisWeek = subs.filter(s => {
-    const joinDate = new Date(s.date.split('/').reverse().join('-'));
-    return joinDate > sevenDaysAgo;
-  }).length;
-  
+  const thirtyDaysAgo = new Date(); thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+  const sevenDaysAgo = new Date(); sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+  const activeSubs = subs.filter(s => s.lastOpen ? new Date(s.lastOpen) > thirtyDaysAgo : false).length;
+  const inactiveSubs = subs.filter(s => !s.lastOpen || new Date(s.lastOpen) <= thirtyDaysAgo).length;
+  const newThisWeek = subs.filter(s => new Date(s.date.split('/').reverse().join('-')) > sevenDaysAgo).length;
   document.getElementById('statTotal').textContent = subs.length;
   document.getElementById('statActive').textContent = activeSubs;
   document.getElementById('statInactive').textContent = inactiveSubs;
   document.getElementById('statGrowth').innerHTML = `+${newThisWeek} esta semana`;
-  
   const lastCampaign = campaigns[campaigns.length - 1];
-  if (lastCampaign) {
-    const openRate = lastCampaign.sent ? Math.round((lastCampaign.opens || 0) / lastCampaign.sent * 100) : 0;
-    document.getElementById('statOpenRate').textContent = `${openRate}%`;
-  }
-  
+  if (lastCampaign) document.getElementById('statOpenRate').textContent = `${Math.round((lastCampaign.opens || 0) / (lastCampaign.sent || 1) * 100)}%`;
   if (growthChart) growthChart.destroy();
   const ctx = document.getElementById('growthChart').getContext('2d');
-  const last6Weeks = [12, 15, 18, 22, 25, subs.length];
-  growthChart = new Chart(ctx, {
-    type: 'line',
-    data: { labels: ['Semana 5', 'Semana 4', 'Semana 3', 'Semana 2', 'Semana 1', 'Hoje'], datasets: [{ label: 'Inscritos', data: last6Weeks.slice(-6), borderColor: '#009C3B', tension: 0.3, fill: false }] },
-    options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } } }
-  });
-  
-  const recentHtml = campaigns.slice(-3).reverse().map(c => `
-    <div class="campaign-card">
-      <div class="campaign-title">${escapeHtml(c.subject)}</div>
-      <div class="campaign-meta">Enviada em ${c.date} • ${c.sent || 0} destinatários</div>
-      <div class="campaign-stats">
-        <div class="campaign-stat"><div class="campaign-stat-value">${Math.round((c.opens || 0) / (c.sent || 1) * 100)}%</div><div class="campaign-stat-label">Abertura</div></div>
-        <div class="campaign-stat"><div class="campaign-stat-value">${Math.round((c.clicks || 0) / (c.opens || 1) * 100)}%</div><div class="campaign-stat-label">Clique</div></div>
-      </div>
-    </div>
-  `).join('');
+  growthChart = new Chart(ctx, { type: 'line', data: { labels: ['Semana 5', 'Semana 4', 'Semana 3', 'Semana 2', 'Semana 1', 'Hoje'], datasets: [{ label: 'Inscritos', data: [12, 15, 18, 22, 25, subs.length], borderColor: '#009C3B', tension: 0.3, fill: false }] }, options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } } } });
+  const recentHtml = campaigns.slice(-3).reverse().map(c => `<div class="campaign-card"><div class="campaign-title">${escapeHtml(c.subject)}</div><div class="campaign-meta">Enviada em ${c.date} • ${c.sent || 0} destinatários</div><div class="campaign-stats"><div class="campaign-stat"><div class="campaign-stat-value">${Math.round((c.opens || 0) / (c.sent || 1) * 100)}%</div><div class="campaign-stat-label">Abertura</div></div><div class="campaign-stat"><div class="campaign-stat-value">${Math.round((c.clicks || 0) / (c.opens || 1) * 100)}%</div><div class="campaign-stat-label">Clique</div></div></div></div>`).join('');
   document.getElementById('recentCampaigns').innerHTML = recentHtml || '<div style="padding:20px;text-align:center;color:var(--t3)">Nenhuma campanha enviada ainda</div>';
 }
 
 function renderAudienceTable() {
+  const thirtyDaysAgo = new Date(); thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
   const tbody = document.getElementById('audienceTableBody');
   if (!tbody) return;
-  const thirtyDaysAgo = new Date(); thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
   tbody.innerHTML = subs.map((s, i) => {
     const firstLetter = s.name ? s.name.charAt(0).toUpperCase() : '?';
     const isActive = s.lastOpen ? new Date(s.lastOpen) > thirtyDaysAgo : false;
     const topicsHtml = (s.topics || []).slice(0,3).map(t => `<span class="topic-badge">${escapeHtml(t)}</span>`).join('');
-    return `<tr>
-      <td><span class="avatar">${escapeHtml(firstLetter)}</span> ${escapeHtml(s.name)}</td>
-      <td>${escapeHtml(s.email)}</td>
-      <td>${topicsHtml || '<span class="topic-badge">Todos</span>'}</td>
-      <td>${s.date || '-'}</td>
-      <td><span class="status-badge ${isActive ? 'active' : 'inactive'}"></span> ${isActive ? 'Ativo' : 'Inativo'}</td>
-      <td><button class="remove-btn" onclick="removeSubscriber(${i})">Remover</button></td>
-    </tr>`;
+    return `<tr><td><span class="avatar">${escapeHtml(firstLetter)}</span> ${escapeHtml(s.name)}</td><td>${escapeHtml(s.email)}</td><td>${topicsHtml || '<span class="topic-badge">Todos</span>'}</td><td>${s.date || '-'}</td><td><span class="status-badge ${isActive ? 'active' : 'inactive'}"></span> ${isActive ? 'Ativo' : 'Inativo'}</td><td><button class="remove-btn" onclick="removeSubscriber(${i})">Remover</button></td></tr>`;
   }).join('');
+  document.getElementById('audTotal').textContent = subs.length;
+  document.getElementById('audActive').textContent = subs.filter(s => s.lastOpen ? new Date(s.lastOpen) > thirtyDaysAgo : false).length;
+  document.getElementById('audNew').textContent = subs.filter(s => new Date(s.date.split('/').reverse().join('-')) > new Date(Date.now() - 30*24*60*60*1000)).length;
 }
 
 function renderCampaignsList() {
   const container = document.getElementById('campaignsList');
-  if (campaigns.length === 0) {
-    container.innerHTML = '<div style="padding:40px;text-align:center;color:var(--t3)">Nenhuma campanha criada ainda</div>';
-    return;
-  }
-  container.innerHTML = campaigns.slice().reverse().map(c => `
-    <div class="campaign-card">
-      <div class="campaign-title">${escapeHtml(c.subject)}</div>
-      <div class="campaign-meta">${c.date} • ${c.sent || 0} enviados • ${c.opens || 0} aberturas • ${c.clicks || 0} cliques</div>
-      <div class="campaign-stats">
-        <div class="campaign-stat"><div class="campaign-stat-value">${Math.round((c.opens || 0) / (c.sent || 1) * 100)}%</div><div class="campaign-stat-label">Abertura</div></div>
-        <div class="campaign-stat"><div class="campaign-stat-value">${Math.round((c.clicks || 0) / (c.opens || 1) * 100)}%</div><div class="campaign-stat-label">Clique</div></div>
-      </div>
-    </div>
-  `).join('');
+  if (!campaigns.length) { container.innerHTML = '<div style="padding:40px;text-align:center;color:var(--t3)">Nenhuma campanha criada ainda</div>'; return; }
+  container.innerHTML = campaigns.slice().reverse().map(c => `<div class="campaign-card"><div class="campaign-title">${escapeHtml(c.subject)}</div><div class="campaign-meta">${c.date} • ${c.sent || 0} enviados • ${c.opens || 0} aberturas • ${c.clicks || 0} cliques</div><div class="campaign-stats"><div class="campaign-stat"><div class="campaign-stat-value">${Math.round((c.opens || 0) / (c.sent || 1) * 100)}%</div><div class="campaign-stat-label">Abertura</div></div><div class="campaign-stat"><div class="campaign-stat-value">${Math.round((c.clicks || 0) / (c.opens || 1) * 100)}%</div><div class="campaign-stat-label">Clique</div></div></div></div>`).join('');
 }
 
 function createNewCampaign() {
@@ -638,32 +499,16 @@ function createNewCampaign() {
   campaigns.push({ subject, content, date: new Date().toLocaleDateString('pt-BR'), sent: 0, opens: 0, clicks: 0 });
   localStorage.setItem('rdc_campaigns', JSON.stringify(campaigns));
   renderCampaignsList();
-  toast('Campanha criada! Para enviar, use o Brevo manualmente.');
+  toast('Campanha criada');
 }
 
-function removeSubscriber(index) {
-  if (confirm('Remover este inscrito?')) {
-    subs.splice(index, 1);
-    localStorage.setItem('rdc_subs', JSON.stringify(subs));
-    renderAudienceTable();
-    updateDashboardData();
-    toast('Inscrito removido');
-  }
+function removeSubscriber(i) {
+  if (confirm('Remover este inscrito?')) { subs.splice(i, 1); localStorage.setItem('rdc_subs', JSON.stringify(subs)); renderAudienceTable(); updateDashboardData(); toast('Removido'); }
 }
 
 function openModal(id) { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-
-function saveApiKey() {
-  const key = document.getElementById('apiKeyInput').value.trim();
-  if (key) {
-    newsdataApiKey = key;
-    localStorage.setItem('newsdata_api_key', key);
-    toast('Chave API salva!');
-    closeModal('adminModal');
-    fetchAllNews();
-  } else { toast('Insira uma chave válida'); }
-}
+function saveApiKey() { const key = document.getElementById('apiKeyInput').value.trim(); if (key) { newsdataApiKey = key; localStorage.setItem('newsdata_api_key', key); toast('Chave salva'); closeModal('adminModal'); fetchAllNews(); } else toast('Chave inválida'); }
 
 async function heroSubscribe() {
   const name = document.getElementById('heroName').value.trim();
@@ -672,14 +517,8 @@ async function heroSubscribe() {
   const selectedTopics = Array.from(document.querySelectorAll('.pill.on')).map(p => p.innerText).filter(t => t !== 'Todos');
   toast('Enviando...');
   try {
-    await fetch('https://api.brevo.com/v3/smtp/email', {
-      method: 'POST', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'api-key': BREVO_API_KEY },
-      body: JSON.stringify({ sender: { email: 'radar@radarbrasil.com', name: 'Radar Brasil' }, to: [{ email }], subject: 'Bem-vindo ao Radar Brasil!', htmlContent: `<h2>Olá ${name || email}!</h2><p>Você receberá nosso resumo semanal.</p><p>Temas: ${selectedTopics.join(', ') || 'Todos'}</p>` })
-    });
-    if (!subs.find(s => s.email === email)) {
-      subs.push({ name: name || email.split('@')[0], email, topics: selectedTopics, date: new Date().toLocaleDateString('pt-BR') });
-      localStorage.setItem('rdc_subs', JSON.stringify(subs));
-    }
+    await fetch('https://api.brevo.com/v3/smtp/email', { method: 'POST', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'api-key': BREVO_API_KEY }, body: JSON.stringify({ sender: { email: 'radar@radarbrasil.com', name: 'Radar Brasil' }, to: [{ email }], subject: 'Bem-vindo ao Radar Brasil!', htmlContent: `<h2>Olá ${name || email}!</h2><p>Você receberá nosso resumo semanal.</p><p>Temas: ${selectedTopics.join(', ') || 'Todos'}</p>` }) });
+    if (!subs.find(s => s.email === email)) { subs.push({ name: name || email.split('@')[0], email, topics: selectedTopics, date: new Date().toLocaleDateString('pt-BR') }); localStorage.setItem('rdc_subs', JSON.stringify(subs)); }
     toast('Inscrito com sucesso!');
     document.getElementById('heroName').value = '';
     document.getElementById('heroEmail').value = '';
@@ -692,17 +531,16 @@ function truncateSummary(text, maxWords = 58) { if (!text) return ''; const word
 
 async function searchCategory(category) {
   if (category.id === 'todos' || !newsdataApiKey) return [];
-  const articles = [], seenUrls = new Set();
-  for (const query of category.queries.slice(0,2)) {
+  const articles = [], seen = new Set();
+  for (const q of category.queries.slice(0,2)) {
     try {
-      const url = `https://radar-news-proxy.onlirroquenrouseives.workers.dev/news?q=${encodeURIComponent(query)}&language=pt,en,zh&size=3`;
-      const response = await fetch(url);
-      const data = await response.json();
+      const res = await fetch(`https://radar-news-proxy.onlirroquenrouseives.workers.dev/news?q=${encodeURIComponent(q)}&language=pt,en,zh&size=3`);
+      const data = await res.json();
       if (data.results) {
-        for (const article of data.results) {
-          if (!seenUrls.has(article.link) && articles.length < 5) {
-            seenUrls.add(article.link);
-            articles.push({ title: article.title, summary: article.description || 'Clique para ler', source: article.source_name || 'Fonte', date: article.pubDate ? new Date(article.pubDate).toLocaleDateString('pt-BR') : 'Data recente', url: article.link, categoryId: category.id, categoryName: category.name, categoryColor: category.color, categoryBg: category.bg, categoryTag: category.tag });
+        for (const a of data.results) {
+          if (!seen.has(a.link) && articles.length < 5) {
+            seen.add(a.link);
+            articles.push({ title: a.title, summary: a.description || 'Clique para ler', source: a.source_name || 'Fonte', date: a.pubDate ? new Date(a.pubDate).toLocaleDateString('pt-BR') : 'Data recente', url: a.link, categoryId: category.id, categoryName: category.name, categoryColor: category.color, categoryBg: category.bg, categoryTag: category.tag });
           }
         }
       }
@@ -721,17 +559,14 @@ function renderNews() {
 
 async function fetchAllNews() {
   if (!newsdataApiKey) { document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API no Admin</div>'; return; }
-  const activeCategories = CATEGORIES.filter(cat => cat.active === true && cat.id !== 'todos');
-  if (activeCategories.length === 0) { document.getElementById('newsGrid').innerHTML = '<div class="empty">Selecione pelo menos um tema</div>'; return; }
+  const active = CATEGORIES.filter(c => c.active === true && c.id !== 'todos');
+  if (active.length === 0) { document.getElementById('newsGrid').innerHTML = '<div class="empty">Selecione pelo menos um tema</div>'; return; }
   const grid = document.getElementById('newsGrid'), loader = document.getElementById('loader');
   grid.innerHTML = ''; loader.style.display = 'flex';
-  const allArticles = [];
-  for (const category of activeCategories) {
-    const articles = await searchCategory(category);
-    allArticles.push(...articles);
-  }
+  const all = [];
+  for (const cat of active) { const arts = await searchCategory(cat); all.push(...arts); }
   const unique = [], seen = new Set();
-  for (const a of allArticles) { if (!seen.has(a.url)) { seen.add(a.url); unique.push(a); } }
+  for (const a of all) { if (!seen.has(a.url)) { seen.add(a.url); unique.push(a); } }
   unique.sort((a,b) => new Date(b.date) - new Date(a.date));
   allNews = unique.slice(0, 24);
   loader.style.display = 'none';
@@ -741,7 +576,7 @@ async function fetchAllNews() {
 
 renderTopics();
 if (newsdataApiKey) fetchAllNews();
-else document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API clicando duas vezes no logo</div>';
+else document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API clicando duas vezes no círculo do rodapé</div>';
 </script>
 </body>
 </html>
