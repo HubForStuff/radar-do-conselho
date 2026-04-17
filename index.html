@@ -31,7 +31,7 @@
   --blue:#0C447C;
   --blue-l:#ddeaf7;
   --purple:#3C3489;
-  --purple-l:#e8e8fc;
+  --purple-l:#e8e6fc;
   --red:#cc2200;
   --r:8px;
   --rl:12px
@@ -80,13 +80,11 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .sec-label{font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#1a1a1a;font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .sec-label::after{content:'';flex:1;height:0.5px;background:var(--b)}
 
-/* TOPICS - Default (not selected) */
+/* TOPICS */
 .topics{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.4rem;justify-content:flex-start;width:100%}
 .topics .pill{flex:0 0 auto}
 .pill{font-size:12px;padding:5px 12px;border-radius:100px;border:0.5px solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.2s;background:#f5f0e8;color:#8a7a6a;user-select:none;font-family:'Roboto',sans-serif}
 .pill.on{font-weight:500}
-
-/* Colors ONLY when selected (on) */
 .pill.on.todos{background:rgba(124,239,90,0.73);color:#1a5a2a;border-color:#7aef5a}
 .pill.on.ccbb{background:#fdf8ed;color:#c4983a;border-color:#f0e0c0}
 .pill.on.emergencias{background:#edf8f2;color:#5ab88a;border-color:#d0ead8}
@@ -103,9 +101,10 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .pill.on.eventos{background:#fdf8ed;color:#c4983a;border-color:#f0e0c0}
 .pill.on.emprego{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
 .pill.on.tecnologia{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
-
-/* Hover effect for non-selected buttons */
+.pill.on.curiosidades{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.pesquisa{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
 .pill:hover:not(.on){background:#e8e0d5}
+
 /* ACTION BAR */
 .action-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.6rem;align-items:center}
 .btn{font-family:'Roboto',sans-serif;font-size:14px;padding:9px 16px;border-radius:var(--r);cursor:pointer;transition:all 0.15s;font-weight:400;border:0.5px solid var(--bm);background:var(--card);color:var(--t1)}
@@ -136,14 +135,14 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 /* EMPTY STATE */
 .empty{text-align:center;padding:3rem 1rem;color:var(--t3);font-size:16px;line-height:1.7;width:100%;display:flex;align-items:center;justify-content:center;min-height:60vh;grid-column:1/-1}
 
-/* TOAST - SAME GREEN AS SIGNUP BAR, SLIGHTLY LOWER, SLIGHTLY SMALLER */
+/* TOAST */
 .toast{position:fixed;bottom:120px;left:50%;transform:translateX(-50%);background:rgba(124,239,90,0.73);color:#1a5a2a;font-size:14px;font-weight:500;padding:10px 24px;border-radius:50px;opacity:0;transition:opacity 0.3s ease;pointer-events:none;z-index:1000;white-space:nowrap;font-family:'Roboto',sans-serif;box-shadow:0 2px 10px rgba(0,0,0,0.1);border:0.5px solid rgba(124,239,90,0.5)}
 .toast.show{opacity:1}
 
 /* MODAL */
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:50;align-items:center;justify-content:center;padding:1rem}
 .modal-bg.open{display:flex}
-.modal{background:var(--bg);border-radius:var(--rl);padding:1.6rem;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:fadeUp 0.2s ease}
+.modal{background:var(--bg);border-radius:var(--rl);padding:1.6rem;max-width:650px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:fadeUp 0.2s ease}
 .modal h3{font-size:16px;font-weight:500;color:var(--t1);margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .badge{font-size:11px;padding:2px 9px;border-radius:100px;font-weight:500}
 .badge-ok2{background:var(--gold-l);color:#633806}
@@ -162,13 +161,21 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .api-section .m-field-label{color:var(--blue)}
 .api-note{font-size:10px;color:var(--blue);margin-top:6px;text-align:center}
 
+/* Dashboard table styles */
+.dashboard-table{width:100%;border-collapse:collapse;margin-top:10px}
+.dashboard-table th,.dashboard-table td{padding:10px;text-align:left;border-bottom:0.5px solid var(--b);font-size:12px}
+.dashboard-table th{background:var(--bg2);font-weight:600}
+.dashboard-table tr:hover{background:rgba(0,0,0,0.02)}
+.topic-badge{display:inline-block;background:var(--green-l);color:var(--green-d);padding:2px 6px;border-radius:10px;font-size:10px;margin:2px}
+.login-error{color:red;font-size:12px;margin-top:8px;text-align:center}
+
 /* FOOTER */
 footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .footer-brand{display:flex;align-items:center;gap:10px}
 .footer-logo-ring{width:22px;height:22px;flex-shrink:0}
 .footer-logo-ring svg{width:22px;height:22px}
-.footer-brand-name{font-family:'Playfair Display',serif;font-size:16px;color:#888888;font-weight:500}
-.footer-note{font-size:14px;color:#888888}
+.footer-brand-name{font-family:'Playfair Display',serif;font-size:16px;color:#1a1a1a;font-weight:500}
+.footer-note{font-size:14px;color:#1a1a1a}
 </style>
 </head>
 <body>
@@ -230,7 +237,7 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
   <!-- ACTION BAR -->
   <div class="action-bar">
     <button class="btn btn-g" onclick="fetchAllNews()">Atualizar notícias</button>
-    <button class="btn" onclick="openModal('adminModal')">Admin</button>
+    <button class="btn" onclick="showAdminLogin()">Admin</button>
   </div>
 
   <!-- NEWS GRID -->
@@ -265,11 +272,25 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- ADMIN MODAL -->
+<!-- ADMIN LOGIN MODAL -->
+<div class="modal-bg" id="adminLoginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('adminLoginModal')">✕</button>
+    <h3>Acesso Admin</h3>
+    <div class="api-section">
+      <div class="m-field-label">Senha</div>
+      <input type="password" id="adminPassword" class="m-input" placeholder="Digite a senha" style="margin-bottom:8px"/>
+      <button class="btn btn-g" onclick="checkAdminPassword()" style="width:100%">Entrar</button>
+      <div id="loginError" class="login-error"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD MODAL -->
 <div class="modal-bg" id="adminModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('adminModal')">✕</button>
-    <h3>Configurações <span class="badge badge-ok2">admin</span></h3>
+    <h3>Painel Admin <span class="badge badge-ok2">dashboard</span></h3>
     
     <div class="api-section">
       <div class="m-field-label" style="color:var(--blue)">Chave API NewsData.io</div>
@@ -280,10 +301,19 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
     
     <div class="divider"></div>
     
-    <h3 style="font-size:14px; margin-bottom:12px">Gerenciar inscritos</h3>
-    <p style="font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.6">
-      Adicione manualmente pessoas que pediram para receber a newsletter.
-    </p>
+    <h3 style="font-size:14px; margin-bottom:12px">Inscritos e Temas Selecionados</h3>
+    <div id="dashboardContainer" style="max-height:400px; overflow-y:auto;">
+      <table class="dashboard-table" id="dashboardTable">
+        <thead>
+          <tr><th>Nome</th><th>Email</th><th>Temas Selecionados</th><th>Data</th></tr>
+        </thead>
+        <tbody id="dashboardBody"></tbody>
+      </table>
+    </div>
+    
+    <div class="divider"></div>
+    
+    <h3 style="font-size:14px; margin-bottom:12px">Adicionar inscrito manualmente</h3>
     <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
       <input type="text" class="m-input" id="adminName" placeholder="Nome" style="flex:1;min-width:100px"/>
       <input type="email" class="m-input" id="adminEmail" placeholder="email@exemplo.com" style="flex:2;min-width:150px"/>
@@ -299,19 +329,21 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
     <div style="display:flex;gap:8px;margin-bottom:16px">
       <button class="btn btn-g" onclick="adminAdd()">Adicionar inscrito</button>
     </div>
-    <div id="subList" style="display:none">
-      <div class="divider"></div>
-      <div class="m-field-label" style="margin-bottom:8px">
-        Inscritos <span id="subCount" style="color:var(--t3);font-weight:400"></span>
-      </div>
-      <div id="subItems"></div>
-    </div>
+    
+    <div class="divider"></div>
+    
+    <button class="btn" onclick="logoutAdmin()" style="width:100%; background:#f0e4d0">Sair do Admin</button>
   </div>
 </div>
 
 <script>
 // ============================================
-// YOUR BREVO API KEY - PASTE HERE
+// ADMIN PASSWORD - CHANGE THIS TO YOUR PASSWORD
+// ============================================
+const ADMIN_PASSWORD = 'radar2024';
+
+// ============================================
+// YOUR BREVO API KEY
 // ============================================
 const BREVO_API_KEY = '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';
 
@@ -320,7 +352,7 @@ const BREVO_API_KEY = 'xkeysib-f18cac060edc096213408041ad3e945914a9f4d1fbfce62e8
 // ============================================
 const NEWSDATA_API_KEY = 'pub_ab546bab2eee494fb85264efc74f457a';
 
-// CATEGORIES - UPDATED ORDER AND COLORS
+// CATEGORIES with new "Pesquisa Acadêmica" topic
 const CATEGORIES = [
   { id: 'todos', name: 'Todos', active: true, color: '#1a5a2a', bg: 'rgba(124,239,90,0.73)', tag: 'Geral', visible: true, isSpecial: true },
   { id: 'ccbb', name: 'Notícias do Conselho', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Conselho', visible: true, queries: ['"Conselho de Cidadãos Brasileiros" Pequim', '"Conselho dos Cidadãos Brasileiros" Beijing', '"conselho dos cidadãos brasileiros" china', '"conselhobeijing.org"'] },
@@ -338,12 +370,36 @@ const CATEGORIES = [
   { id: 'eventos', name: 'Eventos em Beijing', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Eventos', visible: true, queries: ['eventos Pequim', 'exposições Pequim', 'festivais Pequim', 'shows Pequim', 'encontros brasileiros Pequim'] },
   { id: 'emprego', name: 'Oportunidades de Emprego', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Carreira', visible: true, queries: ['vagas China brasileiros', 'emprego Pequim', 'trabalho China brasileiros', 'oportunidades trabalho China'] },
   { id: 'tecnologia', name: 'Tecnologia na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Tecnologia', visible: true, queries: ['tecnologia China Brasil', 'inovação China Brasil', 'startups Brasil China', 'inteligência artificial China', 'transferência tecnológica China notícias'] },
-  { id: 'curiosidades', name: 'Curiosidades Cultura Chinesa', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['cultura chinesa curiosidades', 'tradições chinesas fatos interessantes', 'Chinese culture interesting facts', '中国传统文化趣闻', 'costumes chineses explicados', 'Chinese customs and traditions', '中国习俗与传统', 'festividades chinesas significado', 'Chinese festivals meaning', '中国节日意义'] }
+  { id: 'curiosidades', name: 'Curiosidades Cultura Chinesa', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['cultura chinesa curiosidades', 'tradições chinesas fatos interessantes', 'Chinese culture interesting facts', '中国传统文化趣闻', 'costumes chineses explicados', 'Chinese customs and traditions', '中国习俗与传统', 'festividades chinesas significado', 'Chinese festivals meaning', '中国节日意义'] },
+  { id: 'pesquisa', name: 'Pesquisa Acadêmica', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Acadêmico', visible: true, queries: [
+    '("China" AND "Brazil") AND ("comparative analysis" OR "comparative study" OR "comparison") AND ("economic growth" OR "GDP growth") AND ("panel data" OR "empirical analysis" OR "regression")',
+    '("China" AND "Brazil") AND ("productivity" OR "total factor productivity" OR "TFP") AND ("empirical" OR "panel data" OR "firm-level")',
+    '("China" AND "Brazil") AND ("industrial policy" OR "development strategy") AND ("outcomes" OR "performance") AND ("comparative" OR "cross-country")',
+    '("China" AND "Brazil") AND ("middle income trap" OR "income convergence") AND ("empirical" OR "panel data")',
+    '("China" AND "Brazil") AND ("income inequality" OR "Gini") AND ("panel data" OR "regression" OR "longitudinal")',
+    '("China" AND "Brazil") AND ("manufacturing productivity" OR "industrial productivity") AND ("firm-level" OR "microdata" OR "empirical")',
+    '("China" AND "Brazil") AND ("global value chains" OR "GVC") AND ("participation" OR "integration") AND ("empirical" OR "trade data")',
+    '("China" AND "Brazil") AND ("export structure" OR "export diversification" OR "comparative advantage") AND ("trade data" OR "empirical")',
+    '("China" AND "Brazil") AND ("innovation" OR "patents" OR "R&D") AND ("performance" OR "output") AND ("empirical" OR "bibliometric")',
+    '("China" AND "Brazil") AND ("R&D expenditure" OR "research investment") AND ("productivity" OR "innovation output") AND ("regression" OR "panel data")',
+    '("China" AND "Brazil") AND ("technology adoption" OR "digital economy") AND ("firms" OR "enterprise") AND ("empirical" OR "microdata")',
+    '("China" AND "Brazil") AND ("energy consumption" OR "energy efficiency") AND ("panel data" OR "DEA" OR "stochastic frontier")',
+    '("China" AND "Brazil") AND ("renewable energy" OR "energy transition") AND ("comparative" OR "policy analysis")',
+    '("China" AND "Brazil") AND ("carbon emissions" OR "CO2 emissions") AND ("panel data" OR "regression" OR "decomposition")',
+    '("China" AND "Brazil") AND ("agriculture productivity" OR "farm productivity") AND ("empirical" OR "panel data")',
+    '("China" AND "Brazil") AND ("land use" OR "deforestation") AND ("environmental impact" OR "sustainability") AND ("empirical")',
+    '("China" AND "Brazil") AND ("urbanization" OR "regional disparities") AND ("panel data" OR "spatial analysis")',
+    '("China" AND "Brazil") AND ("human capital" OR "education outcomes") AND ("empirical" OR "panel data")',
+    '("China" AND "Brazil") AND ("health expenditure" OR "health outcomes") AND ("comparative" OR "panel data")',
+    '("China" AND "Brazil") AND ("state capacity" OR "governance" OR "institutions") AND ("economic performance" OR "development") AND ("empirical" OR "regression")',
+    '("China" AND "Brazil") AND ("trade structure" OR "terms of trade") AND ("export diversification" OR "trade performance") AND ("empirical")'
+  ] }
 ];
 
 let allNews = [];
 let subs = [];
 let newsdataApiKey = localStorage.getItem('newsdata_api_key') || NEWSDATA_API_KEY;
+let isAdminLoggedIn = localStorage.getItem('admin_logged_in') === 'true';
 
 try { subs = JSON.parse(localStorage.getItem('rdc_subs') || '[]'); } catch(e) {}
 
@@ -378,7 +434,6 @@ function toggleTopic(id) {
   const category = CATEGORIES.find(c => c.id === id);
   if (category) {
     if (id === 'todos') {
-      // If "Todos" is clicked, select all other topics
       const wasActive = category.active;
       CATEGORIES.forEach(c => {
         if (c.id !== 'todos') c.active = !wasActive;
@@ -386,7 +441,6 @@ function toggleTopic(id) {
       category.active = !wasActive;
     } else {
       category.active = !category.active;
-      // Check if all non-todos are active to sync "Todos"
       const allOthersActive = CATEGORIES.filter(c => c.id !== 'todos' && c.visible).every(c => c.active === true);
       const todosCategory = CATEGORIES.find(c => c.id === 'todos');
       if (todosCategory) todosCategory.active = allOthersActive;
@@ -396,12 +450,64 @@ function toggleTopic(id) {
   }
 }
 
+function showAdminLogin() {
+  if (isAdminLoggedIn) {
+    openAdminDashboard();
+  } else {
+    openModal('adminLoginModal');
+  }
+}
+
+function checkAdminPassword() {
+  const password = document.getElementById('adminPassword').value;
+  if (password === ADMIN_PASSWORD) {
+    isAdminLoggedIn = true;
+    localStorage.setItem('admin_logged_in', 'true');
+    closeModal('adminLoginModal');
+    openAdminDashboard();
+    document.getElementById('loginError').innerHTML = '';
+  } else {
+    document.getElementById('loginError').innerHTML = 'Senha incorreta. Tente novamente.';
+  }
+}
+
+function logoutAdmin() {
+  isAdminLoggedIn = false;
+  localStorage.removeItem('admin_logged_in');
+  closeModal('adminModal');
+  toast('Admin desconectado');
+}
+
+function openAdminDashboard() {
+  openModal('adminModal');
+  renderDashboard();
+  document.getElementById('apiKeyInput').value = newsdataApiKey;
+}
+
+function renderDashboard() {
+  const tbody = document.getElementById('dashboardBody');
+  if (!tbody) return;
+  
+  if (subs.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center">Nenhum inscrito ainda</td></tr>';
+    return;
+  }
+  
+  tbody.innerHTML = subs.map(s => {
+    const topicsHtml = (s.topics || []).map(t => `<span class="topic-badge">${t}</span>`).join('') || '<span class="topic-badge">Todos</span>';
+    return `
+      <tr>
+        <td>${escapeHtml(s.name)}</td>
+        <td>${escapeHtml(s.email)}</td>
+        <td>${topicsHtml}</td>
+        <td>${s.date || '-'}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
 function openModal(id) { 
   document.getElementById(id).classList.add('open'); 
-  if(id === 'adminModal') { 
-    renderSubs(); 
-    document.getElementById('apiKeyInput').value = newsdataApiKey; 
-  } 
 }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
@@ -463,6 +569,7 @@ async function heroSubscribe() {
       if (!subs.find(s => s.email === email)) {
         subs.push({ name: name || email.split('@')[0], email, topics: selectedTopics, date: new Date().toLocaleDateString('pt-BR') });
         localStorage.setItem('rdc_subs', JSON.stringify(subs));
+        renderDashboard();
       }
       toast('Inscrito com sucesso! Você receberá a newsletter toda segunda-feira.');
       document.getElementById('heroName').value = '';
@@ -482,30 +589,13 @@ function adminAdd() {
   const email = document.getElementById('adminEmail').value.trim();
   if (!email || !email.includes('@')) { toast('E-mail inválido.'); return; }
   if (subs.find(s => s.email === email)) { toast('Já na lista.'); return; }
-  subs.push({ name: name || email.split('@')[0], email, loc: activeLoc, date: new Date().toLocaleDateString('pt-BR') });
+  subs.push({ name: name || email.split('@')[0], email, loc: activeLoc, date: new Date().toLocaleDateString('pt-BR'), topics: [] });
   localStorage.setItem('rdc_subs', JSON.stringify(subs));
   document.getElementById('adminName').value = '';
   document.getElementById('adminEmail').value = '';
-  renderSubs();
+  renderDashboard();
   toast(`${name || email} adicionado.`);
 }
-
-function renderSubs() {
-  const list = document.getElementById('subList');
-  if (!subs.length) { list.style.display = 'none'; return; }
-  list.style.display = 'block';
-  document.getElementById('subCount').textContent = `(${subs.length})`;
-  document.getElementById('subItems').innerHTML = subs.map((s, i) => `
-    <div class="sub-item">
-      <span style="color:var(--t1);font-weight:500">${escapeHtml(s.name)}</span>
-      <span style="color:var(--t2);flex:1;margin:0 8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(s.email)}</span>
-      <span style="color:var(--t3);font-size:11px;margin-right:8px">${s.loc || '-'}</span>
-      <span style="color:var(--t3);font-size:10px;margin-right:8px">${s.topics ? s.topics.length : 0} temas</span>
-      <button class="sub-remove" onclick="removeSub(${i})">remover</button>
-    </div>`).join('');
-}
-
-function removeSub(i) { subs.splice(i, 1); localStorage.setItem('rdc_subs', JSON.stringify(subs)); renderSubs(); toast('Removido.'); }
 
 function toast(msg) {
   const t = document.getElementById('toast');
@@ -637,12 +727,21 @@ async function fetchAllNews() {
   toast('Veja as notícias encontradas');
 }
 
+// Initialize
 renderTopics();
 if (newsdataApiKey && newsdataApiKey !== 'YOUR_NEWSDATA_API_KEY_HERE') { 
   fetchAllNews(); 
 } else {
   document.getElementById('newsGrid').innerHTML = '<div class="empty">Carregando notícias...</div>';
 }
+
+document.getElementById('locPills')?.addEventListener('click', e => {
+  const p = e.target.closest('[data-loc]');
+  if (!p) return;
+  document.querySelectorAll('#locPills .pill').forEach(x => { x.classList.remove('on'); x.removeAttribute('style'); });
+  p.classList.add('on');
+  p.style.cssText = 'background:#ddeaf7;color:#0C447C;border-color:#85B7EB';
+});
 </script>
 </body>
 </html>
