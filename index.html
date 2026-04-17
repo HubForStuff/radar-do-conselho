@@ -1,259 +1,57 @@
-<!DOCTYPE html>
-<html lang="pt-BR"> 
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Radar Brasil — Inteligência para brasileiros na China</title>
-
-<meta name="description" content="Inteligência semanal para brasileiros na China.">
-<meta name="theme-color" content="#009C3B">
-
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-:root{
-  --bg:#f8efe2;
-  --card:#fffdf9;
-  --t1:#1a1a1a;
-  --t2:#555;
-  --t3:#999;
-  --b:rgba(0,0,0,0.1);
-  --green:#009C3B;
-  --green-d:#085041;
-  --blue:#0C447C;
-  --r:8px;
-  --rl:12px;
-}
-
-body{
-  font-family:Roboto,sans-serif;
-  background:var(--bg);
-  color:var(--t1);
-}
-
-.page{max-width:1100px;margin:auto;padding:2rem}
-
-/* HEADER FIX */
-.logo-name{
-  font-family:'Playfair Display',serif;
-  font-size:44px;
-  font-weight:700;
-  letter-spacing:-0.02em;
-  line-height:1;
-}
-
-.logo-sub{font-size:13px;color:var(--t2);margin-top:4px}
-
-/* NEWS CARD */
-.news-card{
-  background:var(--card);
-  border:1px solid var(--b);
-  border-radius:12px;
-  padding:1rem;
-  margin-bottom:12px;
-  cursor:pointer;
-  transition:.15s;
-}
-
-.news-card:hover{transform:translateY(-2px)}
-
-.news-title{
-  font-weight:600;
-  margin-bottom:6px;
-}
-
-.news-meta{
-  font-size:11px;
-  color:var(--t3);
-  margin-bottom:6px;
-}
-
-.news-summary{
-  font-size:13px;
-  color:var(--t2);
-  line-height:1.6;
-}
-
-.news-link{
-  font-size:12px;
-  color:var(--blue);
-  display:inline-block;
-  margin-top:6px;
-}
-
-.empty{
-  text-align:center;
-  padding:3rem;
-  color:var(--t3);
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="page">
-
-  <!-- HEADER -->
-  <div>
-    <div class="logo-name">Radar Brasil</div>
-    <div class="logo-sub">Inteligência para brasileiros na China</div>
-  </div>
-
-  <button onclick="fetchAllNews()">Atualizar notícias</button>
-
-  <div id="news"></div>
-
-</div>
-
 <script>
-
-/* =========================
-   KEEP ORIGINAL STRUCTURE
-========================= */
-
-const CATEGORIES = [
-  {
-    queries: [
-      'Conselho de Cidadãos Brasileiros China',
-      'brasileiros China comunidade eventos'
-    ]
-  },
-  {
-    queries: [
-      'visto China brasileiros requisitos',
-      'imigração China Brasil visto'
-    ]
-  },
-  {
-    queries: [
-      'Brasil China comércio acordo economia',
-      'China investe Brasil parceria'
-    ]
-  }
-];
-
-let apiKey = localStorage.getItem('gnews_api_key') || '';
-
-/* =========================
-   HELPERS (ONLY ADDITIONS)
-========================= */
-
-function toPortuguese(text){
-  if(!text) return '';
-  return text
-    .replace(/China/g,'China')
-    .replace(/Brazil/g,'Brasil')
-    .replace(/government/g,'governo')
-    .replace(/agreement/g,'acordo')
-    .replace(/visa/g,'visto')
-    .replace(/trade/g,'comércio')
-    .replace(/economy/g,'economia')
-    .replace(/students/g,'estudantes');
-}
-
-function trimWords(text, limit=58){
-  const words = (text||'').split(/\s+/);
-  return words.length <= limit ? text : words.slice(0,limit).join(' ') + '...';
-}
-
-function escapeHtml(str){
-  return (str||'').replace(/[&<>]/g,m=>({
-    '&':'&amp;','<':'&lt;','>':'&gt;'
-  }[m]));
-}
-
-/* =========================
-   FETCH (UNCHANGED LOGIC)
-========================= */
-
-async function search(q){
-  const url = `https://gnews.io/api/v4/search?q=${encodeURIComponent(q)}&lang=pt,en&max=3&apikey=${apiKey}`;
-  const r = await fetch(url);
-  if(!r.ok) return [];
-  const d = await r.json();
-  return d.articles || [];
-}
 
 async function fetchAllNews(){
 
-  if(!apiKey){
-    document.getElementById('news').innerHTML =
-      '<div class="empty">Adicione API key (gnews_api_key)</div>';
-    return;
+  document.getElementById("news").innerHTML =
+    "<div class='empty'>Carregando...</div>";
+
+  try {
+    const res = await fetch("http://localhost:3000/news");
+    const data = await res.json();
+    render(data);
+  } catch (e) {
+    document.getElementById("news").innerHTML =
+      "<div class='empty'>Erro ao carregar notícias</div>";
   }
-
-  document.getElementById('news').innerHTML =
-    '<div class="empty">Carregando...</div>';
-
-  const results = [];
-  const seen = new Set();
-
-  for(const cat of CATEGORIES){
-    for(const q of cat.queries){
-
-      const articles = await search(q);
-
-      for(const a of articles){
-
-        if(seen.has(a.url)) continue;
-        seen.add(a.url);
-
-        results.push({
-          title: a.title,
-          summary: a.description || a.title || '',
-          date: a.publishedAt,
-          source: a.source?.name || '',
-          url: a.url
-        });
-
-      }
-    }
-  }
-
-  render(results);
 }
-
-/* =========================
-   RENDER (FIXED ONLY)
-========================= */
 
 function render(data){
 
-  const el = document.getElementById('news');
+  const el = document.getElementById("news");
 
-  if(!data.length){
-    el.innerHTML = '<div class="empty">Nenhuma notícia encontrada</div>';
+  if(!data || !data.length){
+    el.innerHTML = "<div class='empty'>Nenhuma notícia</div>";
     return;
   }
 
-  el.innerHTML = data.map(n=>`
+  el.innerHTML = data.map(n => `
     <div class="news-card" onclick="window.open('${n.url}','_blank')">
 
-      <div class="news-title">
-        ${escapeHtml(n.title)}
-      </div>
+      <div class="news-title">${escapeHtml(n.title)}</div>
 
       <div class="news-meta">
         ${n.source} • ${new Date(n.date).toLocaleDateString('pt-BR')}
       </div>
 
       <div class="news-summary">
-        ${escapeHtml(trimWords(toPortuguese(n.summary),58))}
+        ${trimWords(n.summary, 58)}
       </div>
 
-      <a class="news-link" href="${n.url}" target="_blank">
-        Ler notícia →
-      </a>
+      <div class="news-link">Ler notícia →</div>
 
     </div>
   `).join('');
 }
 
-</script>
+function trimWords(text, limit=58){
+  const w = (text||"").split(/\s+/);
+  return w.length <= limit ? text : w.slice(0,limit).join(" ") + "...";
+}
 
-</body>
-</html>
+function escapeHtml(str){
+  return (str||"").replace(/[&<>]/g,m=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;"
+  }[m]));
+}
+
+</script>
