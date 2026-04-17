@@ -82,9 +82,21 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 
 /* TOPICS */
 .topics{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:1.4rem}
-.pill{font-size:13px;padding:5px 13px;border-radius:100px;border:0.5px solid var(--b);cursor:pointer;transition:all 0.15s;color:var(--t2);background:var(--card);user-select:none;font-family:'Roboto',sans-serif}
+.pill{font-size:13px;padding:5px 13px;border-radius:100px;border:0.5px solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.15s;background:#f5f0e8;color:#8a7a6a;user-select:none;font-family:'Roboto',sans-serif}
 .pill.on{font-weight:500}
-.pill:hover:not(.on){background:var(--bg2)}
+.pill.on.ccbb{background:#fdf5e6;color:#c4882b;border-color:#e8d5b5}
+.pill.on.emergencias{background:#e8f5ed;color:#3d9a6a;border-color:#c5e0d0}
+.pill.on.voto{background:#e8f5ed;color:#3d9a6a;border-color:#c5e0d0}
+.pill.on.bilateral{background:#e8f5ed;color:#3d9a6a;border-color:#c5e0d0}
+.pill.on.negocios{background:#e8f0f8;color:#5a7a9a;border-color:#d0dce8}
+.pill.on.oportunidades{background:#e8f0f8;color:#5a7a9a;border-color:#d0dce8}
+.pill.on.imigracao{background:#e8f0f8;color:#5a7a9a;border-color:#d0dce8}
+.pill.on.esportes{background:#e8f0f8;color:#5a7a9a;border-color:#d0dce8}
+.pill.on.cultural{background:#e8f0f8;color:#5a7a9a;border-color:#d0dce8}
+.pill.on.comunidade{background:#e8f0f8;color:#5a7a9a;border-color:#d0dce8}
+.pill.on.saude{background:#e8f0f8;color:#5a7a9a;border-color:#d0dce8}
+.pill.on.turismo{background:#e8f0f8;color:#5a7a9a;border-color:#d0dce8}
+.pill:hover:not(.on){background:#e8e0d5}
 
 /* ACTION BAR */
 .action-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.6rem;align-items:center}
@@ -256,10 +268,10 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
     <h3>Configurações <span class="badge badge-ok2">admin</span></h3>
     
     <div class="api-section">
-      <div class="m-field-label" style="color:var(--blue)">Chave API NewsData.io</div>
-      <input type="text" id="apiKeyInput" class="m-input" placeholder="Cole sua chave API do NewsData.io aqui" style="margin-bottom:8px"/>
+      <div class="m-field-label" style="color:var(--blue)">Chave API GNews</div>
+      <input type="text" id="apiKeyInput" class="m-input" placeholder="Cole sua chave API do GNews aqui" style="margin-bottom:8px"/>
       <button class="btn btn-g" onclick="saveApiKey()" style="width:100%">Salvar Chave API</button>
-      <div class="api-note">Obtenha sua chave gratuita em newsdata.io</div>
+      <div class="api-note">Obtenha sua chave gratuita em gnews.io (100 requisições/dia)</div>
     </div>
     
     <div class="divider"></div>
@@ -295,33 +307,31 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 
 <script>
 // ============================================
-// REPLACE WITH YOUR NewsData.io API KEY
-// Get your free key at https://newsdata.io
+// REPLACE WITH YOUR GNews API KEY
+// Get your free key at https://gnews.io
 // ============================================
-const NEWSDATA_API_KEY = 'YOUR_NEWSDATA_API_KEY_HERE';
+const GNEWS_API_KEY = 'YOUR_GNEWS_API_KEY_HERE';
 
 // CATEGORIES - with colors and selection status
 // Notícias do Conselho is the only one preselected (active: true)
-// Alertas Consulares is now second option
-// Added 2 new relevant topics: Saúde na China and Turismo & Lazer
 const CATEGORIES = [
-  { id: 'ccbb', name: 'Notícias do Conselho', active: true, color: '#BA7517', bg: '#f5e4c0', tag: 'Conselho', queries: ['Conselho de Cidadãos Brasileiros China', 'Conselho de Cidadãos Brasileiros Pequim eventos', 'conselho brasileiros China atividades oficiais', 'Conselho de Cidadãos Brasileiros reunião ata China', 'iniciativas comunidade brasileira China conselho'] },
-  { id: 'emergencias', name: 'Alertas Consulares China', active: false, color: '#085041', bg: '#d6f0e0', tag: 'Urgente', queries: ['embaixada Brasil China comunicado oficial', 'consulado Brasil China aviso brasileiros', 'alerta consular China brasileiros documento', 'regras entrada China estrangeiros atualização', 'embaixada Brasil Pequim aviso brasileiros'] },
-  { id: 'voto', name: 'Voto no Exterior', active: false, color: '#085041', bg: '#d6f0e0', tag: 'Governo', queries: ['voto no exterior China brasileiros eleições', 'votação brasileiros China consulado eleições Brasil', 'seção eleitoral Brasil China votação', 'TSE voto exterior China brasileiros', 'brasileiros na China eleições presidenciais votação'] },
-  { id: 'bilateral', name: 'Relações Brasil-China', active: false, color: '#085041', bg: '#d6f0e0', tag: 'Governo', queries: ['relações Brasil China governo acordo', 'Lula China reunião acordo Brasil China', 'visita oficial Brasil China governo', 'parceria estratégica Brasil China 2026', 'cooperação bilateral Brasil China economia', 'BRICS Brasil China reunião líderes'] },
-  { id: 'negocios', name: 'Negócios Brasil-China', active: false, color: '#0C447C', bg: '#ddeaf7', tag: 'Economia', queries: ['comércio Brasil China dados atualizados', 'exportações Brasil China soja carne minério', 'China investe no Brasil infraestrutura energia', 'empresas chinesas no Brasil investimento anúncio', 'balança comercial Brasil China superávit', 'agronegócio Brasil China exportação recorde', 'tecnologia China Brasil parceria empresas', 'carros elétricos China Brasil BYD fábrica'] },
-  { id: 'oportunidades', name: 'Bolsas & Oportunidades na China', active: false, color: '#0C447C', bg: '#ddeaf7', tag: 'Educação', queries: ['bolsa de estudo China brasileiros CSC inscrição', 'governo chinês bolsa brasileiros universidade China', 'intercâmbio China Brasil inscrição aberta', 'universidades China bolsas internacionais brasileiros', 'programa CSC China Scholarship brasileiros'] },
-  { id: 'imigracao', name: 'Visto & Imigração China', active: false, color: '#0C447C', bg: '#ddeaf7', tag: 'Imigração', queries: ['visto China brasileiros requisitos atualizados', 'como solicitar visto China Brasil 2026', 'política de visto China estrangeiros mudança', 'residência trabalho China brasileiros visto', 'isenção de visto China brasileiros trânsito'] },
-  { id: 'esportes', name: 'Esportes Brasileiros na China', active: false, color: '#0C447C', bg: '#ddeaf7', tag: 'Esportes', queries: ['jogadores brasileiros liga chinesa futebol', 'brasileiros no futebol chinês transferência', 'técnico brasileiro time China futebol', 'futebol China brasileiros destaque', 'esportes China atletas brasileiros competição'] },
-  { id: 'cultural', name: 'Ano Cultural Brasil-China', active: false, color: '#0C447C', bg: '#ddeaf7', tag: 'Cultura', queries: ['ano cultural Brasil China programação oficial', 'eventos culturais Brasil China calendário', 'festival cultura brasileira China evento', 'intercâmbio cultural Brasil China governo', 'mostra cultural Brasil China cidades'] },
-  { id: 'comunidade', name: 'Comunidade Brasileira na China', active: false, color: '#0C447C', bg: '#ddeaf7', tag: 'Comunidade', queries: ['brasileiros na China comunidade eventos', 'brasileiros em Pequim Xangai comunidade', 'eventos brasileiros China networking', 'vida de brasileiros na China reportagens', 'grupos brasileiros China associação'] },
-  { id: 'saude', name: 'Saúde na China', active: false, color: '#0C447C', bg: '#ddeaf7', tag: 'Saúde', queries: ['sistema de saúde China brasileiros', 'hospital China estrangeiros atendimento', 'seguro saúde China brasileiros', 'medicamentos China brasileiros informação', 'atendimento médico China brasileiros'] },
-  { id: 'turismo', name: 'Turismo & Lazer', active: false, color: '#0C447C', bg: '#ddeaf7', tag: 'Turismo', queries: ['turismo China brasileiros destinos', 'viajar China brasileiros dicas', 'pontos turísticos China brasileiros', 'férias China brasileiros roteiro', 'passeios China brasileiros guia'] }
+  { id: 'ccbb', name: 'Notícias do Conselho', active: true, color: '#c4882b', bg: '#fdf5e6', tag: 'Conselho', queries: ['Conselho de Cidadãos Brasileiros China', 'Conselho de Cidadãos Brasileiros Pequim eventos', 'conselho brasileiros China atividades oficiais', 'Conselho de Cidadãos Brasileiros reunião ata China', 'iniciativas comunidade brasileira China conselho'] },
+  { id: 'emergencias', name: 'Alertas Consulares China', active: false, color: '#3d9a6a', bg: '#e8f5ed', tag: 'Urgente', queries: ['embaixada Brasil China comunicado oficial', 'consulado Brasil China aviso brasileiros', 'alerta consular China brasileiros documento', 'regras entrada China estrangeiros atualização', 'embaixada Brasil Pequim aviso brasileiros'] },
+  { id: 'voto', name: 'Voto no Exterior', active: false, color: '#3d9a6a', bg: '#e8f5ed', tag: 'Governo', queries: ['voto no exterior China brasileiros eleições', 'votação brasileiros China consulado eleições Brasil', 'seção eleitoral Brasil China votação', 'TSE voto exterior China brasileiros', 'brasileiros na China eleições presidenciais votação'] },
+  { id: 'bilateral', name: 'Relações Brasil-China', active: false, color: '#3d9a6a', bg: '#e8f5ed', tag: 'Governo', queries: ['relações Brasil China governo acordo', 'Lula China reunião acordo Brasil China', 'visita oficial Brasil China governo', 'parceria estratégica Brasil China 2026', 'cooperação bilateral Brasil China economia', 'BRICS Brasil China reunião líderes'] },
+  { id: 'negocios', name: 'Negócios Brasil-China', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Economia', queries: ['comércio Brasil China dados atualizados', 'exportações Brasil China soja carne minério', 'China investe no Brasil infraestrutura energia', 'empresas chinesas no Brasil investimento anúncio', 'balança comercial Brasil China superávit', 'agronegócio Brasil China exportação recorde', 'tecnologia China Brasil parceria empresas', 'carros elétricos China Brasil BYD fábrica'] },
+  { id: 'oportunidades', name: 'Bolsas & Oportunidades na China', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Educação', queries: ['bolsa de estudo China brasileiros CSC inscrição', 'governo chinês bolsa brasileiros universidade China', 'intercâmbio China Brasil inscrição aberta', 'universidades China bolsas internacionais brasileiros', 'programa CSC China Scholarship brasileiros'] },
+  { id: 'imigracao', name: 'Visto & Imigração China', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Imigração', queries: ['visto China brasileiros requisitos atualizados', 'como solicitar visto China Brasil 2026', 'política de visto China estrangeiros mudança', 'residência trabalho China brasileiros visto', 'isenção de visto China brasileiros trânsito'] },
+  { id: 'esportes', name: 'Esportes Brasileiros na China', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Esportes', queries: ['jogadores brasileiros liga chinesa futebol', 'brasileiros no futebol chinês transferência', 'técnico brasileiro time China futebol', 'futebol China brasileiros destaque', 'esportes China atletas brasileiros competição'] },
+  { id: 'cultural', name: 'Ano Cultural Brasil-China', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Cultura', queries: ['ano cultural Brasil China programação oficial', 'eventos culturais Brasil China calendário', 'festival cultura brasileira China evento', 'intercâmbio cultural Brasil China governo', 'mostra cultural Brasil China cidades'] },
+  { id: 'comunidade', name: 'Comunidade Brasileira na China', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Comunidade', queries: ['brasileiros na China comunidade eventos', 'brasileiros em Pequim Xangai comunidade', 'eventos brasileiros China networking', 'vida de brasileiros na China reportagens', 'grupos brasileiros China associação'] },
+  { id: 'saude', name: 'Saúde na China', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Saúde', queries: ['sistema de saúde China brasileiros', 'hospital China estrangeiros atendimento', 'seguro saúde China brasileiros', 'medicamentos China brasileiros informação', 'atendimento médico China brasileiros'] },
+  { id: 'turismo', name: 'Turismo & Lazer', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Turismo', queries: ['turismo China brasileiros destinos', 'viajar China brasileiros dicas', 'pontos turísticos China brasileiros', 'férias China brasileiros roteiro', 'passeios China brasileiros guia'] }
 ];
 
 let allNews = [];
 let subs = [];
-let newsdataApiKey = localStorage.getItem('newsdata_api_key') || NEWSDATA_API_KEY;
+let gnewsApiKey = localStorage.getItem('gnews_api_key') || GNEWS_API_KEY;
 
 // Load subscribers
 try { subs = JSON.parse(localStorage.getItem('rdc_subs') || '[]'); } catch(e) {}
@@ -336,7 +346,13 @@ document.getElementById('nextDate').textContent = nextMonday();
 function renderTopics() {
   document.getElementById('topicBar').innerHTML = CATEGORIES.map(cat => {
     const isActive = cat.active;
-    return `<div class="pill${isActive ? ' on' : ''}" style="${isActive ? `background:${cat.bg};color:${cat.color};border-color:${cat.color}55` : ''}" onclick="toggleTopic('${cat.id}')">${cat.name}</div>`;
+    let additionalClass = '';
+    let styleAttr = '';
+    if (isActive) {
+      additionalClass = ` ${cat.id}`;
+      styleAttr = `style="background:${cat.bg};color:${cat.color};border-color:${cat.color}80"`;
+    }
+    return `<div class="pill on${additionalClass}" ${styleAttr} onclick="toggleTopic('${cat.id}')">${cat.name}</div>`;
   }).join('');
 }
 
@@ -353,7 +369,7 @@ function openModal(id) {
   document.getElementById(id).classList.add('open'); 
   if(id === 'adminModal') { 
     renderSubs(); 
-    document.getElementById('apiKeyInput').value = newsdataApiKey; 
+    document.getElementById('apiKeyInput').value = gnewsApiKey; 
   } 
 }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
@@ -361,8 +377,8 @@ function closeModal(id) { document.getElementById(id).classList.remove('open'); 
 function saveApiKey() {
   const key = document.getElementById('apiKeyInput').value.trim();
   if (key) {
-    newsdataApiKey = key;
-    localStorage.setItem('newsdata_api_key', key);
+    gnewsApiKey = key;
+    localStorage.setItem('gnews_api_key', key);
     toast('Chave API salva! Buscando notícias...');
     closeModal('adminModal');
     fetchAllNews();
@@ -455,26 +471,26 @@ function getDaysAgo(days) {
 }
 
 async function searchCategory(category) {
-  if (!newsdataApiKey || newsdataApiKey === 'YOUR_NEWSDATA_API_KEY_HERE') return [];
+  if (!gnewsApiKey || gnewsApiKey === 'YOUR_GNEWS_API_KEY_HERE') return [];
   const articles = [];
   const seenUrls = new Set();
   
   for (const query of category.queries) {
     try {
-      const url = `https://newsdata.io/api/1/news?apikey=${newsdataApiKey}&q=${encodeURIComponent(query)}&language=pt,en,zh&country=br,cn&timeframe=7d&size=3`;
+      const url = `https://gnews.io/api/v4/search?q=${encodeURIComponent(query)}&lang=pt,en&max=3&from=${getDaysAgo(7)}&apikey=${gnewsApiKey}`;
       const response = await fetch(url);
       const data = await response.json();
       
-      if (data.results && data.results.length > 0) {
-        for (const article of data.results) {
-          if (!seenUrls.has(article.link) && articles.length < 5) {
-            seenUrls.add(article.link);
+      if (data.articles && data.articles.length > 0) {
+        for (const article of data.articles) {
+          if (!seenUrls.has(article.url) && articles.length < 5) {
+            seenUrls.add(article.url);
             articles.push({
               title: article.title,
-              summary: article.description || article.ai_summary || 'Clique para ler o artigo completo.',
-              source: article.source_name || article.source_id || 'NewsData.io',
-              date: article.pubDate ? new Date(article.pubDate).toLocaleDateString('pt-BR') : 'Últimos 7 dias',
-              url: article.link,
+              summary: article.description || article.content || 'Clique para ler o artigo completo.',
+              source: article.source?.name || 'Fonte internacional',
+              date: new Date(article.publishedAt).toLocaleDateString('pt-BR'),
+              url: article.url,
               categoryId: category.id,
               categoryName: category.name,
               categoryColor: category.color,
@@ -516,9 +532,9 @@ function renderNews() {
 }
 
 async function fetchAllNews() {
-  if (!newsdataApiKey || newsdataApiKey === 'YOUR_NEWSDATA_API_KEY_HERE') {
-    document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API do NewsData.io clicando no botão "Admin" e adicionando sua chave.</div>';
-    toast('Por favor, configure sua chave API do NewsData.io primeiro');
+  if (!gnewsApiKey || gnewsApiKey === 'YOUR_GNEWS_API_KEY_HERE') {
+    document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API do GNews clicando no botão "Admin" e adicionando sua chave.</div>';
+    toast('Por favor, configure sua chave API do GNews primeiro');
     return;
   }
   
@@ -560,10 +576,10 @@ async function fetchAllNews() {
 
 // Initialize
 renderTopics();
-if (newsdataApiKey && newsdataApiKey !== 'YOUR_NEWSDATA_API_KEY_HERE') { 
+if (gnewsApiKey && gnewsApiKey !== 'YOUR_GNEWS_API_KEY_HERE') { 
   fetchAllNews(); 
 } else {
-  document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API do NewsData.io clicando no botão "Admin" e adicionando sua chave.</div>';
+  document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API do GNews clicando no botão "Admin" e adicionando sua chave.</div>';
 }
 </script>
 </body>
