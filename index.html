@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -45,7 +46,7 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 /* HEADER */
 .header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:2rem}
 .header-left{display:flex;flex-direction:column;gap:10px}
-.logo{display:flex;align-items:center;gap:14px}
+.logo{display:flex;align-items:center;gap:14px;cursor:pointer}
 .logo-ring{width:46px;height:46px;flex-shrink:0}
 .logo-ring svg{width:46px;height:46px}
 
@@ -142,7 +143,7 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 /* MODAL */
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:50;align-items:center;justify-content:center;padding:1rem}
 .modal-bg.open{display:flex}
-.modal{background:var(--bg);border-radius:var(--rl);padding:1.6rem;max-width:650px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:fadeUp 0.2s ease}
+.modal{background:var(--bg);border-radius:var(--rl);padding:1.6rem;max-width:900px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:fadeUp 0.2s ease}
 .modal h3{font-size:16px;font-weight:500;color:var(--t1);margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .badge{font-size:11px;padding:2px 9px;border-radius:100px;font-weight:500}
 .badge-ok2{background:var(--gold-l);color:#633806}
@@ -161,12 +162,20 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .api-section .m-field-label{color:var(--blue)}
 .api-note{font-size:10px;color:var(--blue);margin-top:6px;text-align:center}
 
-/* Dashboard table styles */
+/* Dashboard styles */
+.dashboard-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+.stat-card{background:var(--card);border-radius:var(--rl);padding:16px;text-align:center;border:0.5px solid var(--b)}
+.stat-number{font-size:28px;font-weight:700;color:var(--green-d)}
+.stat-label{font-size:12px;color:var(--t3);margin-top:5px}
+.chart-container{background:var(--card);border-radius:var(--rl);padding:16px;margin-bottom:20px;border:0.5px solid var(--b)}
+.chart-container h4{font-size:14px;margin-bottom:12px;color:var(--t1)}
 .dashboard-table{width:100%;border-collapse:collapse;margin-top:10px}
-.dashboard-table th,.dashboard-table td{padding:10px;text-align:left;border-bottom:0.5px solid var(--b);font-size:12px}
+.dashboard-table th,.dashboard-table td{padding:12px 10px;text-align:left;border-bottom:0.5px solid var(--b);font-size:12px}
 .dashboard-table th{background:var(--bg2);font-weight:600}
 .dashboard-table tr:hover{background:rgba(0,0,0,0.02)}
-.topic-badge{display:inline-block;background:var(--green-l);color:var(--green-d);padding:2px 6px;border-radius:10px;font-size:10px;margin:2px}
+.topic-badge{display:inline-block;background:var(--green-l);color:var(--green-d);padding:2px 8px;border-radius:12px;font-size:10px;margin:2px}
+.remove-btn{background:none;border:none;cursor:pointer;font-size:14px;padding:4px 8px;border-radius:var(--r);color:var(--red)}
+.remove-btn:hover{background:#FCEBEB}
 .login-error{color:red;font-size:12px;margin-top:8px;text-align:center}
 
 /* FOOTER */
@@ -185,7 +194,7 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
   <!-- HEADER -->
   <div class="header">
     <div class="header-left">
-      <div class="logo">
+      <div class="logo" ondblclick="showAdminLogin()">
         <div class="logo-ring">
           <svg viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="23" cy="23" r="18" stroke="#ddd0bc" stroke-width="7"/>
@@ -234,10 +243,9 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
   <div class="sec-label">Temas monitorados</div>
   <div class="topics" id="topicBar"></div>
 
-  <!-- ACTION BAR -->
+  <!-- ACTION BAR - No Admin button visible to users -->
   <div class="action-bar">
     <button class="btn btn-g" onclick="fetchAllNews()">Atualizar notícias</button>
-    <button class="btn" onclick="showAdminLogin()">Admin</button>
   </div>
 
   <!-- NEWS GRID -->
@@ -274,11 +282,11 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 
 <!-- ADMIN LOGIN MODAL -->
 <div class="modal-bg" id="adminLoginModal">
-  <div class="modal">
+  <div class="modal" style="max-width:400px">
     <button class="modal-close" onclick="closeModal('adminLoginModal')">✕</button>
-    <h3>Acesso Admin</h3>
+    <h3>Acesso Administrativo</h3>
     <div class="api-section">
-      <div class="m-field-label">Senha</div>
+      <div class="m-field-label">Senha de Administrador</div>
       <input type="password" id="adminPassword" class="m-input" placeholder="Digite a senha" style="margin-bottom:8px"/>
       <button class="btn btn-g" onclick="checkAdminPassword()" style="width:100%">Entrar</button>
       <div id="loginError" class="login-error"></div>
@@ -290,8 +298,9 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 <div class="modal-bg" id="adminModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('adminModal')">✕</button>
-    <h3>Painel Admin <span class="badge badge-ok2">dashboard</span></h3>
+    <h3>Painel Administrativo <span class="badge badge-ok2">Radar Brasil</span></h3>
     
+    <!-- API Key Section -->
     <div class="api-section">
       <div class="m-field-label" style="color:var(--blue)">Chave API NewsData.io</div>
       <input type="text" id="apiKeyInput" class="m-input" placeholder="Cole sua chave API do NewsData.io aqui" style="margin-bottom:8px"/>
@@ -301,11 +310,37 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
     
     <div class="divider"></div>
     
-    <h3 style="font-size:14px; margin-bottom:12px">Inscritos e Temas Selecionados</h3>
+    <!-- Statistics Dashboard -->
+    <h3 style="font-size:14px; margin-bottom:12px">Estatísticas</h3>
+    <div class="dashboard-stats">
+      <div class="stat-card">
+        <div class="stat-number" id="totalSubscribers">0</div>
+        <div class="stat-label">Total de Inscritos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="totalTopicsCount">0</div>
+        <div class="stat-label">Temas Monitorados</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="activeTopicsCount">0</div>
+        <div class="stat-label">Temas Mais Populares</div>
+      </div>
+    </div>
+    
+    <!-- Chart -->
+    <div class="chart-container">
+      <h4>Temas Mais Selecionados pelos Inscritos</h4>
+      <canvas id="topicsChart" width="400" height="200" style="max-height:200px; width:100%"></canvas>
+    </div>
+    
+    <div class="divider"></div>
+    
+    <!-- Subscribers Table -->
+    <h3 style="font-size:14px; margin-bottom:12px">Gerenciar Inscritos</h3>
     <div id="dashboardContainer" style="max-height:400px; overflow-y:auto;">
       <table class="dashboard-table" id="dashboardTable">
         <thead>
-          <tr><th>Nome</th><th>Email</th><th>Temas Selecionados</th><th>Data</th></tr>
+          <tr><th>Nome</th><th>Email</th><th>Temas Selecionados</th><th>Data</th><th>Ação</th></tr>
         </thead>
         <tbody id="dashboardBody"></tbody>
       </table>
@@ -313,7 +348,8 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
     
     <div class="divider"></div>
     
-    <h3 style="font-size:14px; margin-bottom:12px">Adicionar inscrito manualmente</h3>
+    <!-- Add Subscriber Manually -->
+    <h3 style="font-size:14px; margin-bottom:12px">Adicionar Inscrito Manualmente</h3>
     <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
       <input type="text" class="m-input" id="adminName" placeholder="Nome" style="flex:1;min-width:100px"/>
       <input type="email" class="m-input" id="adminEmail" placeholder="email@exemplo.com" style="flex:2;min-width:150px"/>
@@ -327,12 +363,12 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
       </div>
     </div>
     <div style="display:flex;gap:8px;margin-bottom:16px">
-      <button class="btn btn-g" onclick="adminAdd()">Adicionar inscrito</button>
+      <button class="btn btn-g" onclick="adminAdd()">Adicionar Inscrito</button>
     </div>
     
     <div class="divider"></div>
     
-    <button class="btn" onclick="logoutAdmin()" style="width:100%; background:#f0e4d0">Sair do Admin</button>
+    <button class="btn" onclick="logoutAdmin()" style="width:100%; background:#f0e4d0">Sair do Painel Admin</button>
   </div>
 </div>
 
@@ -352,7 +388,7 @@ const BREVO_API_KEY = 'xkeysib-f18cac060edc096213408041ad3e945914a9f4d1fbfce62e8
 // ============================================
 const NEWSDATA_API_KEY = 'pub_ab546bab2eee494fb85264efc74f457a';
 
-// CATEGORIES with new "Pesquisa Acadêmica" topic
+// CATEGORIES
 const CATEGORIES = [
   { id: 'todos', name: 'Todos', active: true, color: '#1a5a2a', bg: 'rgba(124,239,90,0.73)', tag: 'Geral', visible: true, isSpecial: true },
   { id: 'ccbb', name: 'Notícias do Conselho', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Conselho', visible: true, queries: ['"Conselho de Cidadãos Brasileiros" Pequim', '"Conselho dos Cidadãos Brasileiros" Beijing', '"conselho dos cidadãos brasileiros" china', '"conselhobeijing.org"'] },
@@ -400,6 +436,7 @@ let allNews = [];
 let subs = [];
 let newsdataApiKey = localStorage.getItem('newsdata_api_key') || NEWSDATA_API_KEY;
 let isAdminLoggedIn = localStorage.getItem('admin_logged_in') === 'true';
+let topicsChart = null;
 
 try { subs = JSON.parse(localStorage.getItem('rdc_subs') || '[]'); } catch(e) {}
 
@@ -451,11 +488,7 @@ function toggleTopic(id) {
 }
 
 function showAdminLogin() {
-  if (isAdminLoggedIn) {
-    openAdminDashboard();
-  } else {
-    openModal('adminLoginModal');
-  }
+  openModal('adminLoginModal');
 }
 
 function checkAdminPassword() {
@@ -481,7 +514,75 @@ function logoutAdmin() {
 function openAdminDashboard() {
   openModal('adminModal');
   renderDashboard();
+  renderStatsAndChart();
   document.getElementById('apiKeyInput').value = newsdataApiKey;
+}
+
+function renderStatsAndChart() {
+  // Update stats
+  document.getElementById('totalSubscribers').textContent = subs.length;
+  document.getElementById('totalTopicsCount').textContent = CATEGORIES.filter(c => c.visible && c.id !== 'todos').length;
+  
+  // Count topic popularity
+  const topicCounts = {};
+  CATEGORIES.forEach(cat => {
+    if (cat.id !== 'todos' && cat.visible) {
+      topicCounts[cat.name] = 0;
+    }
+  });
+  
+  subs.forEach(sub => {
+    if (sub.topics && sub.topics.length > 0) {
+      sub.topics.forEach(topic => {
+        if (topicCounts[topic] !== undefined) {
+          topicCounts[topic]++;
+        }
+      });
+    }
+  });
+  
+  // Find most popular topic
+  let maxCount = 0;
+  let mostPopular = 'Nenhum';
+  for (const [topic, count] of Object.entries(topicCounts)) {
+    if (count > maxCount) {
+      maxCount = count;
+      mostPopular = topic;
+    }
+  }
+  document.getElementById('activeTopicsCount').textContent = mostPopular;
+  
+  // Update chart
+  const ctx = document.getElementById('topicsChart').getContext('2d');
+  if (topicsChart) {
+    topicsChart.destroy();
+  }
+  
+  const labels = Object.keys(topicCounts);
+  const data = Object.values(topicCounts);
+  
+  topicsChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Número de inscritos',
+        data: data,
+        backgroundColor: '#009C3B',
+        borderRadius: 5
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { position: 'top' }
+      },
+      scales: {
+        y: { beginAtZero: true, ticks: { stepSize: 1 } }
+      }
+    }
+  });
 }
 
 function renderDashboard() {
@@ -489,21 +590,32 @@ function renderDashboard() {
   if (!tbody) return;
   
   if (subs.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center">Nenhum inscrito ainda</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center">Nenhum inscrito ainda</td></tr>';
     return;
   }
   
-  tbody.innerHTML = subs.map(s => {
-    const topicsHtml = (s.topics || []).map(t => `<span class="topic-badge">${t}</span>`).join('') || '<span class="topic-badge">Todos</span>';
+  tbody.innerHTML = subs.map((s, index) => {
+    const topicsHtml = (s.topics || []).map(t => `<span class="topic-badge">${escapeHtml(t)}</span>`).join('') || '<span class="topic-badge">Todos</span>';
     return `
       <tr>
         <td>${escapeHtml(s.name)}</td>
         <td>${escapeHtml(s.email)}</td>
         <td>${topicsHtml}</td>
         <td>${s.date || '-'}</td>
+        <td><button class="remove-btn" onclick="removeSubscriber(${index})">🗑 Remover</button></td>
       </tr>
     `;
   }).join('');
+}
+
+function removeSubscriber(index) {
+  if (confirm('Remover este inscrito?')) {
+    subs.splice(index, 1);
+    localStorage.setItem('rdc_subs', JSON.stringify(subs));
+    renderDashboard();
+    renderStatsAndChart();
+    toast('Inscrito removido');
+  }
 }
 
 function openModal(id) { 
@@ -570,6 +682,7 @@ async function heroSubscribe() {
         subs.push({ name: name || email.split('@')[0], email, topics: selectedTopics, date: new Date().toLocaleDateString('pt-BR') });
         localStorage.setItem('rdc_subs', JSON.stringify(subs));
         renderDashboard();
+        renderStatsAndChart();
       }
       toast('Inscrito com sucesso! Você receberá a newsletter toda segunda-feira.');
       document.getElementById('heroName').value = '';
@@ -594,6 +707,7 @@ function adminAdd() {
   document.getElementById('adminName').value = '';
   document.getElementById('adminEmail').value = '';
   renderDashboard();
+  renderStatsAndChart();
   toast(`${name || email} adicionado.`);
 }
 
