@@ -1,3 +1,6 @@
+Here is the complete HTML code with all the requested fixes: user-friendly error messages (no technical API details visible to regular users), toast popup positioned higher with the correct green background, and empty state message centered on the page.
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -128,7 +131,7 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .spin{width:17px;height:17px;border:1.5px solid var(--b);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* EMPTY STATE - CENTERED ON PAGE */
+/* EMPTY STATE - CENTERED ON PAGE, USER-FRIENDLY MESSAGE */
 .empty{text-align:center;padding:3rem 1rem;color:var(--t3);font-size:16px;line-height:1.7;width:100%;display:flex;align-items:center;justify-content:center;min-height:60vh;grid-column:1/-1}
 
 /* TOAST - HIGHER POSITION, MATCHING SUB-HERO GREEN */
@@ -309,7 +312,7 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 // YOUR BREVO API KEY - PASTE HERE
 // Get it from: Brevo Dashboard → SMTP & API → API Keys
 // ============================================
-const BREVO_API_KEY = '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';  // <-- PASTE YOUR KEY HERE
+const BREVO_API_KEY = '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';
 
 // ============================================
 // YOUR NEWSDATA.IO API KEY
@@ -558,7 +561,8 @@ function renderNews() {
   if (!container) return;
   
   if (allNews.length === 0) {
-    container.innerHTML = '<div class="empty">Nenhuma notícia encontrada. Tente selecionar outros temas ou verifique sua chave API.</div>';
+    // User-friendly message - no technical API details
+    container.innerHTML = '<div class="empty">Nenhuma notícia encontrada no momento. Tente novamente mais tarde ou selecione outros temas.</div>';
     return;
   }
   
@@ -578,14 +582,15 @@ function renderNews() {
 
 async function fetchAllNews() {
   if (!newsdataApiKey || newsdataApiKey === 'YOUR_NEWSDATA_API_KEY_HERE') {
-    document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API do NewsData.io clicando no botão "Admin".</div>';
-    toast('Configure sua chave API do NewsData.io');
+    // User-friendly message - no technical API details
+    document.getElementById('newsGrid').innerHTML = '<div class="empty">Nenhuma notícia disponível no momento. Tente novamente mais tarde.</div>';
+    toast('Serviço de notícias temporariamente indisponível');
     return;
   }
   
   const activeCategories = CATEGORIES.filter(cat => cat.active === true);
   if (activeCategories.length === 0) {
-    document.getElementById('newsGrid').innerHTML = '<div class="empty">Selecione pelo menos um tema monitorado.</div>';
+    document.getElementById('newsGrid').innerHTML = '<div class="empty">Selecione pelo menos um tema monitorado para buscar notícias.</div>';
     return;
   }
   
@@ -617,12 +622,15 @@ async function fetchAllNews() {
   toast(`Veja as notícias encontradas`);
 }
 
+// Initialize
 renderTopics();
 if (newsdataApiKey && newsdataApiKey !== 'YOUR_NEWSDATA_API_KEY_HERE') { 
   fetchAllNews(); 
 } else {
-  document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API do NewsData.io clicando no botão "Admin".</div>';
+  // User-friendly initial message
+  document.getElementById('newsGrid').innerHTML = '<div class="empty">Carregando notícias...</div>';
 }
 </script>
 </body>
 </html>
+```
