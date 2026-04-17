@@ -81,10 +81,11 @@ body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:va
 .sec-label{font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#1a1a1a;font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .sec-label::after{content:'';flex:1;height:0.5px;background:var(--b)}
 
-/* TOPICS - FORCED 2 ROWS */
-.topics{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.4rem;justify-content:flex-start;width:100%;max-width:700px}
-.topics .pill{flex:0 0 auto}
-.pill{font-size:12px;padding:5px 12px;border-radius:100px;border:0.5px solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.2s;background:#f5f0e8;color:#8a7a6a;user-select:none;font-family:'Inter',sans-serif}
+/* TOPICS - FORCED EXACTLY 2 ROWS */
+.topics{display:grid;grid-template-columns:repeat(8,auto);gap:10px;margin-bottom:1.4rem;width:100%}
+@media(max-width:800px){.topics{grid-template-columns:repeat(4,auto)}}
+@media(max-width:500px){.topics{grid-template-columns:repeat(2,auto)}}
+.pill{font-size:12px;padding:5px 12px;border-radius:100px;border:0.5px solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.2s;background:#f5f0e8;color:#8a7a6a;user-select:none;font-family:'Inter',sans-serif;text-align:center;white-space:nowrap}
 .pill.on{font-weight:500}
 .pill.on.todos{background:rgba(124,239,90,0.73);color:#1a5a2a;border-color:#7aef5a}
 .pill.on.ccbb{background:#fdf8ed;color:#c4983a;border-color:#f0e0c0}
@@ -140,13 +141,17 @@ body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:va
 .toast{position:fixed;bottom:120px;left:50%;transform:translateX(-50%);background:rgba(124,239,90,0.73);color:#1a5a2a;font-size:14px;font-weight:500;padding:10px 24px;border-radius:50px;opacity:0;transition:opacity 0.3s ease;pointer-events:none;z-index:1000;white-space:nowrap;font-family:'Inter',sans-serif;box-shadow:0 2px 10px rgba(0,0,0,0.1);border:0.5px solid rgba(124,239,90,0.5)}
 .toast.show{opacity:1}
 
-/* DASHBOARD SECTION - INTEGRATED AFTER FOOTER */
-.dashboard-section{background:white;border-radius:16px;padding:24px;margin-top:2rem;border:1px solid var(--b)}
-.dashboard-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px}
-.dashboard-header h3{font-size:18px;font-weight:600}
-.dashboard-tabs{display:flex;gap:4px;border-bottom:1px solid var(--b);margin-bottom:20px}
-.dash-tab{background:none;border:none;padding:8px 16px;font-size:13px;font-weight:500;color:var(--t3);cursor:pointer;border-radius:var(--r);transition:all 0.2s}
-.dash-tab:hover{background:var(--bg2);color:var(--t1)}
+/* DASHBOARD SECTION - UNDER ULTIMAS ATUALIZACOES */
+.dashboard-section{background:white;border-radius:16px;padding:24px;margin-top:2rem;margin-bottom:2rem;border:1px solid var(--b)}
+.dashboard-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--b)}
+.dashboard-header .small-logo{width:32px;height:32px}
+.dashboard-header .small-logo svg{width:32px;height:32px}
+.dashboard-header .header-text{display:flex;flex-direction:column}
+.dashboard-header .header-text h3{font-size:18px;font-weight:600;color:var(--t1);margin:0}
+.dashboard-header .header-text p{font-size:12px;color:var(--t3);margin:0}
+.dashboard-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.dash-tab{background:var(--bg2);border:none;padding:10px 20px;font-size:13px;font-weight:500;color:var(--t2);cursor:pointer;border-radius:var(--r);transition:all 0.2s;min-width:100px;text-align:center}
+.dash-tab:hover{background:var(--green-l);color:var(--green-d)}
 .dash-tab.active{background:var(--green-l);color:var(--green-d)}
 .dashboard-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
 .stat-card{background:var(--bg);border-radius:12px;padding:20px;border:1px solid var(--b)}
@@ -166,7 +171,8 @@ body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:va
 .remove-btn{background:none;border:none;cursor:pointer;font-size:13px;color:var(--t3);padding:4px 8px;border-radius:var(--r);transition:all 0.2s}
 .remove-btn:hover{background:#FCEBEB;color:var(--red)}
 .add-subscriber-form{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
-.add-subscriber-form input{flex:1;min-width:150px}
+.add-subscriber-form input{flex:1;min-width:150px;padding:10px;border:0.5px solid var(--b);border-radius:var(--r);font-family:'Inter',sans-serif}
+.add-subscriber-form input:focus{outline:none;border-color:var(--green)}
 .campaign-card{background:var(--bg);border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid var(--b)}
 .campaign-title{font-weight:600;margin-bottom:8px}
 .campaign-meta{font-size:12px;color:var(--t3);margin-bottom:12px}
@@ -175,14 +181,17 @@ body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:va
 .campaign-stat-label{font-size:11px;color:var(--t3)}
 .login-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:1000;display:none;align-items:center;justify-content:center}
 .login-box{background:var(--bg);border-radius:16px;padding:24px;width:320px}
-.login-box input{width:100%;margin-bottom:12px}
+.login-box input{width:100%;margin-bottom:12px;padding:10px;border:0.5px solid var(--b);border-radius:var(--r)}
 .login-box button{width:100%}
+.api-section{background:var(--blue-l);padding:20px;border-radius:12px;margin-top:16px}
+.api-section .m-field-label{font-size:12px;font-weight:600;margin-bottom:8px}
+.api-section input{padding:12px;border:0.5px solid var(--b);border-radius:var(--r);width:100%;margin-bottom:12px}
 .api-note{font-size:10px;color:var(--blue);margin-top:6px;text-align:center}
 .topic-badge{display:inline-block;background:var(--green-l);color:var(--green-d);padding:4px 10px;border-radius:20px;font-size:11px;margin:2px}
 .avatar{width:32px;height:32px;border-radius:50%;background:var(--green-d);color:white;display:inline-flex;align-items:center;justify-content:center;font-weight:600;margin-right:10px;font-size:12px}
 
-/* FOOTER - letter color #888888 */
-footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+/* FOOTER */
+footer{margin-top:1.5rem;padding-top:1.5rem;border-top:0.5px solid var(--b);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .footer-brand{display:flex;align-items:center;gap:10px}
 .footer-logo-ring{width:22px;height:22px;flex-shrink:0;cursor:pointer}
 .footer-logo-ring svg{width:22px;height:22px}
@@ -258,11 +267,27 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
     <div class="spin"></div>Buscando notícias...
   </div>
 
-  <!-- DASHBOARD SECTION - INTEGRATED AFTER FOOTER -->
+  <!-- DASHBOARD SECTION - UNDER ULTIMAS ATUALIZACOES -->
   <div class="dashboard-section" id="dashboardSection" style="display:none">
     <div class="dashboard-header">
-      <h3>Painel de controle</h3>
-      <button class="btn" onclick="logoutAdmin()" style="background:#f0e4d0">Sair</button>
+      <div class="small-logo">
+        <svg viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="23" cy="23" r="18" stroke="#ddd0bc" stroke-width="5"/>
+          <circle cx="23" cy="23" r="18" stroke="#009C3B" stroke-width="5" stroke-linecap="round"
+            stroke-dasharray="36 77"
+            style="animation:spin-cw 6s linear infinite;transform-origin:23px 23px"/>
+          <circle cx="23" cy="23" r="18" stroke="#FFDF00" stroke-width="5" stroke-linecap="round"
+            stroke-dasharray="20 93"
+            style="animation:spin-cw 9s linear infinite;transform-origin:23px 23px;animation-delay:-2s"/>
+          <circle cx="23" cy="23" r="18" stroke="#002776" stroke-width="5" stroke-linecap="round"
+            stroke-dasharray="12 101"
+            style="animation:spin-cw 12s linear infinite;transform-origin:23px 23px;animation-delay:-4s"/>
+        </svg>
+      </div>
+      <div class="header-text">
+        <h3>Radar Brasil</h3>
+        <p>Painel de controle</p>
+      </div>
     </div>
     
     <div class="dashboard-tabs">
@@ -293,8 +318,8 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
         <table class="subscriber-table"><thead><tr><th>Inscrito</th><th>Email</th><th>Temas</th><th>Data</th><th>Status</th><th></th></tr></thead><tbody id="audienceTableBody"></tbody></table>
       </div>
       <div class="add-subscriber-form">
-        <input type="text" id="newSubName" class="m-input" placeholder="Nome" style="flex:1">
-        <input type="email" id="newSubEmail" class="m-input" placeholder="Email" style="flex:1">
+        <input type="text" id="newSubName" placeholder="Nome">
+        <input type="email" id="newSubEmail" placeholder="Email">
         <button class="btn btn-g" onclick="addSubscriber()">Adicionar inscrito</button>
       </div>
     </div>
@@ -305,10 +330,10 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
     </div>
     
     <div id="dash-settings" style="display:none">
-      <div class="api-section" style="background:var(--blue-l);padding:16px;border-radius:12px">
+      <div class="api-section">
         <div class="m-field-label">Chave API NewsData.io</div>
-        <input type="text" id="apiKeyInput" class="m-input" placeholder="Cole sua chave API" style="margin-bottom:8px"/>
-        <button class="btn btn-g" onclick="saveApiKey()" style="width:100%">Salvar</button>
+        <input type="text" id="apiKeyInput" placeholder="Cole sua chave API do NewsData.io aqui">
+        <button class="btn btn-g" onclick="saveApiKey()" style="width:100%">Salvar chave API</button>
         <div class="api-note">Obtenha sua chave gratuita em newsdata.io</div>
       </div>
     </div>
@@ -318,7 +343,7 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
   <div id="loginOverlay" class="login-overlay">
     <div class="login-box">
       <h3 style="margin-bottom:16px">Acesso administrativo</h3>
-      <input type="password" id="adminPasswordInput" class="m-input" placeholder="Senha">
+      <input type="password" id="adminPasswordInput" placeholder="Senha">
       <button class="btn btn-g" onclick="checkAdminPassword()">Entrar</button>
       <div id="loginErrorMsg" style="color:red;font-size:12px;margin-top:8px;text-align:center"></div>
     </div>
