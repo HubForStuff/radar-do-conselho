@@ -80,8 +80,9 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .sec-label{font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#1a1a1a;font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .sec-label::after{content:'';flex:1;height:0.5px;background:var(--b)}
 
-/* TOPICS */
-.topics{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:1.4rem}
+/* TOPICS - Better alignment */
+.topics{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:1.4rem;justify-content:flex-start;width:100%}
+.topics .pill{flex:0 0 auto}
 .pill{font-size:13px;padding:5px 13px;border-radius:100px;border:0.5px solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.15s;background:#f5f0e8;color:#8a7a6a;user-select:none;font-family:'Roboto',sans-serif}
 .pill.on{font-weight:500}
 .pill.on.ccbb{background:#fdf5e6;color:#c4882b;border-color:#e8d5b5}
@@ -180,10 +181,10 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
             <circle cx="23" cy="23" r="18" stroke="#002776" stroke-width="5.6" stroke-linecap="round"
               stroke-dasharray="12 101"
               style="animation:spin-cw 12s linear infinite;transform-origin:23px 23px;animation-delay:-4s"/>
-            <circle cx="23" cy="23" r="14" fill="#f8efe2"/>
-            <circle cx="23" cy="23" r="12" fill="white"
+            <circle cx="23" cy="23" r="17" fill="#f8efe2"/>
+            <circle cx="23" cy="23" r="15" fill="white"
               style="animation:red-core-pulse 1.8s ease-in-out infinite"/>
-            <circle cx="23" cy="23" r="12" fill="none" stroke="white" stroke-width="3"
+            <circle cx="23" cy="23" r="15" fill="none" stroke="white" stroke-width="3"
               style="animation:red-ring-expand 1.8s ease-out infinite"/>
           </svg>
         </div>
@@ -248,8 +249,8 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
           <circle cx="11" cy="11" r="8.5" stroke="#002776" stroke-width="3" stroke-linecap="round"
             stroke-dasharray="5 48"
             style="animation:spin-cw 12s linear infinite;transform-origin:11px 11px;animation-delay:-4s"/>
-          <circle cx="11" cy="11" r="6" fill="#f8efe2"/>
-          <circle cx="11" cy="11" r="5" fill="white"/>
+          <circle cx="11" cy="11" r="8" fill="#f8efe2"/>
+          <circle cx="11" cy="11" r="7" fill="white"/>
         </svg>
       </div>
       <span class="footer-brand-name">Radar Brasil</span>
@@ -312,12 +313,12 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
 // ============================================
 const NEWSDATA_API_KEY = 'YOUR_NEWSDATA_API_KEY_HERE';
 
-// CATEGORIES - with colors and selection status
+// CATEGORIES - with corrected search for Conselho (Beijing specific)
 const CATEGORIES = [
-  { id: 'ccbb', name: 'Notícias do Conselho', active: true, color: '#c4882b', bg: '#fdf5e6', tag: 'Conselho', queries: ['Conselho de Cidadãos Brasileiros China', 'Conselho de Cidadãos Brasileiros Pequim eventos', 'conselho brasileiros China atividades oficiais', 'Conselho de Cidadãos Brasileiros reunião ata China', 'iniciativas comunidade brasileira China conselho'] },
+  { id: 'ccbb', name: 'Notícias do Conselho', active: true, color: '#c4882b', bg: '#fdf5e6', tag: 'Conselho', queries: ['"Conselho de Cidadãos Brasileiros de Beijing" Pequim', '"Conselho de Cidadãos Brasileiros" Beijing', '"Conselho de Cidadãos Brasileiros" Pequim eventos', '"conselho brasileiros" Pequim atividades', '"Conselho de Cidadãos Brasileiros" notícia Pequim', '"iniciativas comunidade brasileira" Pequim'] },
   { id: 'emergencias', name: 'Alertas Consulares China', active: false, color: '#3d9a6a', bg: '#e8f5ed', tag: 'Urgente', queries: ['embaixada Brasil China comunicado oficial', 'consulado Brasil China aviso brasileiros', 'alerta consular China brasileiros documento', 'regras entrada China estrangeiros atualização', 'embaixada Brasil Pequim aviso brasileiros'] },
   { id: 'voto', name: 'Voto no Exterior', active: false, color: '#3d9a6a', bg: '#e8f5ed', tag: 'Governo', queries: ['voto no exterior China brasileiros eleições', 'votação brasileiros China consulado eleições Brasil', 'seção eleitoral Brasil China votação', 'TSE voto exterior China brasileiros', 'brasileiros na China eleições presidenciais votação'] },
-  { id: 'bilateral', name: 'Relações Brasil-China', active: false, color: '#3d9a6a', bg: '#e8f5ed', tag: 'Governo', queries: ['relações Brasil China governo acordo', 'Lula China reunião acordo Brasil China', 'visita oficial Brasil China governo', 'parceria estratégica Brasil China 2026', 'cooperação bilateral Brasil China economia', 'BRICS Brasil China reunião líderes'] },
+  { id: 'bilateral', name: 'Relações Brasil-China', active: false, color: '#3d9a6a', bg: '#e8f5ed', tag: 'Governo', queries: ['relações Brasil China governo acordo', 'Brasil China reunião acordo', 'visita oficial Brasil China governo', 'parceria estratégica Brasil China 2026', 'cooperação bilateral Brasil China economia', 'BRICS Brasil China reunião líderes'] },
   { id: 'negocios', name: 'Negócios Brasil-China', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Economia', queries: ['comércio Brasil China dados atualizados', 'exportações Brasil China soja carne minério', 'China investe no Brasil infraestrutura energia', 'empresas chinesas no Brasil investimento anúncio', 'balança comercial Brasil China superávit', 'agronegócio Brasil China exportação recorde', 'tecnologia China Brasil parceria empresas', 'carros elétricos China Brasil BYD fábrica'] },
   { id: 'oportunidades', name: 'Bolsas & Oportunidades na China', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Educação', queries: ['bolsa de estudo China brasileiros CSC inscrição', 'governo chinês bolsa brasileiros universidade China', 'intercâmbio China Brasil inscrição aberta', 'universidades China bolsas internacionais brasileiros', 'programa CSC China Scholarship brasileiros'] },
   { id: 'imigracao', name: 'Visto & Imigração China', active: false, color: '#5a7a9a', bg: '#e8f0f8', tag: 'Imigração', queries: ['visto China brasileiros requisitos atualizados', 'como solicitar visto China Brasil 2026', 'política de visto China estrangeiros mudança', 'residência trabalho China brasileiros visto', 'isenção de visto China brasileiros trânsito'] },
@@ -476,8 +477,8 @@ async function searchCategory(category) {
   
   for (const query of category.queries) {
     try {
-      // Using NewsData.io API - searches last 7 days, multiple languages
-      const url = `https://newsdata.io/api/1/news?apikey=${newsdataApiKey}&q=${encodeURIComponent(query)}&language=pt,en,zh&country=br,cn&timeframe=7d&size=3`;
+      // Searching last 8 days instead of 7
+      const url = `https://newsdata.io/api/1/news?apikey=${newsdataApiKey}&q=${encodeURIComponent(query)}&language=pt,en,zh&country=br,cn&timeframe=8d&size=3`;
       const response = await fetch(url);
       const data = await response.json();
       
@@ -489,7 +490,7 @@ async function searchCategory(category) {
               title: article.title,
               summary: article.description || article.ai_summary || 'Clique para ler o artigo completo.',
               source: article.source_name || article.source_id || 'NewsData.io',
-              date: article.pubDate ? new Date(article.pubDate).toLocaleDateString('pt-BR') : 'Últimos 7 dias',
+              date: article.pubDate ? new Date(article.pubDate).toLocaleDateString('pt-BR') : 'Últimos 8 dias',
               url: article.link,
               categoryId: category.id,
               categoryName: category.name,
