@@ -10,7 +10,7 @@
 <meta name="theme-color" content="#009C3B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -38,7 +38,7 @@
   --rl:12px
 }
 html{scroll-behavior:smooth}
-body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:var(--bg);min-height:100vh}
+body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:var(--bg);min-height:100vh}
 
 .page{max-width:calc(100% - 176px);margin:0 auto;padding:2rem 0 4rem}
 @media(max-width:700px){.page{max-width:100%;padding:1.5rem 1rem 3rem}}
@@ -67,13 +67,13 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 /* SUBSCRIBE HERO */
 .sub-hero{background:rgba(124,239,90,0.73);border:0.5px solid rgba(124,239,90,0.5);border-radius:var(--rl);padding:1.4rem 1.6rem;margin-bottom:1.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
 .sub-hero-text{flex:1;min-width:200px}
-.sub-hero-text h2{font-family:'Roboto',sans-serif;font-size:19px;font-weight:500;color:#1a1a1a;margin-bottom:4px}
+.sub-hero-text h2{font-family:'Inter',sans-serif;font-size:19px;font-weight:500;color:#1a1a1a;margin-bottom:4px}
 .sub-hero-text p{font-size:14px;color:#1a1a1a;opacity:0.8;line-height:1.5}
 .sub-hero-form{display:flex;gap:8px;flex-wrap:wrap}
-.sub-hero-form input{font-family:'Roboto',sans-serif;font-size:14px;padding:9px 13px;border-radius:var(--r);border:0.5px solid rgba(0,0,0,0.2);background:white;color:var(--t1);outline:none;min-width:130px}
+.sub-hero-form input{font-family:'Inter',sans-serif;font-size:14px;padding:9px 13px;border-radius:var(--r);border:0.5px solid rgba(0,0,0,0.2);background:white;color:var(--t1);outline:none;min-width:130px}
 .sub-hero-form input:focus{border-color:var(--green)}
 .sub-hero-form input::placeholder{color:var(--t3)}
-.sub-btn{font-family:'Roboto',sans-serif;font-size:14px;font-weight:500;padding:9px 18px;border-radius:var(--r);border:none;background:rgba(0,156,59,0.58);color:white;cursor:pointer;transition:all 0.15s;white-space:nowrap}
+.sub-btn{font-family:'Inter',sans-serif;font-size:14px;font-weight:500;padding:9px 18px;border-radius:var(--r);border:none;background:rgba(0,156,59,0.58);color:white;cursor:pointer;transition:all 0.15s;white-space:nowrap}
 .sub-btn:hover{background:rgba(8,80,65,0.65)}
 .sub-btn:active{transform:scale(0.98)}
 
@@ -81,10 +81,15 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .sec-label{font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#1a1a1a;font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .sec-label::after{content:'';flex:1;height:0.5px;background:var(--b)}
 
-/* TOPICS */
-.topics{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.4rem;justify-content:flex-start;width:100%}
-.topics .pill{flex:0 0 auto}
-.pill{font-size:12px;padding:5px 12px;border-radius:100px;border:0.5px solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.2s;background:#f5f0e8;color:#8a7a6a;user-select:none;font-family:'Roboto',sans-serif}
+/* TOPICS - 2 ROWS with flex wrap */
+.topics{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.4rem;justify-content:flex-start;width:100%;max-width:100%}
+.topics .pill{flex:0 0 auto;margin-bottom:0}
+/* Force 2 rows by limiting width */
+@media(min-width:800px){
+  .topics{max-width:800px}
+}
+
+.pill{font-size:12px;padding:5px 12px;border-radius:100px;border:0.5px solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.2s;background:#f5f0e8;color:#8a7a6a;user-select:none;font-family:'Inter',sans-serif}
 .pill.on{font-weight:500}
 .pill.on.todos{background:rgba(124,239,90,0.73);color:#1a5a2a;border-color:#7aef5a}
 .pill.on.ccbb{background:#fdf8ed;color:#c4983a;border-color:#f0e0c0}
@@ -95,6 +100,7 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .pill.on.oportunidades{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
 .pill.on.imigracao{background:#edf8f2;color:#5ab88a;border-color:#d0ead8}
 .pill.on.esportes{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.pesquisa{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
 .pill.on.cultural{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
 .pill.on.comunidade{background:#fdf8ed;color:#c4983a;border-color:#f0e0c0}
 .pill.on.saude{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
@@ -103,12 +109,11 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .pill.on.emprego{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
 .pill.on.tecnologia{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
 .pill.on.curiosidades{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
-.pill.on.pesquisa{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
 .pill:hover:not(.on){background:#e8e0d5}
 
 /* ACTION BAR */
 .action-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.6rem;align-items:center}
-.btn{font-family:'Roboto',sans-serif;font-size:14px;padding:9px 16px;border-radius:var(--r);cursor:pointer;transition:all 0.15s;font-weight:400;border:0.5px solid var(--bm);background:var(--card);color:var(--t1)}
+.btn{font-family:'Inter',sans-serif;font-size:14px;padding:9px 16px;border-radius:var(--r);cursor:pointer;transition:all 0.15s;font-weight:400;border:0.5px solid var(--bm);background:var(--card);color:var(--t1)}
 .btn:hover{background:var(--bg2)}
 .btn:active{transform:scale(0.98)}
 .btn-g{border-color:var(--green-m);background:var(--green-l);color:var(--green-d);font-weight:500}
@@ -137,24 +142,24 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .empty{text-align:center;padding:3rem 1rem;color:var(--t3);font-size:16px;line-height:1.7;width:100%;display:flex;align-items:center;justify-content:center;min-height:60vh;grid-column:1/-1}
 
 /* TOAST */
-.toast{position:fixed;bottom:120px;left:50%;transform:translateX(-50%);background:rgba(124,239,90,0.73);color:#1a5a2a;font-size:14px;font-weight:500;padding:10px 24px;border-radius:50px;opacity:0;transition:opacity 0.3s ease;pointer-events:none;z-index:1000;white-space:nowrap;font-family:'Roboto',sans-serif;box-shadow:0 2px 10px rgba(0,0,0,0.1);border:0.5px solid rgba(124,239,90,0.5)}
+.toast{position:fixed;bottom:120px;left:50%;transform:translateX(-50%);background:rgba(124,239,90,0.73);color:#1a5a2a;font-size:14px;font-weight:500;padding:10px 24px;border-radius:50px;opacity:0;transition:opacity 0.3s ease;pointer-events:none;z-index:1000;white-space:nowrap;font-family:'Inter',sans-serif;box-shadow:0 2px 10px rgba(0,0,0,0.1);border:0.5px solid rgba(124,239,90,0.5)}
 .toast.show{opacity:1}
 
-/* MODAL */
+/* MODAL BASE */
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:50;align-items:center;justify-content:center;padding:1rem}
 .modal-bg.open{display:flex}
-.modal{background:var(--bg);border-radius:var(--rl);padding:1.6rem;max-width:900px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:fadeUp 0.2s ease}
+.modal{background:var(--bg);border-radius:var(--rl);padding:1.6rem;max-width:1000px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:fadeUp 0.2s ease}
 .modal h3{font-size:16px;font-weight:500;color:var(--t1);margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .badge{font-size:11px;padding:2px 9px;border-radius:100px;font-weight:500}
 .badge-ok2{background:var(--gold-l);color:#633806}
 .modal-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:15px;cursor:pointer;color:var(--t3);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center}
 .modal-close:hover{background:var(--bg2)}
 .m-field-label{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--t3);font-weight:500;margin-bottom:6px}
-.m-input{font-family:'Roboto',sans-serif;font-size:14px;width:100%;padding:9px 12px;border-radius:var(--r);border:0.5px solid var(--b);background:var(--card);color:var(--t1);outline:none}
+.m-input{font-family:'Inter',sans-serif;font-size:14px;width:100%;padding:9px 12px;border-radius:var(--r);border:0.5px solid var(--b);background:var(--card);color:var(--t1);outline:none}
 .m-input:focus{border-color:var(--bm)}
 .sub-item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:0.5px solid var(--b);font-size:13px}
 .sub-item:last-child{border-bottom:none}
-.sub-remove{background:none;border:none;cursor:pointer;font-size:12px;color:var(--t3);padding:2px 7px;border-radius:var(--r);font-family:'Roboto',sans-serif}
+.sub-remove{background:none;border:none;cursor:pointer;font-size:12px;color:var(--t3);padding:2px 7px;border-radius:var(--r);font-family:'Inter',sans-serif}
 .sub-remove:hover{color:#A32D2D;background:#FCEBEB}
 .divider{height:0.5px;background:var(--b);margin:14px 0}
 .loc-row{display:flex;gap:6px;flex-wrap:wrap}
@@ -162,21 +167,26 @@ body{font-family:'Roboto',sans-serif;font-size:17px;color:var(--t1);background:v
 .api-section .m-field-label{color:var(--blue)}
 .api-note{font-size:10px;color:var(--blue);margin-top:6px;text-align:center}
 
-/* Dashboard styles */
-.dashboard-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
-.stat-card{background:var(--card);border-radius:var(--rl);padding:16px;text-align:center;border:0.5px solid var(--b)}
-.stat-number{font-size:28px;font-weight:700;color:var(--green-d)}
-.stat-label{font-size:12px;color:var(--t3);margin-top:5px}
-.chart-container{background:var(--card);border-radius:var(--rl);padding:16px;margin-bottom:20px;border:0.5px solid var(--b)}
-.chart-container h4{font-size:14px;margin-bottom:12px;color:var(--t1)}
+/* MODERN DASHBOARD 2026 STYLES */
+.dashboard-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:30px}
+.stat-card{background:linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);border-radius:20px;padding:20px;text-align:center;border:1px solid rgba(0,156,59,0.1);box-shadow:0 4px 15px rgba(0,0,0,0.05);transition:all 0.3s ease}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,156,59,0.15);border-color:rgba(0,156,59,0.3)}
+.stat-number{font-size:36px;font-weight:700;background:linear-gradient(135deg, #009C3B, #00c04b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat-label{font-size:13px;color:var(--t3);margin-top:8px;font-weight:500}
+.stat-icon{font-size:28px;margin-bottom:8px}
+
+.chart-container{background:white;border-radius:20px;padding:20px;margin-bottom:30px;border:1px solid rgba(0,0,0,0.05);box-shadow:0 4px 15px rgba(0,0,0,0.05)}
+.chart-container h4{font-size:16px;margin-bottom:16px;color:var(--t1);font-weight:600}
+
 .dashboard-table{width:100%;border-collapse:collapse;margin-top:10px}
-.dashboard-table th,.dashboard-table td{padding:12px 10px;text-align:left;border-bottom:0.5px solid var(--b);font-size:12px}
-.dashboard-table th{background:var(--bg2);font-weight:600}
-.dashboard-table tr:hover{background:rgba(0,0,0,0.02)}
-.topic-badge{display:inline-block;background:var(--green-l);color:var(--green-d);padding:2px 8px;border-radius:12px;font-size:10px;margin:2px}
-.remove-btn{background:none;border:none;cursor:pointer;font-size:14px;padding:4px 8px;border-radius:var(--r);color:var(--red)}
-.remove-btn:hover{background:#FCEBEB}
+.dashboard-table th,.dashboard-table td{padding:14px 12px;text-align:left;border-bottom:1px solid var(--b);font-size:13px}
+.dashboard-table th{background:linear-gradient(135deg, #f0f4f8, #e8ecf0);font-weight:600;color:var(--t1)}
+.dashboard-table tr:hover{background:rgba(0,156,59,0.03)}
+.topic-badge{display:inline-block;background:linear-gradient(135deg, #d6f0e0, #c0e8d0);color:var(--green-d);padding:4px 10px;border-radius:20px;font-size:11px;margin:2px;font-weight:500}
+.remove-btn{background:linear-gradient(135deg, #fff5f5, #ffe0e0);border:none;cursor:pointer;font-size:12px;padding:6px 12px;border-radius:25px;color:var(--red);transition:all 0.2s}
+.remove-btn:hover{background:#ff4444;color:white;transform:scale(1.02)}
 .login-error{color:red;font-size:12px;margin-top:8px;text-align:center}
+.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg, #009C3B, #00c04b);color:white;display:inline-flex;align-items:center;justify-content:center;font-weight:600;margin-right:10px}
 
 /* FOOTER */
 footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
@@ -243,7 +253,7 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
   <div class="sec-label">Temas monitorados</div>
   <div class="topics" id="topicBar"></div>
 
-  <!-- ACTION BAR - No Admin button visible to users -->
+  <!-- ACTION BAR -->
   <div class="action-bar">
     <button class="btn btn-g" onclick="fetchAllNews()">Atualizar notícias</button>
   </div>
@@ -294,53 +304,72 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
   </div>
 </div>
 
-<!-- ADMIN DASHBOARD MODAL -->
+<!-- ADMIN DASHBOARD MODAL - MODERN 2026 DESIGN -->
 <div class="modal-bg" id="adminModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('adminModal')">✕</button>
-    <h3>Painel Administrativo <span class="badge badge-ok2">Radar Brasil</span></h3>
+    
+    <!-- Header with gradient -->
+    <div style="background:linear-gradient(135deg, #009C3B 0%, #00c04b 100%); margin:-1.6rem -1.6rem 1.5rem -1.6rem; padding:1.5rem; border-radius:var(--rl) var(--rl) 0 0">
+      <h3 style="color:white; margin:0; display:flex; align-items:center; justify-content:space-between">
+        <span>🎯 Radar Brasil</span>
+        <span class="badge" style="background:rgba(255,255,255,0.2); color:white">v2.0 · 2026</span>
+      </h3>
+      <p style="color:rgba(255,255,255,0.8); font-size:12px; margin-top:8px">Painel de controle · Inteligência para brasileiros na China</p>
+    </div>
     
     <!-- API Key Section -->
-    <div class="api-section">
-      <div class="m-field-label" style="color:var(--blue)">Chave API NewsData.io</div>
-      <input type="text" id="apiKeyInput" class="m-input" placeholder="Cole sua chave API do NewsData.io aqui" style="margin-bottom:8px"/>
-      <button class="btn btn-g" onclick="saveApiKey()" style="width:100%">Salvar Chave API</button>
+    <div class="api-section" style="background:linear-gradient(135deg, #f0f5fc, #e8f0fa); border:1px solid rgba(12,68,124,0.1)">
+      <div class="m-field-label" style="color:var(--blue)">🔑 Chave API NewsData.io</div>
+      <input type="text" id="apiKeyInput" class="m-input" placeholder="Cole sua chave API do NewsData.io aqui" style="margin-bottom:8px; border:1px solid rgba(0,0,0,0.1)"/>
+      <button class="btn btn-g" onclick="saveApiKey()" style="width:100%; background:linear-gradient(135deg, #009C3B, #00c04b); border:none">💾 Salvar Chave API</button>
       <div class="api-note">Obtenha sua chave gratuita em newsdata.io</div>
     </div>
     
     <div class="divider"></div>
     
-    <!-- Statistics Dashboard -->
-    <h3 style="font-size:14px; margin-bottom:12px">Estatísticas</h3>
+    <!-- Statistics Dashboard - Modern Cards -->
+    <h3 style="font-size:14px; margin-bottom:16px; color:var(--t1)">📊 Estatísticas</h3>
     <div class="dashboard-stats">
       <div class="stat-card">
+        <div class="stat-icon">👥</div>
         <div class="stat-number" id="totalSubscribers">0</div>
         <div class="stat-label">Total de Inscritos</div>
       </div>
       <div class="stat-card">
+        <div class="stat-icon">📰</div>
         <div class="stat-number" id="totalTopicsCount">0</div>
         <div class="stat-label">Temas Monitorados</div>
       </div>
       <div class="stat-card">
+        <div class="stat-icon">⭐</div>
         <div class="stat-number" id="activeTopicsCount">0</div>
-        <div class="stat-label">Temas Mais Populares</div>
+        <div class="stat-label">Tema Mais Popular</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📧</div>
+        <div class="stat-number" id="weeklyEmails">0</div>
+        <div class="stat-label">Emails/semana</div>
       </div>
     </div>
     
-    <!-- Chart -->
+    <!-- Chart Section -->
     <div class="chart-container">
-      <h4>Temas Mais Selecionados pelos Inscritos</h4>
-      <canvas id="topicsChart" width="400" height="200" style="max-height:200px; width:100%"></canvas>
+      <h4>📈 Temas Mais Selecionados pelos Inscritos</h4>
+      <canvas id="topicsChart" width="400" height="200" style="max-height:220px; width:100%"></canvas>
     </div>
     
     <div class="divider"></div>
     
     <!-- Subscribers Table -->
-    <h3 style="font-size:14px; margin-bottom:12px">Gerenciar Inscritos</h3>
-    <div id="dashboardContainer" style="max-height:400px; overflow-y:auto;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px">
+      <h3 style="font-size:14px; margin:0">📋 Gerenciar Inscritos</h3>
+      <div style="font-size:11px; color:var(--t3)">📌 Clique em remover para excluir</div>
+    </div>
+    <div id="dashboardContainer" style="max-height:350px; overflow-y:auto; border-radius:16px; border:1px solid var(--b)">
       <table class="dashboard-table" id="dashboardTable">
         <thead>
-          <tr><th>Nome</th><th>Email</th><th>Temas Selecionados</th><th>Data</th><th>Ação</th></tr>
+          <tr><th>Inscrito</th><th>Email</th><th>Temas Selecionados</th><th>Data</th><th>Ação</th></tr>
         </thead>
         <tbody id="dashboardBody"></tbody>
       </table>
@@ -349,13 +378,13 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
     <div class="divider"></div>
     
     <!-- Add Subscriber Manually -->
-    <h3 style="font-size:14px; margin-bottom:12px">Adicionar Inscrito Manualmente</h3>
+    <h3 style="font-size:14px; margin-bottom:12px">➕ Adicionar Inscrito Manualmente</h3>
     <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
       <input type="text" class="m-input" id="adminName" placeholder="Nome" style="flex:1;min-width:100px"/>
       <input type="email" class="m-input" id="adminEmail" placeholder="email@exemplo.com" style="flex:2;min-width:150px"/>
     </div>
     <div style="margin-bottom:13px">
-      <div class="m-field-label" style="margin-bottom:6px">Localização</div>
+      <div class="m-field-label" style="margin-bottom:6px">📍 Localização</div>
       <div class="loc-row" id="locPills">
         <div class="pill on" data-loc="china" style="background:#ddeaf7;color:#0C447C;border-color:#85B7EB">Na China</div>
         <div class="pill" data-loc="brasil">No Brasil</div>
@@ -363,12 +392,12 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid var(--b);displa
       </div>
     </div>
     <div style="display:flex;gap:8px;margin-bottom:16px">
-      <button class="btn btn-g" onclick="adminAdd()">Adicionar Inscrito</button>
+      <button class="btn btn-g" onclick="adminAdd()" style="background:linear-gradient(135deg, #009C3B, #00c04b); border:none">➕ Adicionar Inscrito</button>
     </div>
     
     <div class="divider"></div>
     
-    <button class="btn" onclick="logoutAdmin()" style="width:100%; background:#f0e4d0">Sair do Painel Admin</button>
+    <button class="btn" onclick="logoutAdmin()" style="width:100%; background:linear-gradient(135deg, #f0e4d0, #e8d8c4); border:none">🚪 Sair do Painel Admin</button>
   </div>
 </div>
 
@@ -388,7 +417,7 @@ const BREVO_API_KEY = 'xkeysib-f18cac060edc096213408041ad3e945914a9f4d1fbfce62e8
 // ============================================
 const NEWSDATA_API_KEY = 'pub_ab546bab2eee494fb85264efc74f457a';
 
-// CATEGORIES
+// CATEGORIES - REORDERED: Pesquisa Acadêmica next to Notícias Esportivas
 const CATEGORIES = [
   { id: 'todos', name: 'Todos', active: true, color: '#1a5a2a', bg: 'rgba(124,239,90,0.73)', tag: 'Geral', visible: true, isSpecial: true },
   { id: 'ccbb', name: 'Notícias do Conselho', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Conselho', visible: true, queries: ['"Conselho de Cidadãos Brasileiros" Pequim', '"Conselho dos Cidadãos Brasileiros" Beijing', '"conselho dos cidadãos brasileiros" china', '"conselhobeijing.org"'] },
@@ -399,37 +428,15 @@ const CATEGORIES = [
   { id: 'oportunidades', name: 'Bolsas & Oportunidades', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Oportunidades', visible: true, queries: ['bolsa CSC China brasileiros', 'estudar na China brasileiros', 'MBA China brasileiros', 'curso China brasileiros', 'intercâmbio China Brasil'] },
   { id: 'imigracao', name: 'Visto & Imigração', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Imigração', visible: true, queries: ['visto trabalho China brasileiros', 'residência China brasileiros', 'visto estudante China Brasil'] },
   { id: 'esportes', name: 'Notícias Esportivas', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Esportes', visible: true, queries: ['brasileiros futebol China', 'atletas brasileiros China', 'jogadores brasileiros China'] },
+  { id: 'pesquisa', name: 'Pesquisa Acadêmica', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Acadêmico', visible: true, queries: ['("China" AND "Brazil") AND ("comparative analysis" OR "comparative study") AND ("economic growth" OR "GDP growth")', '("China" AND "Brazil") AND ("productivity" OR "total factor productivity") AND ("empirical" OR "panel data")', '("China" AND "Brazil") AND ("industrial policy" OR "development strategy") AND ("outcomes" OR "performance")', '("China" AND "Brazil") AND ("innovation" OR "patents" OR "R&D") AND ("performance" OR "output")', '("China" AND "Brazil") AND ("technology adoption" OR "digital economy") AND ("firms" OR "enterprise")'] },
   { id: 'cultural', name: 'Ano Cultural Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['festival brasileiro China', 'cultura Brasil China evento', 'exposição arte Brasil China'] },
   { id: 'comunidade', name: 'Comunidade Brasileira na China', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Comunidade', visible: true, queries: ['brasileiros em Pequim', 'comunidade brasileira Xangai', 'eventos brasileiros China'] },
   { id: 'saude', name: 'Saúde na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Saúde', visible: true, queries: ['sistema saúde China brasileiros', 'seguro saúde China', 'atendimento médico China'] },
   { id: 'turismo', name: 'Turismo & Lazer', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Turismo', visible: true, queries: ['turismo China brasileiros', 'dicas viagem China', 'destinos turísticos China'] },
   { id: 'eventos', name: 'Eventos em Beijing', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Eventos', visible: true, queries: ['eventos Pequim', 'exposições Pequim', 'festivais Pequim', 'shows Pequim', 'encontros brasileiros Pequim'] },
   { id: 'emprego', name: 'Oportunidades de Emprego', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Carreira', visible: true, queries: ['vagas China brasileiros', 'emprego Pequim', 'trabalho China brasileiros', 'oportunidades trabalho China'] },
-  { id: 'tecnologia', name: 'Tecnologia na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Tecnologia', visible: true, queries: ['tecnologia China Brasil', 'inovação China Brasil', 'startups Brasil China', 'inteligência artificial China', 'transferência tecnológica China notícias'] },
-  { id: 'curiosidades', name: 'Curiosidades Cultura Chinesa', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['cultura chinesa curiosidades', 'tradições chinesas fatos interessantes', 'Chinese culture interesting facts', '中国传统文化趣闻', 'costumes chineses explicados', 'Chinese customs and traditions', '中国习俗与传统', 'festividades chinesas significado', 'Chinese festivals meaning', '中国节日意义'] },
-  { id: 'pesquisa', name: 'Pesquisa Acadêmica', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Acadêmico', visible: true, queries: [
-    '("China" AND "Brazil") AND ("comparative analysis" OR "comparative study" OR "comparison") AND ("economic growth" OR "GDP growth") AND ("panel data" OR "empirical analysis" OR "regression")',
-    '("China" AND "Brazil") AND ("productivity" OR "total factor productivity" OR "TFP") AND ("empirical" OR "panel data" OR "firm-level")',
-    '("China" AND "Brazil") AND ("industrial policy" OR "development strategy") AND ("outcomes" OR "performance") AND ("comparative" OR "cross-country")',
-    '("China" AND "Brazil") AND ("middle income trap" OR "income convergence") AND ("empirical" OR "panel data")',
-    '("China" AND "Brazil") AND ("income inequality" OR "Gini") AND ("panel data" OR "regression" OR "longitudinal")',
-    '("China" AND "Brazil") AND ("manufacturing productivity" OR "industrial productivity") AND ("firm-level" OR "microdata" OR "empirical")',
-    '("China" AND "Brazil") AND ("global value chains" OR "GVC") AND ("participation" OR "integration") AND ("empirical" OR "trade data")',
-    '("China" AND "Brazil") AND ("export structure" OR "export diversification" OR "comparative advantage") AND ("trade data" OR "empirical")',
-    '("China" AND "Brazil") AND ("innovation" OR "patents" OR "R&D") AND ("performance" OR "output") AND ("empirical" OR "bibliometric")',
-    '("China" AND "Brazil") AND ("R&D expenditure" OR "research investment") AND ("productivity" OR "innovation output") AND ("regression" OR "panel data")',
-    '("China" AND "Brazil") AND ("technology adoption" OR "digital economy") AND ("firms" OR "enterprise") AND ("empirical" OR "microdata")',
-    '("China" AND "Brazil") AND ("energy consumption" OR "energy efficiency") AND ("panel data" OR "DEA" OR "stochastic frontier")',
-    '("China" AND "Brazil") AND ("renewable energy" OR "energy transition") AND ("comparative" OR "policy analysis")',
-    '("China" AND "Brazil") AND ("carbon emissions" OR "CO2 emissions") AND ("panel data" OR "regression" OR "decomposition")',
-    '("China" AND "Brazil") AND ("agriculture productivity" OR "farm productivity") AND ("empirical" OR "panel data")',
-    '("China" AND "Brazil") AND ("land use" OR "deforestation") AND ("environmental impact" OR "sustainability") AND ("empirical")',
-    '("China" AND "Brazil") AND ("urbanization" OR "regional disparities") AND ("panel data" OR "spatial analysis")',
-    '("China" AND "Brazil") AND ("human capital" OR "education outcomes") AND ("empirical" OR "panel data")',
-    '("China" AND "Brazil") AND ("health expenditure" OR "health outcomes") AND ("comparative" OR "panel data")',
-    '("China" AND "Brazil") AND ("state capacity" OR "governance" OR "institutions") AND ("economic performance" OR "development") AND ("empirical" OR "regression")',
-    '("China" AND "Brazil") AND ("trade structure" OR "terms of trade") AND ("export diversification" OR "trade performance") AND ("empirical")'
-  ] }
+  { id: 'tecnologia', name: 'Tecnologia na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Tecnologia', visible: true, queries: ['tecnologia China Brasil', 'inovação China Brasil', 'startups Brasil China', 'inteligência artificial China'] },
+  { id: 'curiosidades', name: 'Curiosidades Cultura Chinesa', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['cultura chinesa curiosidades', 'tradições chinesas fatos interessantes', 'Chinese culture interesting facts', '中国传统文化趣闻'] }
 ];
 
 let allNews = [];
@@ -519,11 +526,10 @@ function openAdminDashboard() {
 }
 
 function renderStatsAndChart() {
-  // Update stats
   document.getElementById('totalSubscribers').textContent = subs.length;
   document.getElementById('totalTopicsCount').textContent = CATEGORIES.filter(c => c.visible && c.id !== 'todos').length;
+  document.getElementById('weeklyEmails').textContent = subs.length;
   
-  // Count topic popularity
   const topicCounts = {};
   CATEGORIES.forEach(cat => {
     if (cat.id !== 'todos' && cat.visible) {
@@ -541,7 +547,6 @@ function renderStatsAndChart() {
     }
   });
   
-  // Find most popular topic
   let maxCount = 0;
   let mostPopular = 'Nenhum';
   for (const [topic, count] of Object.entries(topicCounts)) {
@@ -552,11 +557,8 @@ function renderStatsAndChart() {
   }
   document.getElementById('activeTopicsCount').textContent = mostPopular;
   
-  // Update chart
   const ctx = document.getElementById('topicsChart').getContext('2d');
-  if (topicsChart) {
-    topicsChart.destroy();
-  }
+  if (topicsChart) topicsChart.destroy();
   
   const labels = Object.keys(topicCounts);
   const data = Object.values(topicCounts);
@@ -568,18 +570,20 @@ function renderStatsAndChart() {
       datasets: [{
         label: 'Número de inscritos',
         data: data,
-        backgroundColor: '#009C3B',
-        borderRadius: 5
+        backgroundColor: 'rgba(0,156,59,0.7)',
+        borderRadius: 8,
+        barPercentage: 0.6
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: true,
       plugins: {
-        legend: { position: 'top' }
+        legend: { position: 'top', labels: { font: { size: 11 } } }
       },
       scales: {
-        y: { beginAtZero: true, ticks: { stepSize: 1 } }
+        y: { beginAtZero: true, ticks: { stepSize: 1, font: { size: 10 } } },
+        x: { ticks: { font: { size: 9 }, rotation: 45, maxRotation: 45 } }
       }
     }
   });
@@ -590,15 +594,16 @@ function renderDashboard() {
   if (!tbody) return;
   
   if (subs.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center">Nenhum inscrito ainda</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:40px">Nenhum inscrito ainda</td></tr>';
     return;
   }
   
   tbody.innerHTML = subs.map((s, index) => {
+    const firstLetter = s.name ? s.name.charAt(0).toUpperCase() : '?';
     const topicsHtml = (s.topics || []).map(t => `<span class="topic-badge">${escapeHtml(t)}</span>`).join('') || '<span class="topic-badge">Todos</span>';
     return `
       <tr>
-        <td>${escapeHtml(s.name)}</td>
+        <td><span class="avatar">${escapeHtml(firstLetter)}</span> ${escapeHtml(s.name)}</td>
         <td>${escapeHtml(s.email)}</td>
         <td>${topicsHtml}</td>
         <td>${s.date || '-'}</td>
@@ -618,9 +623,7 @@ function removeSubscriber(index) {
   }
 }
 
-function openModal(id) { 
-  document.getElementById(id).classList.add('open'); 
-}
+function openModal(id) { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
 function saveApiKey() {
@@ -749,8 +752,7 @@ async function searchCategory(category) {
       if (data.results && data.results.length > 0) {
         for (const article of data.results) {
           const title = (article.title || '').toLowerCase();
-          const isRelevant = !title.includes('irã') && !title.includes('iran') && 
-                             !title.includes('trump') && !title.includes('eua');
+          const isRelevant = !title.includes('irã') && !title.includes('iran') && !title.includes('trump') && !title.includes('eua');
           
           if (isRelevant && !seenUrls.has(article.link) && articles.length < 5) {
             seenUrls.add(article.link);
@@ -841,7 +843,6 @@ async function fetchAllNews() {
   toast('Veja as notícias encontradas');
 }
 
-// Initialize
 renderTopics();
 if (newsdataApiKey && newsdataApiKey !== 'YOUR_NEWSDATA_API_KEY_HERE') { 
   fetchAllNews(); 
