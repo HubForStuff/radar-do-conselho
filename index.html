@@ -252,4 +252,258 @@ if (!gnewsApiKey) {
   document.getElementById('categoriesContainer').innerHTML =
     '<div class="empty">Adicione API key no Admin</div>';
 }
+</script><!-- ONLY SHOWING CHANGED PARTS + FULL FIXED JS -->
+<!-- You can replace your entire <script> block with this -->
+
+<script>
+// CATEGORIES (UNCHANGED)
+const CATEGORIES = [...]; // KEEP EXACT SAME AS YOUR ORIGINAL
+
+let allNewsData = {};
+let subs = [];
+let gnewsApiKey = localStorage.getItem('gnews_api_key') || '';
+
+// Load cache
+const cache = JSON.parse(localStorage.getItem('news_cache') || 'null');
+if (cache && Date.now() - cache.time < 1000 * 60 * 30) {
+  allNewsData = cache.data;
+  setTimeout(renderCategories, 200);
+}
+
+// Load subscribers
+try { subs = JSON.parse(localStorage.getItem('rdc_subs') || '[]'); } catch(e) {}
+
+function nextMonday() {
+  const d = new Date(), day = d.getDay(), diff = day === 1 ? 7 : (8 - day) % 7 || 7;
+  d.setDate(d.getDate() + diff);
+  return d.toLocaleDateString('pt-BR', {weekday:'long', day:'2-digit', month:'long'});
+}
+document.getElementById('nextDate').textContent = nextMonday();
+
+function renderTopics() {
+  document.getElementById('topicBar').innerHTML = CATEGORIES.map(cat =>
+    `<div class="pill on" style="background:#d6f0e0;color:#085041;border-color:#08504155">${cat.name}</div>`
+  ).join('');
+}
+
+// MODAL
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  if (id === 'adminModal') renderSubs();
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+
+// CLOSE MODAL OUTSIDE CLICK
+document.querySelectorAll('.modal-bg').forEach(m => {
+  m.addEventListener('click', e => {
+    if (e.target === m) m.classList.remove('open');
+  });
+});
+
+// ✅ NEW: SAVE API KEY
+function saveApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (!key) return toast('API key inválida');
+  localStorage.setItem('gnews_api_key', key);
+  gnewsApiKey = key;
+  toast('API key salva com sucesso');
+}
+
+// SUBSCRIBE
+function heroSubscribe() {
+  const name = document.getElementById('heroName').value.trim();
+  const email = document.getElementById('heroEmail').value.trim();
+
+  if (!email || !email.includes('@')) return toast('Insira um e-mail válido');
+  if (subs.find(s => s.email === email)) return toast('E-mail já inscrito');
+
+  subs.push({ name: name || email.split('@')[0], email, loc: '?', date: new Date().toLocaleDateString('pt-BR') });
+  localStorage.setItem('rdc_subs', JSON.stringify(subs));
+
+  document.getElementById('heroName').value = '';
+  document.getElementById('heroEmail').value = '';
+  toast('Inscrito com sucesso!');
+}
+
+// ADMIN
+function adminAdd() {
+  const name = document.getElementById('adminName').value.trim();
+  const email = document.getElementById('adminEmail').value.trim();
+
+  if (!email || !email.includes('@')) return toast('E-mail inválido');
+  if (subs.find(s => s.email === email)) return toast('Já existe');
+
+  subs.push({ name: name || email.split('@')[0], email, loc: 'china', date: new Date().toLocaleDateString('pt-BR') });
+  localStorage.setItem('rdc_subs', JSON.stringify(subs));
+
+  renderSubs();
+  toast('Adicionado');
+}
+
+function renderSubs() {
+  const list = document.getElementById('subList');
+  if (!subs.length) return list.style.display = 'none';
+
+  list.style.display = 'block';
+  document.getElementById('subCount').textContent = `(${subs.length})`;
+
+  document.getElementById('subItems').innerHTML = subs.map((s, i) => `
+    <div class="sub-item">
+      <span>${escapeHtml(s.name)}</span>
+      <span style="flex:1;margin:0 8px;overflow:hidden">${escapeHtml(s.email)}</span>
+      <span>${s.loc}</span>
+      <button class="sub-remove" onclick="removeSub(${i})">x</button>
+    </div>
+  `).join('');
+}
+
+function removeSub(i) {
+  subs.splice(i, 1);
+  localStorage.setItem('rdc_subs', JSON.stringify(subs));
+  renderSubs();
+  toast('Removido');
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function escapeHtml(str) {
+  return (str || '').replace(/[&<>]/g, m => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;'
+  }[m]));
+}
+
+function detectLanguage(text) {
+  if (/[\u4e00-\u9fff]/.test(text)) return 'ZH';
+  if (/[áàâãéèêíïóôõúçñ]/i.test(text)) return 'PT';
+  return 'EN';
+}
+
+// ✅ FIXED SEARCH
+async function searchCategory(category) {
+  const articles = [];
+  const seenUrls = new Set();
+
+  for (const query of category.queries.slice(0, 3)) { // LIMIT API LOAD
+    try {
+      const url = `https://gnews.io/api/v4/search?q=${encodeURIComponent(query)}&lang=pt,en&max=3&from=${getDaysAgo(3)}&apikey=${gnewsApiKey}`;
+
+      const response = await fetch(url);
+      if (!response.ok) continue;
+
+      const data = await response.json();
+
+      if (data.articles) {
+        for (const article of data.articles) {
+          if (seenUrls.has(article.url)) continue;
+          if (articles.length >= 6) break;
+
+          seenUrls.add(article.url);
+
+          articles.push({
+            title: article.title,
+            summary: article.description || '',
+            source: article.source?.name || 'Fonte',
+            dateRaw: article.publishedAt,
+            date: new Date(article.publishedAt).toLocaleDateString('pt-BR'),
+            url: article.url,
+            lang: detectLanguage(article.title)
+          });
+        }
+      }
+
+      await new Promise(r => setTimeout(r, 300));
+
+    } catch (e) {
+      console.error('fetch error', e);
+    }
+  }
+
+  articles.sort((a, b) => new Date(b.dateRaw) - new Date(a.dateRaw));
+  return articles;
+}
+
+function getDaysAgo(days) {
+  const d = new Date();
+  d.setDate(d.getDate() - days);
+  return d.toISOString().split('T')[0];
+}
+
+// RENDER
+function renderCategories() {
+  const container = document.getElementById('categoriesContainer');
+  if (!container) return;
+
+  let html = '';
+
+  for (const category of CATEGORIES) {
+    const news = allNewsData[category.id] || [];
+
+    html += `
+      <div class="category-section">
+        <div class="category-header">
+          <div class="category-title">${escapeHtml(category.name)}</div>
+          <div class="category-meta">${news.length} notícias</div>
+        </div>
+        <div class="category-news">
+    `;
+
+    if (!news.length) {
+      html += `<div class="empty-category">Sem notícias</div>`;
+    } else {
+      for (const item of news) {
+        html += `
+          <div class="news-card" onclick="window.open('${item.url}','_blank')">
+            <div class="news-title">${escapeHtml(item.title)}</div>
+            <div class="news-meta">
+              <span class="news-source">${escapeHtml(item.source)}</span>
+              <span class="news-date">${item.date}</span>
+              <span class="news-lang">${item.lang}</span>
+            </div>
+            <div class="news-summary">${escapeHtml(item.summary).slice(0,150)}</div>
+          </div>
+        `;
+      }
+    }
+
+    html += `</div></div>`;
+  }
+
+  container.innerHTML = html;
+
+  // cache save
+  localStorage.setItem('news_cache', JSON.stringify({
+    time: Date.now(),
+    data: allNewsData
+  }));
+}
+
+// FETCH ALL
+async function fetchAllNews() {
+  if (!gnewsApiKey) return toast('Adicione API key no Admin');
+
+  document.getElementById('categoriesContainer').innerHTML =
+    '<div class="loader">Carregando...</div>';
+
+  for (const cat of CATEGORIES) {
+    allNewsData[cat.id] = await searchCategory(cat);
+  }
+
+  renderCategories();
+  toast('Atualizado');
+}
+
+// INIT
+renderTopics();
+
+if (!gnewsApiKey) {
+  document.getElementById('categoriesContainer').innerHTML =
+    '<div class="empty">Adicione API key no Admin</div>';
+}
 </script>
