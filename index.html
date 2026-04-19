@@ -428,107 +428,177 @@ let allNews = [], subs = [], newsdataApiKey = localStorage.getItem('newsdata_api
 let isAdminLoggedIn = localStorage.getItem('admin_logged_in') === 'true';
 try { subs = JSON.parse(localStorage.getItem('rdc_subs') || '[]'); } catch(e) {}
 
-const CATEGORIES = [
-  {
-    id: 'emergencias',
-    name: 'Alertas Consulares',
-    queries: [
-      'brasileiros na China alerta hoje',
-      'China new rules foreigners visa problem 2026',
-      'expats China warning travel restriction',
-      'Embaixada Brasil China comunicado urgente',
-      'China policy change foreigners impact 2026'
+const NEWS_SYSTEM = {
+  categories: [
+    {
+      id: 'emergencias',
+      name: 'Alertas Consulares',
+      queries: [
+        'China new rules foreigners warning 2026 Beijing',
+        'alerta estrangeiros China hoje Pequim',
+        'China restrictions foreigners travel update Beijing',
+        'comunicado embaixada Brasil China urgente Pequim',
+        'China policy change affecting foreigners Beijing'
+      ]
+    },
+    {
+      id: 'imigracao',
+      name: 'Visto & Imigração',
+      queries: [
+        'China visa rules change foreigners 2026 Beijing',
+        'como renovar visto China brasileiro Pequim',
+        'residence permit China new policy Beijing',
+        'problemas visto China estrangeiros Beijing',
+        'China immigration update expats Beijing'
+      ]
+    },
+    {
+      id: 'comunidade',
+      name: 'Comunidade Brasileira',
+      queries: [
+        'evento brasileiros Beijing hoje',
+        'Brazilian community Beijing events',
+        'expats meetup Beijing Tianjin',
+        'grupos brasileiros Pequim encontro',
+        'vida de estrangeiros em Pequim relato'
+      ]
+    },
+    {
+      id: 'emprego',
+      name: 'Emprego',
+      queries: [
+        'jobs Beijing foreigners 2026 hiring',
+        'emprego China estrangeiros Pequim requisitos',
+        'companies hiring expats Beijing',
+        'salario Pequim estrangeiros custo de vida',
+        'Beijing job market foreigners news'
+      ]
+    },
+    {
+      id: 'negocios',
+      name: 'Negócios',
+      queries: [
+        'business Beijing foreigners restrictions',
+        'empresa estrangeira Pequim regras novas',
+        'Brazil China trade impact Beijing business',
+        'import export China changes Beijing 2026',
+        'market access Beijing foreigners update'
+      ]
+    },
+    {
+      id: 'eventos',
+      name: 'Eventos',
+      queries: [
+        'events Beijing this week expats',
+        'agenda cultural Pequim hoje',
+        'events Beijing weekend expats',
+        'what to do Beijing expats',
+        'international events Beijing Tianjin'
+      ]
+    },
+    {
+      id: 'saude',
+      name: 'Saúde',
+      queries: [
+        'healthcare Beijing foreigners experience',
+        'seguro saude China estrangeiros Pequim',
+        'hospital Pequim expats problems',
+        'China health policy foreigners Beijing',
+        'medical emergency Beijing expat'
+      ]
+    },
+    {
+      id: 'tecnologia',
+      name: 'Tecnologia',
+      queries: [
+        'apps China foreigners restrictions Beijing',
+        'digital payments China foreigners issues Beijing',
+        'VPN China rules update Beijing',
+        'China tech policy foreigners Beijing impact',
+        'AI China regulation Beijing users'
+      ]
+    },
+    {
+      id: 'bilateral',
+      name: 'Brasil-China',
+      queries: [
+        'Brazil China agreements impact citizens Beijing',
+        'China Brazil visa policy update Beijing',
+        'flights Brazil China Beijing changes',
+        'trade Brazil China Beijing impact jobs',
+        'China Brazil cooperation education Beijing students'
+      ]
+    }
+  ],
+
+  filters: {
+    mustHave: [
+      'china'
+    ],
+
+    relevanceSignals: [
+      'foreigners', 'expats', 'estrangeiros', 'brasileiros'
+    ],
+
+    boost: [
+      'beijing', 'pequim', 'tianjin',
+      'visa', 'visto', 'policy', 'rule', 'update',
+      'job', 'work', 'emprego',
+      'health', 'hospital',
+      'event', 'festival'
+    ],
+
+    negative: [
+      'war', 'military', 'missile', 'iran', 'israel'
     ]
   },
-  {
-    id: 'imigracao',
-    name: 'Visto & Imigração',
-    queries: [
-      'como renovar visto china brasileiro 2026',
-      'China visa rules change foreigners 2026',
-      'residence permit China new policy expats',
-      'problemas visto China estrangeiros',
-      'work visa China requirements update 2026'
-    ]
+
+  scoreArticle(article) {
+    const text = (article.title + ' ' + article.description).toLowerCase();
+
+    let score = 0;
+
+    // HARD FILTER
+    if (!this.filters.mustHave.some(term => text.includes(term))) {
+      return -100;
+    }
+
+    // EXPAT SIGNAL
+    if (this.filters.relevanceSignals.some(term => text.includes(term))) {
+      score += 3;
+    }
+
+    // LOCATION PRIORITY (BIG IMPACT)
+    if (text.includes('beijing') || text.includes('pequim')) {
+      score += 4;
+    }
+    if (text.includes('tianjin')) {
+      score += 3;
+    }
+
+    // BOOST TERMS
+    this.filters.boost.forEach(term => {
+      if (text.includes(term)) score += 2;
+    });
+
+    // NEGATIVE TERMS
+    this.filters.negative.forEach(term => {
+      if (text.includes(term)) score -= 5;
+    });
+
+    return score;
   },
-  {
-    id: 'comunidade',
-    name: 'Comunidade Brasileira',
-    queries: [
-      'evento brasileiros Beijing hoje',
-      'Brazilian community Shanghai events 2026',
-      'grupos brasileiros China encontro',
-      'expats Brazil China meetup',
-      'brasileiros na China dificuldades relato'
-    ]
-  },
-  {
-    id: 'emprego',
-    name: 'Emprego',
-    queries: [
-      'jobs in China for foreigners 2026 hiring',
-      'emprego China estrangeiros requisitos 2026',
-      'companies hiring expats China',
-      'salario China estrangeiros 2026',
-      'layoffs China expats news'
-    ]
-  },
-  {
-    id: 'negocios',
-    name: 'Negócios',
-    queries: [
-      'Brazil China business opportunities 2026',
-      'empresa brasileira China expansão',
-      'China market foreigners restrictions business',
-      'import export Brazil China changes 2026',
-      'small business China expats challenges'
-    ]
-  },
-  {
-    id: 'eventos',
-    name: 'Eventos',
-    queries: [
-      'events Beijing this week expats',
-      'what to do Beijing weekend expats',
-      'agenda cultural Beijing hoje',
-      'events Shanghai expats 2026',
-      'festival China international events'
-    ]
-  },
-  {
-    id: 'saude',
-    name: 'Saúde',
-    queries: [
-      'healthcare China foreigners experience',
-      'seguro saude China estrangeiros vale a pena',
-      'hospital China expats problems',
-      'China health policy foreigners 2026',
-      'medical emergency China expat story'
-    ]
-  },
-  {
-    id: 'tecnologia',
-    name: 'Tecnologia',
-    queries: [
-      'China tech news impact expats',
-      'apps China foreigners restrictions',
-      'AI China news global impact 2026',
-      'digital payments China foreigners issues',
-      'VPN China rules update'
-    ]
-  },
-  {
-    id: 'bilateral',
-    name: 'Brasil-China',
-    queries: [
-      'Brazil China relations impact citizens',
-      'Lula China agreements impact expats',
-      'China Brazil visa agreements',
-      'trade Brazil China impact jobs',
-      'Brazil China flights changes 2026'
-    ]
+
+  filterAndRank(articles) {
+    return articles
+      .map(article => ({
+        ...article,
+        score: this.scoreArticle(article)
+      }))
+      .filter(a => a.score > 0)
+      .sort((a, b) => b.score - a.score);
   }
-];
+};
 
 function nextMonday() {
   const d = new Date(), day = d.getDay(), diff = day === 1 ? 7 : (8 - day) % 7 || 7;
