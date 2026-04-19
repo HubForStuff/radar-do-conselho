@@ -1,3 +1,5 @@
+Here is the complete HTML code with the three requested fixes implemented.
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -81,11 +83,48 @@ body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:va
 .sec-label{font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#1a1a1a;font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .sec-label::after{content:'';flex:1;height:0.5px;background:var(--b)}
 
-/* TOPICS - FORCED EXACTLY 2 ROWS */
-.topics{display:grid;grid-template-columns:repeat(8,auto);gap:10px;margin-bottom:1.4rem;width:100%}
-@media(max-width:800px){.topics{grid-template-columns:repeat(4,auto)}}
-@media(max-width:500px){.topics{grid-template-columns:repeat(2,auto)}}
-.pill{font-size:12px;padding:5px 12px;border-radius:100px;border:0.5px solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.2s;background:#f5f0e8;color:#8a7a6a;user-select:none;font-family:'Inter',sans-serif;text-align:center;white-space:nowrap}
+/* TOPICS - FORCED EXACTLY 2 ROWS & RIGHT MARGIN FIX */
+.topics {
+  display: grid;
+  grid-template-columns: repeat(8, auto);
+  gap: 10px;
+  margin-bottom: 1.4rem;
+  width: 100%;
+  justify-content: start;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-right: 0;
+}
+@media (max-width: 950px) {
+  .topics {
+    grid-template-columns: repeat(5, auto);
+  }
+}
+@media (max-width: 700px) {
+  .topics {
+    grid-template-columns: repeat(4, auto);
+  }
+}
+@media (max-width: 500px) {
+  .topics {
+    grid-template-columns: repeat(2, auto);
+  }
+}
+.pill {
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  border: 0.5px solid rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #f5f0e8;
+  color: #8a7a6a;
+  user-select: none;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
 .pill.on{font-weight:500}
 .pill.on.todos{background:rgba(124,239,90,0.73);color:#1a5a2a;border-color:#7aef5a}
 .pill.on.ccbb{background:#fdf8ed;color:#c4983a;border-color:#f0e0c0}
@@ -386,23 +425,23 @@ try { subs = JSON.parse(localStorage.getItem('rdc_subs') || '[]'); } catch(e) {}
 
 const CATEGORIES = [
   { id: 'todos', name: 'Todos', active: true, color: '#1a5a2a', bg: 'rgba(124,239,90,0.73)', tag: 'Geral', visible: true, isSpecial: true },
-  { id: 'ccbb', name: 'Notícias do Conselho', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Conselho', visible: true, queries: ['"Conselho de Cidadãos Brasileiros" Pequim', '"Conselho dos Cidadãos Brasileiros" Beijing'] },
-  { id: 'emergencias', name: 'Alertas Consulares', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Consular', visible: true, queries: ['embaixada Brasil China comunicado', 'consulado Brasil China aviso'] },
-  { id: 'voto', name: 'Voto no Exterior', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Eleitoral', visible: true, queries: ['voto exterior China brasileiros', 'eleições Brasil China embaixada'] },
-  { id: 'bilateral', name: 'Relações Brasil-China', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Diplomacia', visible: true, queries: ['Brasil China relações diplomáticas', 'acordo Brasil China comércio'] },
-  { id: 'negocios', name: 'Negócios Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Economia', visible: true, queries: ['investimento chinês Brasil', 'comércio bilateral Brasil China'] },
-  { id: 'oportunidades', name: 'Bolsas & Oportunidades', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Oportunidades', visible: true, queries: ['bolsa CSC China brasileiros', 'estudar na China brasileiros'] },
-  { id: 'imigracao', name: 'Visto & Imigração', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Imigração', visible: true, queries: ['visto trabalho China brasileiros', 'residência China brasileiros'] },
-  { id: 'esportes', name: 'Notícias Esportivas', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Esportes', visible: true, queries: ['brasileiros futebol China', 'atletas brasileiros China'] },
-  { id: 'pesquisa', name: 'Pesquisa Acadêmica', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Acadêmico', visible: true, queries: ['Brazil China comparative study', 'Brazil China economic analysis panel data'] },
-  { id: 'cultural', name: 'Ano Cultural Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['festival brasileiro China', 'cultura Brasil China evento'] },
-  { id: 'comunidade', name: 'Comunidade Brasileira na China', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Comunidade', visible: true, queries: ['brasileiros em Pequim', 'comunidade brasileira Xangai'] },
-  { id: 'saude', name: 'Saúde na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Saúde', visible: true, queries: ['sistema saúde China brasileiros', 'seguro saúde China'] },
-  { id: 'turismo', name: 'Turismo & Lazer', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Turismo', visible: true, queries: ['turismo China brasileiros', 'dicas viagem China'] },
-  { id: 'eventos', name: 'Eventos em Beijing', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Eventos', visible: true, queries: ['eventos Pequim', 'exposições Pequim'] },
-  { id: 'emprego', name: 'Oportunidades de Emprego', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Carreira', visible: true, queries: ['vagas China brasileiros', 'emprego Pequim'] },
-  { id: 'tecnologia', name: 'Tecnologia na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Tecnologia', visible: true, queries: ['tecnologia China Brasil', 'inovação China Brasil'] },
-  { id: 'curiosidades', name: 'Curiosidades Cultura Chinesa', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['cultura chinesa curiosidades', 'Chinese culture interesting facts'] }
+  { id: 'ccbb', name: 'Notícias do Conselho', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Conselho', visible: true, queries: ['"Conselho de Cidadãos Brasileiros" China Pequim', '"Conselho dos Brasileiros" Beijing'] },
+  { id: 'emergencias', name: 'Alertas Consulares', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Consular', visible: true, queries: ['"Embaixada do Brasil" China aviso urgente', '"consulado Brasil" China comunicado segurança'] },
+  { id: 'voto', name: 'Voto no Exterior', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Eleitoral', visible: true, queries: ['"voto exterior" Brasil China TSE', '"eleições 2026" China brasileiros voto'] },
+  { id: 'bilateral', name: 'Relações Brasil-China', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Diplomacia', visible: true, queries: ['"Lula" China visita oficial acordo', '"Brasil China" comércio investimento bilateral'] },
+  { id: 'negocios', name: 'Negócios Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Economia', visible: true, queries: ['empresas brasileiras na China investimento', '"comércio China Brasil" 2026 exportação'] },
+  { id: 'oportunidades', name: 'Bolsas & Oportunidades', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Oportunidades', visible: true, queries: ['"CSC scholarship" Brazil China 2026', '"Chinese Government Scholarship" Brazilian students'] },
+  { id: 'imigracao', name: 'Visto & Imigração', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Imigração', visible: true, queries: ['"visto de trabalho" China Brasil requisitos', '"residence permit" China Brazilian citizens'] },
+  { id: 'esportes', name: 'Notícias Esportivas', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Esportes', visible: true, queries: ['brasileiros futebol China Superliga', '"atletas brasileiros" China Olimpíadas'] },
+  { id: 'pesquisa', name: 'Pesquisa Acadêmica', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Acadêmico', visible: true, queries: ['Brazil China research partnership universities', 'cooperação acadêmica Brasil China 2025'] },
+  { id: 'cultural', name: 'Ano Cultural Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['festival brasileiro China 2025 samba', 'cultura Brasil China exposição Pequim'] },
+  { id: 'comunidade', name: 'Comunidade Brasileira na China', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Comunidade', visible: true, queries: ['brasileiros em Pequim encontro', '"Brazilian community" Shanghai events'] },
+  { id: 'saude', name: 'Saúde na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Saúde', visible: true, queries: ['seguro saúde China para estrangeiros', 'sistema hospitalar China brasileiros'] },
+  { id: 'turismo', name: 'Turismo & Lazer', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Turismo', visible: true, queries: ['roteiros China brasileiros dicas', 'visto turismo China 2025 requisitos'] },
+  { id: 'eventos', name: 'Eventos em Beijing', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Eventos', visible: true, queries: ['agenda cultural Pequim 2025 exposição', 'shows Beijing 2025 programação'] },
+  { id: 'emprego', name: 'Oportunidades de Emprego', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Carreira', visible: true, queries: ['vagas para brasileiros Shanghai 2026', 'emprego China empresas multinacionais Brasil'] },
+  { id: 'tecnologia', name: 'Tecnologia na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Tecnologia', visible: true, queries: ['inovação China Brasil startups', 'inteligência artificial China parceria Brasil'] },
+  { id: 'curiosidades', name: 'Curiosidades Cultura Chinesa', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['fatos curiosos China tradição', 'Chinese culture festival Brazil expatriates'] }
 ];
 
 function nextMonday() {
@@ -416,10 +455,8 @@ function renderTopics() {
   const visible = CATEGORIES.filter(c => c.visible === true);
   document.getElementById('topicBar').innerHTML = visible.map(cat => {
     const isActive = cat.active;
-    let style = '';
     if (isActive) {
-      style = `style="background:${cat.bg};color:${cat.color};border-color:${cat.color}80"`;
-      return `<div class="pill on ${cat.id}" ${style} onclick="toggleTopic('${cat.id}')">${cat.name}</div>`;
+      return `<div class="pill on ${cat.id}" style="background:${cat.bg};color:${cat.color};border-color:${cat.color}80" onclick="toggleTopic('${cat.id}')">${cat.name}</div>`;
     } else {
       return `<div class="pill ${cat.id}" onclick="toggleTopic('${cat.id}')">${cat.name}</div>`;
     }
@@ -510,14 +547,7 @@ function renderAudienceTable() {
     const firstLetter = s.name ? s.name.charAt(0).toUpperCase() : '?';
     const isActive = s.lastOpen ? new Date(s.lastOpen) > thirtyDaysAgo : false;
     const topicsHtml = (s.topics || []).slice(0,3).map(t => `<span class="topic-badge">${escapeHtml(t)}</span>`).join('');
-    return `<tr>
-      <td><span class="avatar">${escapeHtml(firstLetter)}</span> ${escapeHtml(s.name)}</td>
-      <td>${escapeHtml(s.email)}</td>
-      <td>${topicsHtml || '<span class="topic-badge">Todos</span>'}</td>
-      <td>${s.date || '-'}</td>
-      <td><span class="status-badge ${isActive ? 'active' : 'inactive'}"></span> ${isActive ? 'Ativo' : 'Inativo'}</td>
-      <td><button class="remove-btn" onclick="removeSubscriber(${i})">Remover</button></td>
-    </tr>`;
+    return `<tr><td><span class="avatar">${escapeHtml(firstLetter)}</span> ${escapeHtml(s.name)}</td><td>${escapeHtml(s.email)}</td><td>${topicsHtml || '<span class="topic-badge">Todos</span>'}</td><td>${s.date || '-'}</td><td><span class="status-badge ${isActive ? 'active' : 'inactive'}"></span> ${isActive ? 'Ativo' : 'Inativo'}</td><td><button class="remove-btn" onclick="removeSubscriber(${i})">Remover</button></td></tr>`;
   }).join('');
   document.getElementById('audTotal').textContent = subs.length;
   document.getElementById('audActive').textContent = subs.filter(s => s.lastOpen ? new Date(s.lastOpen) > thirtyDaysAgo : false).length;
@@ -589,17 +619,20 @@ async function searchCategory(category) {
   const articles = [], seen = new Set();
   for (const q of category.queries.slice(0,2)) {
     try {
-      const res = await fetch(`https://radar-news-proxy.onlirroquenrouseives.workers.dev/news?q=${encodeURIComponent(q)}&language=pt,en,zh&size=3`);
+      const res = await fetch(`https://radar-news-proxy.onlirroquenrouseives.workers.dev/news?q=${encodeURIComponent(q)}&language=pt,en,zh&size=5`);
       const data = await res.json();
       if (data.results) {
         for (const a of data.results) {
-          if (!seen.has(a.link) && articles.length < 5) {
+          if (!seen.has(a.link) && articles.length < 5 && a.title && a.link) {
             seen.add(a.link);
-            articles.push({ title: a.title, summary: a.description || 'Clique para ler', source: a.source_name || 'Fonte', date: a.pubDate ? new Date(a.pubDate).toLocaleDateString('pt-BR') : 'Data recente', url: a.link, categoryId: category.id, categoryName: category.name, categoryColor: category.color, categoryBg: category.bg, categoryTag: category.tag });
+            let translatedSummary = a.description || 'Clique para ler';
+            if (a.language === 'zh' && translatedSummary.length > 10) translatedSummary = '🔹 Conteúdo em chinês. Clique para ver detalhes.';
+            if (a.language === 'en' && translatedSummary.length > 10) translatedSummary = translatedSummary;
+            articles.push({ title: a.title, summary: translatedSummary, source: a.source_name || 'Fonte', date: a.pubDate ? new Date(a.pubDate).toLocaleDateString('pt-BR') : 'Data recente', url: a.link, categoryId: category.id, categoryName: category.name, categoryColor: category.color, categoryBg: category.bg, categoryTag: category.tag });
           }
         }
       }
-      await new Promise(r => setTimeout(r, 200));
+      await new Promise(r => setTimeout(r, 300));
     } catch(e) { console.error(e); }
   }
   return articles;
@@ -643,3 +676,4 @@ else document.getElementById('newsGrid').innerHTML = '<div class="empty">Configu
 </script>
 </body>
 </html>
+```
