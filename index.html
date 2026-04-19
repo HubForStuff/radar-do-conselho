@@ -427,23 +427,23 @@ try { subs = JSON.parse(localStorage.getItem('rdc_subs') || '[]'); } catch(e) {}
 
 const CATEGORIES = [
   { id: 'todos', name: 'Todos', active: true, color: '#1a5a2a', bg: 'rgba(124,239,90,0.73)', tag: 'Geral', visible: true, isSpecial: true },
-  { id: 'ccbb', name: 'Notícias do Conselho', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Conselho', visible: true, queries: ['"Conselho de Cidadãos Brasileiros" China Pequim', '"Conselho dos Brasileiros" Beijing'] },
-  { id: 'emergencias', name: 'Alertas Consulares', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Consular', visible: true, queries: ['"Embaixada do Brasil" China aviso urgente', '"consulado Brasil" China comunicado segurança'] },
-  { id: 'voto', name: 'Voto no Exterior', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Eleitoral', visible: true, queries: ['"voto exterior" Brasil China TSE', '"eleições 2026" China brasileiros voto'] },
-  { id: 'bilateral', name: 'Relações Brasil-China', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Diplomacia', visible: true, queries: ['"Lula" China visita oficial acordo', '"Brasil China" comércio investimento bilateral'] },
-  { id: 'negocios', name: 'Negócios Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Economia', visible: true, queries: ['empresas brasileiras na China investimento', '"comércio China Brasil" 2026 exportação'] },
-  { id: 'oportunidades', name: 'Bolsas & Oportunidades', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Oportunidades', visible: true, queries: ['"CSC scholarship" Brazil China 2026', '"Chinese Government Scholarship" Brazilian students'] },
-  { id: 'imigracao', name: 'Visto & Imigração', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Imigração', visible: true, queries: ['"visto de trabalho" China Brasil requisitos', '"residence permit" China Brazilian citizens'] },
-  { id: 'esportes', name: 'Notícias Esportivas', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Esportes', visible: true, queries: ['brasileiros futebol China Superliga', '"atletas brasileiros" China Olimpíadas'] },
-  { id: 'pesquisa', name: 'Pesquisa Acadêmica', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Acadêmico', visible: true, queries: ['Brazil China research partnership universities', 'cooperação acadêmica Brasil China 2025'] },
-  { id: 'cultural', name: 'Ano Cultural Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['festival brasileiro China 2025 samba', 'cultura Brasil China exposição Pequim'] },
-  { id: 'comunidade', name: 'Comunidade Brasileira na China', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Comunidade', visible: true, queries: ['brasileiros em Pequim encontro', '"Brazilian community" Shanghai events'] },
-  { id: 'saude', name: 'Saúde na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Saúde', visible: true, queries: ['seguro saúde China para estrangeiros', 'sistema hospitalar China brasileiros'] },
-  { id: 'turismo', name: 'Turismo & Lazer', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Turismo', visible: true, queries: ['roteiros China brasileiros dicas', 'visto turismo China 2025 requisitos'] },
-  { id: 'eventos', name: 'Eventos em Beijing', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Eventos', visible: true, queries: ['agenda cultural Pequim 2025 exposição', 'shows Beijing 2025 programação'] },
-  { id: 'emprego', name: 'Oportunidades de Emprego', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Carreira', visible: true, queries: ['vagas para brasileiros Shanghai 2026', 'emprego China empresas multinacionais Brasil'] },
-  { id: 'tecnologia', name: 'Tecnologia na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Tecnologia', visible: true, queries: ['inovação China Brasil startups', 'inteligência artificial China parceria Brasil'] },
-  { id: 'curiosidades', name: 'Curiosidades Cultura Chinesa', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['fatos curiosos China tradição', 'Chinese culture festival Brazil expatriates'] }
+  { id: 'ccbb', name: 'Notícias do Conselho', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Conselho', visible: true, queries: ['conselho cidadaos brasileiros Pequim reuniao hoje', 'comunidade brasileira Beijing reuniao ultimas horas'] },
+  { id: 'emergencias', name: 'Alertas Consulares', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Consular', visible: true, queries: ['alerta consular China brasileiros emergencia agora', 'embaixada Brasil Pequim aviso urgencia 2026'] },
+  { id: 'voto', name: 'Voto no Exterior', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Eleitoral', visible: true, queries: ['voto exterior China brasileiros prazo 2026', 'como votar China eleicoes Brasil procedimento'] },
+  { id: 'bilateral', name: 'Relações Brasil-China', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Diplomacia', visible: true, queries: ['acordo Brasil China hoje ultimas negociacoes', 'relacoes diplomaticas Pequim Brasilia nova regra'] },
+  { id: 'negocios', name: 'Negócios Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Economia', visible: true, queries: ['oportunidade negocios China brasileiros agora', 'comercio exterior China Brasil nova regra 2026'] },
+  { id: 'oportunidades', name: 'Bolsas & Oportunidades', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Oportunidades', visible: true, queries: ['bolsa estudo China brasileiros prazo 2026 oportunidade', 'intercambio China bolsa ultimas horas raro'] },
+  { id: 'imigracao', name: 'Visto & Imigração', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Imigração', visible: true, queries: ['como renovar visto China problema hoje', 'mudanca visto trabalho China estrangeiros 2026 alerta'] },
+  { id: 'esportes', name: 'Notícias Esportivas', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Esportes', visible: true, queries: ['brasileiros futebol China jogo hoje noticia', 'campeonato chines brasileiro destaque ultimas horas'] },
+  { id: 'pesquisa', name: 'Pesquisa Acadêmica', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Acadêmico', visible: true, queries: ['pesquisa Brasil China universidade publicacao hoje', 'estudo cooperacao academica Pequim oportunidade raro'] },
+  { id: 'cultural', name: 'Ano Cultural Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['evento cultural Brasil Pequim hoje agora', 'festival brasileiro China 2026 programacao ultimas horas'] },
+  { id: 'comunidade', name: 'Comunidade Brasileira na China', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Comunidade', visible: true, queries: ['brasileiros em Pequim encontro hoje noticia', 'comunidade Brasil China reuniao oportunidade'] },
+  { id: 'saude', name: 'Saúde na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Saúde', visible: true, queries: ['seguro saude China estrangeiros problema hoje', 'atendimento medico Pequim brasileiros alerta 2026'] },
+  { id: 'turismo', name: 'Turismo & Lazer', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Turismo', visible: true, queries: ['visto turismo China brasileiros nova regra hoje', 'viajar China dicas 2026 oportunidade ultimas horas'] },
+  { id: 'eventos', name: 'Eventos em Beijing', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Eventos', visible: true, queries: ['evento Pequim hoje brasileiros programacao', 'exposicao Beijing agora agenda cultural ultimas horas'] },
+  { id: 'emprego', name: 'Oportunidades de Emprego', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Carreira', visible: true, queries: ['vaga emprego China brasileiros hoje oportunidade', 'trabalhar Pequim estrangeiros vaga raro 2026'] },
+  { id: 'tecnologia', name: 'Tecnologia na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Tecnologia', visible: true, queries: ['tecnologia China Brasil inovacao hoje noticia', 'startup Pequim oportunidade brasileiros ultimas horas'] },
+  { id: 'curiosidades', name: 'Curiosidades Cultura Chinesa', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['cultura chinesa curiosidades hoje aprender', 'costumes China estrangeiros dicas 2026 ultimas horas'] }
 ];
 
 function nextMonday() {
@@ -549,7 +549,13 @@ function renderAudienceTable() {
     const firstLetter = s.name ? s.name.charAt(0).toUpperCase() : '?';
     const isActive = s.lastOpen ? new Date(s.lastOpen) > thirtyDaysAgo : false;
     const topicsHtml = (s.topics || []).slice(0,3).map(t => `<span class="topic-badge">${escapeHtml(t)}</span>`).join('');
-    return `<tr><td><span class="avatar">${escapeHtml(firstLetter)}</span> ${escapeHtml(s.name)}</td><td>${escapeHtml(s.email)}</td><td>${topicsHtml || '<span class="topic-badge">Todos</span>'}</td><td>${s.date || '-'}</td><td><span class="status-badge ${isActive ? 'active' : 'inactive'}"></span> ${isActive ? 'Ativo' : 'Inativo'}</td><td><button class="remove-btn" onclick="removeSubscriber(${i})">Remover</button></td></tr>`;
+    return `<tr><td><span class="avatar">${escapeHtml(firstLetter)}</span> ${escapeHtml(s.name)}</td>
+      <td>${escapeHtml(s.email)}</td>
+      <td>${topicsHtml || '<span class="topic-badge">Todos</span>'}</td>
+      <td>${s.date || '-'}</td>
+      <td><span class="status-badge ${isActive ? 'active' : 'inactive'}"></span> ${isActive ? 'Ativo' : 'Inativo'}</td>
+      <td><button class="remove-btn" onclick="removeSubscriber(${i})">Remover</button></td>
+     </tr>`;
   }).join('');
   document.getElementById('audTotal').textContent = subs.length;
   document.getElementById('audActive').textContent = subs.filter(s => s.lastOpen ? new Date(s.lastOpen) > thirtyDaysAgo : false).length;
@@ -628,7 +634,7 @@ async function searchCategory(category) {
           if (!seen.has(a.link) && articles.length < 5 && a.title && a.link) {
             seen.add(a.link);
             let translatedSummary = a.description || 'Clique para ler';
-            if (a.language === 'zh' && translatedSummary.length > 10) translatedSummary = '🔹 Conteúdo em chinês. Clique para ver detalhes.';
+            if (a.language === 'zh' && translatedSummary.length > 10) translatedSummary = 'Conteudo em chines. Clique para ver detalhes.';
             if (a.language === 'en' && translatedSummary.length > 10) translatedSummary = translatedSummary;
             articles.push({ title: a.title, summary: translatedSummary, source: a.source_name || 'Fonte', date: a.pubDate ? new Date(a.pubDate).toLocaleDateString('pt-BR') : 'Data recente', url: a.link, categoryId: category.id, categoryName: category.name, categoryColor: category.color, categoryBg: category.bg, categoryTag: category.tag });
           }
@@ -643,7 +649,7 @@ async function searchCategory(category) {
 function renderNews() {
   const container = document.getElementById('newsGrid');
   if (!container) return;
-  if (allNews.length === 0) { container.innerHTML = '<div class="empty">Nenhuma notícia encontrada. Tente selecionar outros temas.</div>'; return; }
+  if (allNews.length === 0) { container.innerHTML = '<div class="empty">Nenhuma noticia encontrada. Tente selecionar outros temas.</div>'; return; }
   container.innerHTML = allNews.map(item => `<div class="news-card" onclick="window.open('${escapeHtml(item.url)}', '_blank')"><div class="topic-tag" style="background:${item.categoryBg}; color:${item.categoryColor}">${item.categoryTag}</div><div class="news-title">${escapeHtml(item.title)}</div><div class="news-meta"><span class="news-source">${escapeHtml(item.source)}</span><span class="news-date">${item.date}</span></div><div class="news-summary">${escapeHtml(truncateSummary(item.summary, 58))}</div><a href="${escapeHtml(item.url)}" target="_blank" class="news-link" onclick="event.stopPropagation()">Ler artigo completo →</a></div>`).join('');
 }
 
@@ -661,7 +667,7 @@ async function fetchAllNews() {
   allNews = unique.slice(0, 24);
   loader.style.display = 'none';
   renderNews();
-  toast('Notícias atualizadas');
+  toast('Noticias atualizadas');
 }
 
 if (isAdminLoggedIn) {
@@ -674,7 +680,7 @@ if (isAdminLoggedIn) {
 
 renderTopics();
 if (newsdataApiKey) fetchAllNews();
-else document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API clicando duas vezes no círculo do rodapé</div>';
+else document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API clicando duas vezes no circulo do rodape</div>';
 </script>
 </body>
 </html>
