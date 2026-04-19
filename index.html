@@ -1,3 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radar Brasil — Inteligência para brasileiros na China</title>
+<meta name="description" content="Inteligência semanal para brasileiros na China. Embaixada, MRE, vistos, cultura e muito mais.">
+<meta property="og:title" content="Radar Brasil">
+<meta property="og:description" content="Newsletter semanal toda segunda-feira para brasileiros na China.">
+<meta name="theme-color" content="#009C3B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8efe2;
+  --bg2:#f0e4d0;
+  --card:#fffdf9;
+  --t1:#1a1a1a;
+  --t2:#555;
+  --t3:#999;
+  --b:rgba(0,0,0,0.1);
+  --bm:rgba(0,0,0,0.18);
+  --green:#009C3B;
+  --green-d:#085041;
+  --green-l:#d6f0e0;
+  --green-m:#9FE1CB;
+  --gold:#BA7517;
+  --gold-l:#f5e4c0;
+  --blue:#0C447C;
+  --blue-l:#ddeaf7;
+  --purple:#3C3489;
+  --purple-l:#e8e6fc;
+  --red:#cc2200;
+  --r:8px;
+  --rl:12px
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:var(--bg);min-height:100vh}
+
+.page{max-width:calc(100% - 176px);margin:0 auto;padding:2rem 0 4rem}
+@media(max-width:700px){.page{max-width:100%;padding:1.5rem 1rem 3rem}}
+
+/* HEADER */
+.header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:2rem}
+.header-left{display:flex;flex-direction:column;gap:10px}
+.logo{display:flex;align-items:center;gap:14px}
+.logo-ring{width:46px;height:46px;flex-shrink:0}
+.logo-ring svg{width:46px;height:46px}
+
+@keyframes spin-cw{from{stroke-dashoffset:0}to{stroke-dashoffset:-100}}
+@keyframes red-core-pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+@keyframes red-ring-expand{0%{r:4.5;opacity:0.5;stroke-width:1.5}100%{r:10;opacity:0;stroke-width:0.3}}
+
+.logo-text-container{display:flex;flex-direction:column;align-items:flex-start}
+.logo-name{font-family:'Playfair Display',serif;font-size:36px;font-weight:600;color:#1a1a1a;letter-spacing:-0.01em;line-height:1;margin-bottom:2px}
+.logo-sub{font-size:11.5px;color:#1a1a1a;letter-spacing:0.02em;line-height:1.3}
+.live-row{display:flex;align-items:center;padding-left:2px}
+.live-label{font-size:13px;color:var(--green);font-weight:500;letter-spacing:0.03em}
+
+.header-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;padding-top:4px}
+.next-send{font-size:13px;color:#1a1a1a;text-align:right;line-height:1.7}
+.next-send strong{color:#1a1a1a;font-weight:500}
+
+/* SUBSCRIBE HERO */
+.sub-hero{background:rgba(124,239,90,0.73);border:0.5px solid rgba(124,239,90,0.5);border-radius:var(--rl);padding:1.4rem 1.6rem;margin-bottom:1.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.sub-hero-text{flex:1;min-width:200px}
+.sub-hero-text h2{font-family:'Inter',sans-serif;font-size:19px;font-weight:500;color:#1a1a1a;margin-bottom:4px}
+.sub-hero-text p{font-size:14px;color:#1a1a1a;opacity:0.8;line-height:1.5}
+.sub-hero-form{display:flex;gap:8px;flex-wrap:wrap}
+.sub-hero-form input{font-family:'Inter',sans-serif;font-size:14px;padding:9px 13px;border-radius:var(--r);border:0.5px solid rgba(0,0,0,0.2);background:white;color:var(--t1);outline:none;min-width:130px}
+.sub-hero-form input:focus{border-color:var(--green)}
+.sub-hero-form input::placeholder{color:var(--t3)}
+.sub-btn{font-family:'Inter',sans-serif;font-size:14px;font-weight:500;padding:9px 18px;border-radius:var(--r);border:none;background:rgba(0,156,59,0.58);color:white;cursor:pointer;transition:all 0.15s;white-space:nowrap}
+.sub-btn:hover{background:rgba(8,80,65,0.65)}
+.sub-btn:active{transform:scale(0.98)}
+
+/* SECTION LABEL */
+.sec-label{font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#1a1a1a;font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sec-label::after{content:'';flex:1;height:0.5px;background:var(--b)}
+
+/* TOPICS - SMALLER BUTTONS TO FIT EXACTLY 2 ROWS */
+.topics {
+  display: grid;
+  grid-template-columns: repeat(9, auto);
+  gap: 8px;
+  margin-bottom: 1.4rem;
+  width: 100%;
+}
+.pill {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 100px;
+  border: 0.5px solid rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #f5f0e8;
+  color: #8a7a6a;
+  user-select: none;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  white-space: nowrap;
+}
+@media (max-width: 1000px) {
+  .topics {
+    grid-template-columns: repeat(6, auto);
+  }
+}
+@media (max-width: 700px) {
+  .topics {
+    grid-template-columns: repeat(4, auto);
+  }
+}
+@media (max-width: 500px) {
+  .topics {
+    grid-template-columns: repeat(3, auto);
+  }
+}
+@media (max-width: 380px) {
+  .topics {
+    grid-template-columns: repeat(2, auto);
+  }
+  .pill {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+}
+.pill.on{font-weight:500}
+.pill.on.todos{background:rgba(124,239,90,0.73);color:#1a5a2a;border-color:#7aef5a}
+.pill.on.ccbb{background:#fdf8ed;color:#c4983a;border-color:#f0e0c0}
+.pill.on.emergencias{background:#edf8f2;color:#5ab88a;border-color:#d0ead8}
+.pill.on.voto{background:#edf8f2;color:#5ab88a;border-color:#d0ead8}
+.pill.on.bilateral{background:#edf8f2;color:#5ab88a;border-color:#d0ead8}
+.pill.on.negocios{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.oportunidades{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.imigracao{background:#edf8f2;color:#5ab88a;border-color:#d0ead8}
+.pill.on.esportes{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.pesquisa{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.cultural{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.comunidade{background:#fdf8ed;color:#c4983a;border-color:#f0e0c0}
+.pill.on.saude{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.turismo{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.eventos{background:#fdf8ed;color:#c4983a;border-color:#f0e0c0}
+.pill.on.emprego{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.tecnologia{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill.on.curiosidades{background:#f0f5fc;color:#7a9aba;border-color:#d8e8f4}
+.pill:hover:not(.on){background:#e8e0d5}
+
+/* ACTION BAR */
+.action-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.6rem;align-items:center}
+.btn{font-family:'Inter',sans-serif;font-size:14px;padding:9px 16px;border-radius:var(--r);cursor:pointer;transition:all 0.15s;font-weight:400;border:0.5px solid var(--bm);background:var(--card);color:var(--t1)}
+.btn:hover{background:var(--bg2)}
+.btn:active{transform:scale(0.98)}
+.btn-g{border-color:var(--green-m);background:var(--green-l);color:var(--green-d);font-weight:500}
+.btn-g:hover{background:var(--green-m)}
+
+/* NEWS GRID */
+.news-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:1.75rem}
+@media(max-width:560px){.news-grid{grid-template-columns:1fr}}
+.news-card{background:var(--card);border:0.5px solid var(--b);border-radius:var(--rl);padding:1.4rem;transition:all 0.15s;cursor:pointer}
+.news-card:hover{border-color:var(--bm);transform:translateY(-2px)}
+.news-title{font-size:18px;font-weight:600;line-height:1.4;margin-bottom:10px;color:var(--t1)}
+.news-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:5px}
+.news-source{font-size:12px;color:var(--green-d);font-weight:500}
+.news-date{font-size:11px;color:var(--t3)}
+.news-summary{font-size:15px;color:var(--t2);line-height:1.6;margin-bottom:12px}
+.news-link{font-size:13px;color:var(--blue);text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+.news-link:hover{text-decoration:underline}
+.topic-tag{display:inline-block;font-size:11px;padding:3px 10px;border-radius:12px;margin-bottom:10px;font-weight:500}
+
+/* LOADER */
+.loader{display:flex;gap:8px;align-items:center;padding:3rem;justify-content:center;color:var(--t3);font-size:14px}
+.spin{width:17px;height:17px;border:1.5px solid var(--b);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:3rem 1rem;color:var(--t3);font-size:16px;line-height:1.7;width:100%;display:flex;align-items:center;justify-content:center;min-height:60vh;grid-column:1/-1}
+
+/* TOAST */
+.toast{position:fixed;bottom:120px;left:50%;transform:translateX(-50%);background:rgba(124,239,90,0.73);color:#1a5a2a;font-size:14px;font-weight:500;padding:10px 24px;border-radius:50px;opacity:0;transition:opacity 0.3s ease;pointer-events:none;z-index:1000;white-space:nowrap;font-family:'Inter',sans-serif;box-shadow:0 2px 10px rgba(0,0,0,0.1);border:0.5px solid rgba(124,239,90,0.5)}
+.toast.show{opacity:1}
+
+/* DASHBOARD SECTION - UNDER ULTIMAS ATUALIZACOES */
+.dashboard-section{background:white;border-radius:16px;padding:24px;margin-top:2rem;margin-bottom:2rem;border:1px solid var(--b)}
+.dashboard-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--b)}
+.dashboard-header .small-logo{width:32px;height:32px}
+.dashboard-header .small-logo svg{width:32px;height:32px}
+.dashboard-header .header-text{display:flex;flex-direction:column}
+.dashboard-header .header-text h3{font-size:18px;font-weight:600;color:var(--t1);margin:0}
+.dashboard-header .header-text p{font-size:12px;color:var(--t3);margin:0}
+.dashboard-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.dash-tab{background:var(--bg2);border:none;padding:10px 20px;font-size:13px;font-weight:500;color:var(--t2);cursor:pointer;border-radius:var(--r);transition:all 0.2s;min-width:100px;text-align:center}
+.dash-tab:hover{background:var(--green-l);color:var(--green-d)}
+.dash-tab.active{background:var(--green-l);color:var(--green-d)}
+.dashboard-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.stat-card{background:var(--bg);border-radius:12px;padding:20px;border:1px solid var(--b)}
+.stat-number{font-size:32px;font-weight:700;color:var(--green-d);margin-bottom:4px}
+.stat-label{font-size:13px;color:var(--t3)}
+.stat-change{font-size:11px;margin-top:8px;color:var(--t2)}
+.stat-change.up{color:var(--green-d)}
+.chart-container{background:var(--bg);border-radius:12px;padding:20px;margin-bottom:24px;border:1px solid var(--b)}
+.chart-container h4{font-size:14px;margin-bottom:16px;color:var(--t1);font-weight:600}
+.subscriber-table{width:100%;border-collapse:collapse}
+.subscriber-table th,.subscriber-table td{padding:12px;text-align:left;border-bottom:1px solid var(--b);font-size:13px}
+.subscriber-table th{font-weight:600;color:var(--t2)}
+.subscriber-table tr:hover{background:rgba(0,156,59,0.03)}
+.status-badge{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px}
+.status-badge.active{background:var(--green-d)}
+.status-badge.inactive{background:var(--t3)}
+.remove-btn{background:none;border:none;cursor:pointer;font-size:13px;color:var(--t3);padding:4px 8px;border-radius:var(--r);transition:all 0.2s}
+.remove-btn:hover{background:#FCEBEB;color:var(--red)}
+.add-subscriber-form{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.add-subscriber-form input{flex:1;min-width:150px;padding:10px;border:0.5px solid var(--b);border-radius:var(--r);font-family:'Inter',sans-serif}
+.add-subscriber-form input:focus{outline:none;border-color:var(--green)}
+.campaign-card{background:var(--bg);border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid var(--b)}
+.campaign-title{font-weight:600;margin-bottom:8px}
+.campaign-meta{font-size:12px;color:var(--t3);margin-bottom:12px}
+.campaign-stats{display:flex;gap:24px}
+.campaign-stat-value{font-weight:700;color:var(--t1)}
+.campaign-stat-label{font-size:11px;color:var(--t3)}
+.login-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:1000;display:none;align-items:center;justify-content:center}
+.login-box{background:var(--bg);border-radius:16px;padding:24px;width:320px}
+.login-box input{width:100%;margin-bottom:12px;padding:10px;border:0.5px solid var(--b);border-radius:var(--r)}
+.login-box button{width:100%}
+.api-section{background:var(--blue-l);padding:20px;border-radius:12px;margin-top:16px}
+.api-section .m-field-label{font-size:12px;font-weight:600;margin-bottom:8px}
+.api-section input{padding:12px;border:0.5px solid var(--b);border-radius:var(--r);width:100%;margin-bottom:12px}
+.api-note{font-size:10px;color:var(--blue);margin-top:6px;text-align:center}
+.topic-badge{display:inline-block;background:var(--green-l);color:var(--green-d);padding:4px 10px;border-radius:20px;font-size:11px;margin:2px}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--green-d);color:white;display:inline-flex;align-items:center;justify-content:center;font-weight:600;margin-right:10px;font-size:12px}
+
+/* FOOTER */
+footer{margin-top:1.5rem;padding-top:1.5rem;border-top:0.5px solid var(--b);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.footer-brand{display:flex;align-items:center;gap:10px}
+.footer-logo-ring{width:22px;height:22px;flex-shrink:0;cursor:pointer}
+.footer-logo-ring svg{width:22px;height:22px}
+.footer-brand-name{font-family:'Playfair Display',serif;font-size:16px;color:#888888;font-weight:500}
+.footer-note{font-size:14px;color:#888888}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">
+        <div class="logo-ring">
+          <svg viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="23" cy="23" r="18" stroke="#ddd0bc" stroke-width="7"/>
+            <circle cx="23" cy="23" r="18" stroke="#009C3B" stroke-width="7" stroke-linecap="round"
+              stroke-dasharray="36 77"
+              style="animation:spin-cw 6s linear infinite;transform-origin:23px 23px"/>
+            <circle cx="23" cy="23" r="18" stroke="#FFDF00" stroke-width="7" stroke-linecap="round"
+              stroke-dasharray="20 93"
+              style="animation:spin-cw 9s linear infinite;transform-origin:23px 23px;animation-delay:-2s"/>
+            <circle cx="23" cy="23" r="18" stroke="#002776" stroke-width="7" stroke-linecap="round"
+              stroke-dasharray="12 101"
+              style="animation:spin-cw 12s linear infinite;transform-origin:23px 23px;animation-delay:-4s"/>
+          </svg>
+        </div>
+        <div class="logo-text-container">
+          <div class="logo-name">Radar Brasil</div>
+          <div class="logo-sub">Inteligência para brasileiros na China</div>
+        </div>
+      </div>
+      <div class="live-row">
+        <span class="live-label"></span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="next-send">
+        Próxima newsletter<br>
+        <strong id="nextDate">—</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBSCRIBE HERO -->
+  <div class="sub-hero">
+    <div class="sub-hero-text">
+      <h2>Receba toda segunda-feira</h2>
+      <p>Alertas semanais no seu email</p>
+    </div>
+    <div class="sub-hero-form">
+      <input type="text" id="heroName" placeholder="Seu nome" style="width:140px"/>
+      <input type="email" id="heroEmail" placeholder="seu@email.com" style="width:190px"/>
+      <button class="sub-btn" onclick="heroSubscribe()">Inscreva-se</button>
+    </div>
+  </div>
+
+  <!-- TOPICS -->
+  <div class="sec-label">Temas monitorados</div>
+  <div class="topics" id="topicBar"></div>
+
+  <!-- ACTION BAR -->
+  <div class="action-bar">
+    <button class="btn btn-g" onclick="fetchAllNews()">Atualizar notícias</button>
+  </div>
+
+  <!-- NEWS GRID -->
+  <div class="sec-label">Últimas atualizações</div>
+  <div id="newsGrid" class="news-grid"></div>
+  <div id="loader" class="loader" style="display:none">
+    <div class="spin"></div>Buscando notícias...
+  </div>
+
+  <!-- DASHBOARD SECTION - UNDER ULTIMAS ATUALIZACOES -->
+  <div class="dashboard-section" id="dashboardSection" style="display:none">
+    <div class="dashboard-header">
+      <div class="small-logo">
+        <svg viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="23" cy="23" r="18" stroke="#ddd0bc" stroke-width="5"/>
+          <circle cx="23" cy="23" r="18" stroke="#009C3B" stroke-width="5" stroke-linecap="round"
+            stroke-dasharray="36 77"
+            style="animation:spin-cw 6s linear infinite;transform-origin:23px 23px"/>
+          <circle cx="23" cy="23" r="18" stroke="#FFDF00" stroke-width="5" stroke-linecap="round"
+            stroke-dasharray="20 93"
+            style="animation:spin-cw 9s linear infinite;transform-origin:23px 23px;animation-delay:-2s"/>
+          <circle cx="23" cy="23" r="18" stroke="#002776" stroke-width="5" stroke-linecap="round"
+            stroke-dasharray="12 101"
+            style="animation:spin-cw 12s linear infinite;transform-origin:23px 23px;animation-delay:-4s"/>
+        </svg>
+      </div>
+      <div class="header-text">
+        <h3>Radar Brasil</h3>
+        <p>Painel de controle</p>
+      </div>
+    </div>
+    
+    <div class="dashboard-tabs">
+      <button class="dash-tab active" onclick="showDashTab('home')">Visão geral</button>
+      <button class="dash-tab" onclick="showDashTab('audience')">Audiência</button>
+      <button class="dash-tab" onclick="showDashTab('campaigns')">Campanhas</button>
+      <button class="dash-tab" onclick="showDashTab('settings')">Configurações</button>
+    </div>
+    
+    <div id="dash-home">
+      <div class="dashboard-stats">
+        <div class="stat-card"><div class="stat-number" id="statTotal">0</div><div class="stat-label">Inscritos</div><div class="stat-change up" id="statGrowth">+0 esta semana</div></div>
+        <div class="stat-card"><div class="stat-number" id="statActive">0</div><div class="stat-label">Ativos (30d)</div></div>
+        <div class="stat-card"><div class="stat-number" id="statInactive">0</div><div class="stat-label">Inativos</div></div>
+        <div class="stat-card"><div class="stat-number" id="statOpenRate">0%</div><div class="stat-label">Abertura última campanha</div></div>
+      </div>
+      <div class="chart-container"><h4>Crescimento de inscritos</h4><canvas id="growthChart" height="120" style="max-height:150px"></canvas></div>
+      <div class="chart-container"><h4>Últimas campanhas</h4><div id="recentCampaigns"></div></div>
+    </div>
+    
+    <div id="dash-audience" style="display:none">
+      <div class="dashboard-stats" style="grid-template-columns:repeat(3,1fr)">
+        <div class="stat-card"><div class="stat-number" id="audTotal">0</div><div class="stat-label">Total</div></div>
+        <div class="stat-card"><div class="stat-number" id="audActive">0</div><div class="stat-label">Ativos</div></div>
+        <div class="stat-card"><div class="stat-number" id="audNew">0</div><div class="stat-label">Novos (30d)</div></div>
+      </div>
+      <div style="background:var(--bg);border-radius:12px;border:1px solid var(--b);overflow:auto">
+        <table class="subscriber-table"><thead><tr><th>Inscrito</th><th>Email</th><th>Temas</th><th>Data</th><th>Status</th><th></th></tr></thead><tbody id="audienceTableBody"></tbody></table>
+      </div>
+      <div class="add-subscriber-form">
+        <input type="text" id="newSubName" placeholder="Nome">
+        <input type="email" id="newSubEmail" placeholder="Email">
+        <button class="btn btn-g" onclick="addSubscriber()">Adicionar inscrito</button>
+      </div>
+    </div>
+    
+    <div id="dash-campaigns" style="display:none">
+      <div style="margin-bottom:16px"><button class="btn btn-g" onclick="createNewCampaign()">Nova campanha</button></div>
+      <div id="campaignsList"></div>
+    </div>
+    
+    <div id="dash-settings" style="display:none">
+      <div class="api-section">
+        <div class="m-field-label">Chave API NewsData.io</div>
+        <input type="text" id="apiKeyInput" placeholder="Cole sua chave API do NewsData.io aqui">
+        <button class="btn btn-g" onclick="saveApiKey()" style="width:100%">Salvar chave API</button>
+        <div class="api-note">Obtenha sua chave gratuita em newsdata.io</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGIN OVERLAY -->
+  <div id="loginOverlay" class="login-overlay">
+    <div class="login-box">
+      <h3 style="margin-bottom:16px">Acesso administrativo</h3>
+      <input type="password" id="adminPasswordInput" placeholder="Senha">
+      <button class="btn btn-g" onclick="checkAdminPassword()">Entrar</button>
+      <div id="loginErrorMsg" style="color:red;font-size:12px;margin-top:8px;text-align:center"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="footer-logo-ring" ondblclick="showAdminLogin()">
+        <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="8.5" stroke="#ccc" stroke-width="4"/>
+          <circle cx="11" cy="11" r="8.5" stroke="#009C3B" stroke-width="4" stroke-linecap="round"
+            stroke-dasharray="16 37"
+            style="animation:spin-cw 6s linear infinite;transform-origin:11px 11px"/>
+          <circle cx="11" cy="11" r="8.5" stroke="#FFDF00" stroke-width="4" stroke-linecap="round"
+            stroke-dasharray="9 44"
+            style="animation:spin-cw 9s linear infinite;transform-origin:11px 11px;animation-delay:-2s"/>
+          <circle cx="11" cy="11" r="8.5" stroke="#002776" stroke-width="4" stroke-linecap="round"
+            stroke-dasharray="5 48"
+            style="animation:spin-cw 12s linear infinite;transform-origin:11px 11px;animation-delay:-4s"/>
+        </svg>
+      </div>
+      <span class="footer-brand-name">Radar Brasil</span>
+    </div>
+    <div class="footer-note">Toda segunda-feira em seu email</div>
+  </footer>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
 <script>
 const ADMIN_PASSWORD = 'radar2024';
 const BREVO_API_KEY = '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';
@@ -6,138 +423,258 @@ const NEWSDATA_API_KEY = 'pub_ab546bab2eee494fb85264efc74f457a';
 let campaigns = JSON.parse(localStorage.getItem('rdc_campaigns') || '[]');
 let allNews = [], subs = [], newsdataApiKey = localStorage.getItem('newsdata_api_key') || NEWSDATA_API_KEY, growthChart = null;
 let isAdminLoggedIn = localStorage.getItem('admin_logged_in') === 'true';
-
 try { subs = JSON.parse(localStorage.getItem('rdc_subs') || '[]'); } catch(e) {}
 
-const NEWS_SYSTEM = {
-  categories: [
-    {
-      id: 'emergencias',
-      name: 'Alertas Consulares',
-      queries: [
-        'China new rules foreigners warning 2026 Beijing',
-        'alerta estrangeiros China hoje Pequim',
-        'China restrictions foreigners travel update Beijing',
-        'comunicado embaixada Brasil China urgente Pequim',
-        'China policy change affecting foreigners Beijing'
-      ]
-    },
-    {
-      id: 'imigracao',
-      name: 'Visto & Imigração',
-      queries: [
-        'China visa rules change foreigners 2026 Beijing',
-        'como renovar visto China brasileiro Pequim',
-        'residence permit China new policy Beijing',
-        'problemas visto China estrangeiros Beijing',
-        'China immigration update expats Beijing'
-      ]
-    },
-    {
-      id: 'comunidade',
-      name: 'Comunidade Brasileira',
-      queries: [
-        'evento brasileiros Beijing hoje',
-        'Brazilian community Beijing events',
-        'expats meetup Beijing Tianjin',
-        'grupos brasileiros Pequim encontro',
-        'vida de estrangeiros em Pequim relato'
-      ]
-    },
-    {
-      id: 'emprego',
-      name: 'Emprego',
-      queries: [
-        'jobs Beijing foreigners 2026 hiring',
-        'emprego China estrangeiros Pequim requisitos',
-        'companies hiring expats Beijing',
-        'salario Pequim estrangeiros custo de vida',
-        'Beijing job market foreigners news'
-      ]
-    },
-    {
-      id: 'negocios',
-      name: 'Negócios',
-      queries: [
-        'business Beijing foreigners restrictions',
-        'empresa estrangeira Pequim regras novas',
-        'Brazil China trade impact Beijing business',
-        'import export China changes Beijing 2026',
-        'market access Beijing foreigners update'
-      ]
-    },
-    {
-      id: 'eventos',
-      name: 'Eventos',
-      queries: [
-        'events Beijing this week expats',
-        'agenda cultural Pequim hoje',
-        'events Beijing weekend expats',
-        'what to do Beijing expats',
-        'international events Beijing Tianjin'
-      ]
-    },
-    {
-      id: 'saude',
-      name: 'Saúde',
-      queries: [
-        'healthcare Beijing foreigners experience',
-        'seguro saude China estrangeiros Pequim',
-        'hospital Pequim expats problems',
-        'China health policy foreigners Beijing',
-        'medical emergency Beijing expat'
-      ]
-    },
-    {
-      id: 'tecnologia',
-      name: 'Tecnologia',
-      queries: [
-        'apps China foreigners restrictions Beijing',
-        'digital payments China foreigners issues Beijing',
-        'VPN China rules update Beijing',
-        'China tech policy foreigners Beijing impact',
-        'AI China regulation Beijing users'
-      ]
-    },
-    {
-      id: 'bilateral',
-      name: 'Brasil-China',
-      queries: [
-        'Brazil China agreements impact citizens Beijing',
-        'China Brazil visa policy update Beijing',
-        'flights Brazil China Beijing changes',
-        'trade Brazil China Beijing impact jobs',
-        'China Brazil cooperation education Beijing students'
-      ]
-    }
-  ]
-};
+const CATEGORIES = [
+  { id: 'todos', name: 'Todos', active: true, color: '#1a5a2a', bg: 'rgba(124,239,90,0.73)', tag: 'Geral', visible: true, isSpecial: true },
+  { id: 'ccbb', name: 'Notícias do Conselho', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Conselho', visible: true, queries: ['"Conselho de Cidadãos Brasileiros" China Pequim', '"Conselho dos Brasileiros" Beijing'] },
+  { id: 'emergencias', name: 'Alertas Consulares', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Consular', visible: true, queries: ['"Embaixada do Brasil" China aviso urgente', '"consulado Brasil" China comunicado segurança'] },
+  { id: 'voto', name: 'Voto no Exterior', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Eleitoral', visible: true, queries: ['"voto exterior" Brasil China TSE', '"eleições 2026" China brasileiros voto'] },
+  { id: 'bilateral', name: 'Relações Brasil-China', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Diplomacia', visible: true, queries: ['"Lula" China visita oficial acordo', '"Brasil China" comércio investimento bilateral'] },
+  { id: 'negocios', name: 'Negócios Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Economia', visible: true, queries: ['empresas brasileiras na China investimento', '"comércio China Brasil" 2026 exportação'] },
+  { id: 'oportunidades', name: 'Bolsas & Oportunidades', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Oportunidades', visible: true, queries: ['"CSC scholarship" Brazil China 2026', '"Chinese Government Scholarship" Brazilian students'] },
+  { id: 'imigracao', name: 'Visto & Imigração', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Imigração', visible: true, queries: ['"visto de trabalho" China Brasil requisitos', '"residence permit" China Brazilian citizens'] },
+  { id: 'esportes', name: 'Notícias Esportivas', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Esportes', visible: true, queries: ['brasileiros futebol China Superliga', '"atletas brasileiros" China Olimpíadas'] },
+  { id: 'pesquisa', name: 'Pesquisa Acadêmica', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Acadêmico', visible: true, queries: ['Brazil China research partnership universities', 'cooperação acadêmica Brasil China 2025'] },
+  { id: 'cultural', name: 'Ano Cultural Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['festival brasileiro China 2025 samba', 'cultura Brasil China exposição Pequim'] },
+  { id: 'comunidade', name: 'Comunidade Brasileira na China', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Comunidade', visible: true, queries: ['brasileiros em Pequim encontro', '"Brazilian community" Shanghai events'] },
+  { id: 'saude', name: 'Saúde na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Saúde', visible: true, queries: ['seguro saúde China para estrangeiros', 'sistema hospitalar China brasileiros'] },
+  { id: 'turismo', name: 'Turismo & Lazer', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Turismo', visible: true, queries: ['roteiros China brasileiros dicas', 'visto turismo China 2025 requisitos'] },
+  { id: 'eventos', name: 'Eventos em Beijing', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Eventos', visible: true, queries: ['agenda cultural Pequim 2025 exposição', 'shows Beijing 2025 programação'] },
+  { id: 'emprego', name: 'Oportunidades de Emprego', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Carreira', visible: true, queries: ['vagas para brasileiros Shanghai 2026', 'emprego China empresas multinacionais Brasil'] },
+  { id: 'tecnologia', name: 'Tecnologia na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Tecnologia', visible: true, queries: ['inovação China Brasil startups', 'inteligência artificial China parceria Brasil'] },
+  { id: 'curiosidades', name: 'Curiosidades Cultura Chinesa', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['fatos curiosos China tradição', 'Chinese culture festival Brazil expatriates'] }
+];
 
-/* =========================
-   FIX (ONLY THIS PART)
-   ========================= */
-if (typeof CATEGORIES === 'undefined') {
-  window.CATEGORIES = [
-    {
-      id: 'todos',
-      name: 'Todos',
-      active: true,
-      color: '#1a5a2a',
-      bg: 'rgba(124,239,90,0.73)',
-      tag: 'Geral',
-      visible: true,
-      isSpecial: true
-    },
-    ...NEWS_SYSTEM.categories.map(cat => ({
-      id: cat.id,
-      name: cat.name,
-      active: false,
-      color: '#7a9aba',
-      bg: '#f0f5fc',
-      tag: cat.name,
-      visible: true,
-      queries: cat.queries
-    }))
-  ];
+function nextMonday() {
+  const d = new Date(), day = d.getDay(), diff = day === 1 ? 7 : (8 - day) % 7 || 7;
+  d.setDate(d.getDate() + diff);
+  return d.toLocaleDateString('pt-BR', {weekday:'long', day:'2-digit', month:'long'});
 }
+document.getElementById('nextDate').textContent = nextMonday();
+
+function renderTopics() {
+  const visible = CATEGORIES.filter(c => c.visible === true);
+  document.getElementById('topicBar').innerHTML = visible.map(cat => {
+    const isActive = cat.active;
+    if (isActive) {
+      return `<div class="pill on ${cat.id}" style="background:${cat.bg};color:${cat.color};border-color:${cat.color}80" onclick="toggleTopic('${cat.id}')">${cat.name}</div>`;
+    } else {
+      return `<div class="pill ${cat.id}" onclick="toggleTopic('${cat.id}')">${cat.name}</div>`;
+    }
+  }).join('');
+}
+
+function toggleTopic(id) {
+  const cat = CATEGORIES.find(c => c.id === id);
+  if (!cat) return;
+  if (id === 'todos') {
+    const wasActive = cat.active;
+    CATEGORIES.forEach(c => { if (c.id !== 'todos') c.active = !wasActive; });
+    cat.active = !wasActive;
+  } else {
+    cat.active = !cat.active;
+    const allOthersActive = CATEGORIES.filter(c => c.id !== 'todos' && c.visible).every(c => c.active === true);
+    const todos = CATEGORIES.find(c => c.id === 'todos');
+    if (todos) todos.active = allOthersActive;
+  }
+  renderTopics();
+  fetchAllNews();
+}
+
+function showAdminLogin() {
+  document.getElementById('loginOverlay').style.display = 'flex';
+}
+
+function checkAdminPassword() {
+  const password = document.getElementById('adminPasswordInput').value;
+  if (password === ADMIN_PASSWORD) {
+    isAdminLoggedIn = true;
+    localStorage.setItem('admin_logged_in', 'true');
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('dashboardSection').style.display = 'block';
+    updateDashboardData();
+    renderAudienceTable();
+    renderCampaignsList();
+    document.getElementById('apiKeyInput').value = newsdataApiKey;
+  } else {
+    document.getElementById('loginErrorMsg').innerHTML = 'Senha incorreta';
+  }
+}
+
+function logoutAdmin() {
+  isAdminLoggedIn = false;
+  localStorage.removeItem('admin_logged_in');
+  document.getElementById('dashboardSection').style.display = 'none';
+  toast('Desconectado');
+}
+
+function showDashTab(tab) {
+  document.getElementById('dash-home').style.display = 'none';
+  document.getElementById('dash-audience').style.display = 'none';
+  document.getElementById('dash-campaigns').style.display = 'none';
+  document.getElementById('dash-settings').style.display = 'none';
+  document.getElementById(`dash-${tab}`).style.display = 'block';
+  document.querySelectorAll('.dash-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  if (tab === 'home') updateDashboardData();
+  if (tab === 'audience') renderAudienceTable();
+  if (tab === 'campaigns') renderCampaignsList();
+}
+
+function updateDashboardData() {
+  const thirtyDaysAgo = new Date(); thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+  const sevenDaysAgo = new Date(); sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+  const activeSubs = subs.filter(s => s.lastOpen ? new Date(s.lastOpen) > thirtyDaysAgo : false).length;
+  const inactiveSubs = subs.filter(s => !s.lastOpen || new Date(s.lastOpen) <= thirtyDaysAgo).length;
+  const newThisWeek = subs.filter(s => new Date(s.date.split('/').reverse().join('-')) > sevenDaysAgo).length;
+  document.getElementById('statTotal').textContent = subs.length;
+  document.getElementById('statActive').textContent = activeSubs;
+  document.getElementById('statInactive').textContent = inactiveSubs;
+  document.getElementById('statGrowth').innerHTML = `+${newThisWeek} esta semana`;
+  const lastCampaign = campaigns[campaigns.length - 1];
+  if (lastCampaign) document.getElementById('statOpenRate').textContent = `${Math.round((lastCampaign.opens || 0) / (lastCampaign.sent || 1) * 100)}%`;
+  if (growthChart) growthChart.destroy();
+  const ctx = document.getElementById('growthChart').getContext('2d');
+  growthChart = new Chart(ctx, { type: 'line', data: { labels: ['Semana 5', 'Semana 4', 'Semana 3', 'Semana 2', 'Semana 1', 'Hoje'], datasets: [{ label: 'Inscritos', data: [12, 15, 18, 22, 25, subs.length], borderColor: '#009C3B', tension: 0.3, fill: false }] }, options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } } } });
+  const recentHtml = campaigns.slice(-3).reverse().map(c => `<div class="campaign-card"><div class="campaign-title">${escapeHtml(c.subject)}</div><div class="campaign-meta">Enviada em ${c.date} • ${c.sent || 0} destinatários</div><div class="campaign-stats"><div class="campaign-stat"><div class="campaign-stat-value">${Math.round((c.opens || 0) / (c.sent || 1) * 100)}%</div><div class="campaign-stat-label">Abertura</div></div><div class="campaign-stat"><div class="campaign-stat-value">${Math.round((c.clicks || 0) / (c.opens || 1) * 100)}%</div><div class="campaign-stat-label">Clique</div></div></div></div>`).join('');
+  document.getElementById('recentCampaigns').innerHTML = recentHtml || '<div style="padding:20px;text-align:center;color:var(--t3)">Nenhuma campanha enviada ainda</div>';
+}
+
+function renderAudienceTable() {
+  const thirtyDaysAgo = new Date(); thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+  const tbody = document.getElementById('audienceTableBody');
+  if (!tbody) return;
+  tbody.innerHTML = subs.map((s, i) => {
+    const firstLetter = s.name ? s.name.charAt(0).toUpperCase() : '?';
+    const isActive = s.lastOpen ? new Date(s.lastOpen) > thirtyDaysAgo : false;
+    const topicsHtml = (s.topics || []).slice(0,3).map(t => `<span class="topic-badge">${escapeHtml(t)}</span>`).join('');
+    return `<tr><td><span class="avatar">${escapeHtml(firstLetter)}</span> ${escapeHtml(s.name)}</td><td>${escapeHtml(s.email)}</td><td>${topicsHtml || '<span class="topic-badge">Todos</span>'}</td><td>${s.date || '-'}</td><td><span class="status-badge ${isActive ? 'active' : 'inactive'}"></span> ${isActive ? 'Ativo' : 'Inativo'}</td><td><button class="remove-btn" onclick="removeSubscriber(${i})">Remover</button></td></tr>`;
+  }).join('');
+  document.getElementById('audTotal').textContent = subs.length;
+  document.getElementById('audActive').textContent = subs.filter(s => s.lastOpen ? new Date(s.lastOpen) > thirtyDaysAgo : false).length;
+  document.getElementById('audNew').textContent = subs.filter(s => new Date(s.date.split('/').reverse().join('-')) > new Date(Date.now() - 30*24*60*60*1000)).length;
+}
+
+function renderCampaignsList() {
+  const container = document.getElementById('campaignsList');
+  if (!campaigns.length) { container.innerHTML = '<div style="padding:40px;text-align:center;color:var(--t3)">Nenhuma campanha criada ainda</div>'; return; }
+  container.innerHTML = campaigns.slice().reverse().map(c => `<div class="campaign-card"><div class="campaign-title">${escapeHtml(c.subject)}</div><div class="campaign-meta">${c.date} • ${c.sent || 0} enviados • ${c.opens || 0} aberturas • ${c.clicks || 0} cliques</div><div class="campaign-stats"><div class="campaign-stat"><div class="campaign-stat-value">${Math.round((c.opens || 0) / (c.sent || 1) * 100)}%</div><div class="campaign-stat-label">Abertura</div></div><div class="campaign-stat"><div class="campaign-stat-value">${Math.round((c.clicks || 0) / (c.opens || 1) * 100)}%</div><div class="campaign-stat-label">Clique</div></div></div></div>`).join('');
+}
+
+function createNewCampaign() {
+  const subject = prompt('Assunto da campanha:');
+  if (!subject) return;
+  const content = prompt('Conteúdo da campanha:');
+  if (!content) return;
+  campaigns.push({ subject, content, date: new Date().toLocaleDateString('pt-BR'), sent: 0, opens: 0, clicks: 0 });
+  localStorage.setItem('rdc_campaigns', JSON.stringify(campaigns));
+  renderCampaignsList();
+  toast('Campanha criada');
+}
+
+function addSubscriber() {
+  const name = document.getElementById('newSubName').value.trim();
+  const email = document.getElementById('newSubEmail').value.trim();
+  if (!email || !email.includes('@')) { toast('E-mail inválido'); return; }
+  if (subs.find(s => s.email === email)) { toast('Já na lista'); return; }
+  subs.push({ name: name || email.split('@')[0], email, topics: [], date: new Date().toLocaleDateString('pt-BR') });
+  localStorage.setItem('rdc_subs', JSON.stringify(subs));
+  document.getElementById('newSubName').value = '';
+  document.getElementById('newSubEmail').value = '';
+  renderAudienceTable();
+  updateDashboardData();
+  toast('Inscrito adicionado');
+}
+
+function removeSubscriber(i) {
+  if (confirm('Remover este inscrito?')) { subs.splice(i, 1); localStorage.setItem('rdc_subs', JSON.stringify(subs)); renderAudienceTable(); updateDashboardData(); toast('Removido'); }
+}
+
+function saveApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (key) { newsdataApiKey = key; localStorage.setItem('newsdata_api_key', key); toast('Chave salva'); fetchAllNews(); }
+  else toast('Chave inválida');
+}
+
+async function heroSubscribe() {
+  const name = document.getElementById('heroName').value.trim();
+  const email = document.getElementById('heroEmail').value.trim();
+  if (!email || !email.includes('@')) { toast('E-mail inválido'); return; }
+  const selectedTopics = Array.from(document.querySelectorAll('.pill.on')).map(p => p.innerText).filter(t => t !== 'Todos');
+  toast('Enviando...');
+  try {
+    await fetch('https://api.brevo.com/v3/smtp/email', { method: 'POST', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'api-key': BREVO_API_KEY }, body: JSON.stringify({ sender: { email: 'radar@radarbrasil.com', name: 'Radar Brasil' }, to: [{ email }], subject: 'Bem-vindo ao Radar Brasil!', htmlContent: `<h2>Olá ${name || email}!</h2><p>Você receberá nosso resumo semanal.</p><p>Temas: ${selectedTopics.join(', ') || 'Todos'}</p>` }) });
+    if (!subs.find(s => s.email === email)) { subs.push({ name: name || email.split('@')[0], email, topics: selectedTopics, date: new Date().toLocaleDateString('pt-BR') }); localStorage.setItem('rdc_subs', JSON.stringify(subs)); }
+    toast('Inscrito com sucesso!');
+    document.getElementById('heroName').value = '';
+    document.getElementById('heroEmail').value = '';
+  } catch(e) { toast('Erro'); }
+}
+
+function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
+function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
+function truncateSummary(text, maxWords = 58) { if (!text) return ''; const words = text.split(/\s+/); return words.length <= maxWords ? text : words.slice(0, maxWords).join(' ') + '...'; }
+
+async function searchCategory(category) {
+  if (category.id === 'todos' || !newsdataApiKey) return [];
+  const articles = [], seen = new Set();
+  for (const q of category.queries.slice(0,2)) {
+    try {
+      const res = await fetch(`https://radar-news-proxy.onlirroquenrouseives.workers.dev/news?q=${encodeURIComponent(q)}&language=pt,en,zh&size=5`);
+      const data = await res.json();
+      if (data.results) {
+        for (const a of data.results) {
+          if (!seen.has(a.link) && articles.length < 5 && a.title && a.link) {
+            seen.add(a.link);
+            let translatedSummary = a.description || 'Clique para ler';
+            if (a.language === 'zh' && translatedSummary.length > 10) translatedSummary = '🔹 Conteúdo em chinês. Clique para ver detalhes.';
+            if (a.language === 'en' && translatedSummary.length > 10) translatedSummary = translatedSummary;
+            articles.push({ title: a.title, summary: translatedSummary, source: a.source_name || 'Fonte', date: a.pubDate ? new Date(a.pubDate).toLocaleDateString('pt-BR') : 'Data recente', url: a.link, categoryId: category.id, categoryName: category.name, categoryColor: category.color, categoryBg: category.bg, categoryTag: category.tag });
+          }
+        }
+      }
+      await new Promise(r => setTimeout(r, 300));
+    } catch(e) { console.error(e); }
+  }
+  return articles;
+}
+
+function renderNews() {
+  const container = document.getElementById('newsGrid');
+  if (!container) return;
+  if (allNews.length === 0) { container.innerHTML = '<div class="empty">Nenhuma notícia encontrada. Tente selecionar outros temas.</div>'; return; }
+  container.innerHTML = allNews.map(item => `<div class="news-card" onclick="window.open('${escapeHtml(item.url)}', '_blank')"><div class="topic-tag" style="background:${item.categoryBg}; color:${item.categoryColor}">${item.categoryTag}</div><div class="news-title">${escapeHtml(item.title)}</div><div class="news-meta"><span class="news-source">${escapeHtml(item.source)}</span><span class="news-date">${item.date}</span></div><div class="news-summary">${escapeHtml(truncateSummary(item.summary, 58))}</div><a href="${escapeHtml(item.url)}" target="_blank" class="news-link" onclick="event.stopPropagation()">Ler artigo completo →</a></div>`).join('');
+}
+
+async function fetchAllNews() {
+  if (!newsdataApiKey) { document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API no Admin</div>'; return; }
+  const active = CATEGORIES.filter(c => c.active === true && c.id !== 'todos');
+  if (active.length === 0) { document.getElementById('newsGrid').innerHTML = '<div class="empty">Selecione pelo menos um tema</div>'; return; }
+  const grid = document.getElementById('newsGrid'), loader = document.getElementById('loader');
+  grid.innerHTML = ''; loader.style.display = 'flex';
+  const all = [];
+  for (const cat of active) { const arts = await searchCategory(cat); all.push(...arts); }
+  const unique = [], seen = new Set();
+  for (const a of all) { if (!seen.has(a.url)) { seen.add(a.url); unique.push(a); } }
+  unique.sort((a,b) => new Date(b.date) - new Date(a.date));
+  allNews = unique.slice(0, 24);
+  loader.style.display = 'none';
+  renderNews();
+  toast('Notícias atualizadas');
+}
+
+if (isAdminLoggedIn) {
+  document.getElementById('dashboardSection').style.display = 'block';
+  updateDashboardData();
+  renderAudienceTable();
+  renderCampaignsList();
+  document.getElementById('apiKeyInput').value = newsdataApiKey;
+}
+
+renderTopics();
+if (newsdataApiKey) fetchAllNews();
+else document.getElementById('newsGrid').innerHTML = '<div class="empty">Configure sua chave API clicando duas vezes no círculo do rodapé</div>';
 </script>
+</body>
+</html>
