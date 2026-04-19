@@ -427,7 +427,7 @@ try { subs = JSON.parse(localStorage.getItem('rdc_subs') || '[]'); } catch(e) {}
 
 const CATEGORIES = [
   { id: 'todos', name: 'Todos', active: true, color: '#1a5a2a', bg: 'rgba(124,239,90,0.73)', tag: 'Geral', visible: true, isSpecial: true },
-  { id: 'ccbb', name: 'Notícias do Conselho', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Conselho', visible: true, queries: ['conselho cidadaos brasileiros Pequim reuniao hoje', 'comunidade brasileira Beijing reuniao ultimas horas'] },
+  { id: 'ccbb', name: 'Notícias do Conselho', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Conselho', visible: true, queries: ['conselho cidadaos brasileiros Pequim]',  'conselho.beijing.org',  'comunidade brasileira Beijing reuniao ultimas horas'] },
   { id: 'emergencias', name: 'Alertas Consulares', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Consular', visible: true, queries: ['alerta consular China brasileiros emergencia agora', 'embaixada Brasil Pequim aviso urgencia 2026'] },
   { id: 'voto', name: 'Voto no Exterior', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Eleitoral', visible: true, queries: ['voto exterior China brasileiros prazo 2026', 'como votar China eleicoes Brasil procedimento'] },
   { id: 'bilateral', name: 'Relações Brasil-China', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Diplomacia', visible: true, queries: ['acordo Brasil China hoje ultimas negociacoes', 'relacoes diplomaticas Pequim Brasilia nova regra'] },
@@ -435,7 +435,7 @@ const CATEGORIES = [
   { id: 'oportunidades', name: 'Bolsas & Oportunidades', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Oportunidades', visible: true, queries: ['bolsa estudo China brasileiros prazo 2026 oportunidade', 'intercambio China bolsa ultimas horas raro'] },
   { id: 'imigracao', name: 'Visto & Imigração', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Imigração', visible: true, queries: ['como renovar visto China problema hoje', 'mudanca visto trabalho China estrangeiros 2026 alerta'] },
   { id: 'esportes', name: 'Notícias Esportivas', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Esportes', visible: true, queries: ['brasileiros futebol China jogo hoje noticia', 'campeonato chines brasileiro destaque ultimas horas'] },
-  { id: 'pesquisa', name: 'Pesquisa Acadêmica', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Acadêmico', visible: true, queries: ['pesquisa Brasil China universidade publicacao hoje', 'estudo cooperacao academica Pequim oportunidade raro'] },
+  { id: 'pesquisa', name: 'Pesquisa Acadêmica', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Acadêmico', visible: true, queries: ['pesquisa Brasil China universidade publicacao hoje', 'estudo cooperacao academica Pequim oportunidade'] },
   { id: 'cultural', name: 'Ano Cultural Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['evento cultural Brasil Pequim hoje agora', 'festival brasileiro China 2026 programacao ultimas horas'] },
   { id: 'comunidade', name: 'Comunidade Brasileira na China', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Comunidade', visible: true, queries: ['brasileiros em Pequim encontro hoje noticia', 'comunidade Brasil China reuniao oportunidade'] },
   { id: 'saude', name: 'Saúde na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Saúde', visible: true, queries: ['seguro saude China estrangeiros problema hoje', 'atendimento medico Pequim brasileiros alerta 2026'] },
