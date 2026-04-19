@@ -110,60 +110,34 @@ const NEWS_SYSTEM = {
         'China Brazil cooperation education Beijing students'
       ]
     }
-  ],
-
-  filters: {
-    mustHave: ['china'],
-    relevanceSignals: ['foreigners', 'expats', 'estrangeiros', 'brasileiros'],
-    boost: ['beijing', 'pequim', 'tianjin','visa','visto','policy','rule','update','job','work','emprego','health','hospital','event','festival'],
-    negative: ['war','military','missile','iran','israel']
-  },
-
-  scoreArticle(article) {
-    const text = (article.title + ' ' + article.description).toLowerCase();
-    let score = 0;
-
-    if (!this.filters.mustHave.some(t => text.includes(t))) return -100;
-    if (this.filters.relevanceSignals.some(t => text.includes(t))) score += 3;
-    if (text.includes('beijing') || text.includes('pequim')) score += 4;
-    if (text.includes('tianjin')) score += 3;
-
-    this.filters.boost.forEach(t => { if (text.includes(t)) score += 2; });
-    this.filters.negative.forEach(t => { if (text.includes(t)) score -= 5; });
-
-    return score;
-  },
-
-  filterAndRank(articles) {
-    return articles
-      .map(a => ({ ...a, score: this.scoreArticle(a) }))
-      .filter(a => a.score > 0)
-      .sort((a,b) => b.score - a.score);
-  }
+  ]
 };
 
 /* =========================
+   FIX (ONLY THIS PART)
    ========================= */
-const CATEGORIES = [
-  {
-    id: 'todos',
-    name: 'Todos',
-    active: true,
-    color: '#1a5a2a',
-    bg: 'rgba(124,239,90,0.73)',
-    tag: 'Geral',
-    visible: true,
-    isSpecial: true
-  },
-  ...NEWS_SYSTEM.categories.map(cat => ({
-    id: cat.id,
-    name: cat.name,
-    active: false,
-    color: '#7a9aba',
-    bg: '#f0f5fc',
-    tag: cat.name,
-    visible: true,
-    queries: cat.queries
-  }))
-];
+if (typeof CATEGORIES === 'undefined') {
+  window.CATEGORIES = [
+    {
+      id: 'todos',
+      name: 'Todos',
+      active: true,
+      color: '#1a5a2a',
+      bg: 'rgba(124,239,90,0.73)',
+      tag: 'Geral',
+      visible: true,
+      isSpecial: true
+    },
+    ...NEWS_SYSTEM.categories.map(cat => ({
+      id: cat.id,
+      name: cat.name,
+      active: false,
+      color: '#7a9aba',
+      bg: '#f0f5fc',
+      tag: cat.name,
+      visible: true,
+      queries: cat.queries
+    }))
+  ];
+}
 </script>
