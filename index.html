@@ -81,29 +81,37 @@ body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:va
 .sec-label{font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#1a1a1a;font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .sec-label::after{content:'';flex:1;height:0.5px;background:var(--b)}
 
-/* TOPICS - FORCED EXACTLY 2 ROWS & RIGHT MARGIN FIX */
+/* TOPICS - EXACTLY 2 ROWS & RIGHT MARGIN FIX */
 .topics {
   display: grid;
-  grid-template-columns: repeat(8, auto);
+  grid-template-columns: repeat(9, auto);
   gap: 10px;
   margin-bottom: 1.4rem;
   width: 100%;
-  justify-content: start;
-  max-width: 100%;
-  overflow-x: auto;
-  padding-right: 0;
+  overflow: hidden;
 }
-@media (max-width: 950px) {
+/* Force exactly 2 rows using grid */
+@media (min-width: 1200px) {
+  .topics {
+    grid-template-columns: repeat(9, auto);
+  }
+}
+@media (max-width: 1199px) and (min-width: 900px) {
+  .topics {
+    grid-template-columns: repeat(6, auto);
+  }
+}
+@media (max-width: 899px) and (min-width: 600px) {
   .topics {
     grid-template-columns: repeat(5, auto);
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 599px) and (min-width: 400px) {
   .topics {
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(3, auto);
   }
 }
-@media (max-width: 500px) {
+@media (max-width: 399px) {
   .topics {
     grid-template-columns: repeat(2, auto);
   }
@@ -121,7 +129,6 @@ body{font-family:'Inter',sans-serif;font-size:17px;color:var(--t1);background:va
   font-family: 'Inter', sans-serif;
   text-align: center;
   white-space: nowrap;
-  flex-shrink: 0;
 }
 .pill.on{font-weight:500}
 .pill.on.todos{background:rgba(124,239,90,0.73);color:#1a5a2a;border-color:#7aef5a}
