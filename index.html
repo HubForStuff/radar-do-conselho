@@ -429,24 +429,105 @@ let isAdminLoggedIn = localStorage.getItem('admin_logged_in') === 'true';
 try { subs = JSON.parse(localStorage.getItem('rdc_subs') || '[]'); } catch(e) {}
 
 const CATEGORIES = [
-  { id: 'todos', name: 'Todos', active: true, color: '#1a5a2a', bg: 'rgba(124,239,90,0.73)', tag: 'Geral', visible: true, isSpecial: true },
-  { id: 'ccbb', name: 'Notícias do Conselho', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Conselho', visible: true, queries: ['"Conselho de Cidadãos Brasileiros" China Pequim', '"Conselho dos Brasileiros" Beijing'] },
-  { id: 'emergencias', name: 'Alertas Consulares', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Consular', visible: true, queries: ['"Embaixada do Brasil" China aviso urgente', '"consulado Brasil" China comunicado segurança'] },
-  { id: 'voto', name: 'Voto no Exterior', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Eleitoral', visible: true, queries: ['"voto exterior" Brasil China TSE', '"eleições 2026" China brasileiros voto'] },
-  { id: 'bilateral', name: 'Relações Brasil-China', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Diplomacia', visible: true, queries: ['"Lula" China visita oficial acordo', '"Brasil China" comércio investimento bilateral'] },
-  { id: 'negocios', name: 'Negócios Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Economia', visible: true, queries: ['empresas brasileiras na China investimento', '"comércio China Brasil" 2026 exportação'] },
-  { id: 'oportunidades', name: 'Bolsas & Oportunidades', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Oportunidades', visible: true, queries: ['"CSC scholarship" Brazil China 2026', '"Chinese Government Scholarship" Brazilian students'] },
-  { id: 'imigracao', name: 'Visto & Imigração', active: false, color: '#5ab88a', bg: '#edf8f2', tag: 'Imigração', visible: true, queries: ['"visto de trabalho" China Brasil requisitos', '"residence permit" China Brazilian citizens'] },
-  { id: 'esportes', name: 'Notícias Esportivas', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Esportes', visible: true, queries: ['brasileiros futebol China Superliga', '"atletas brasileiros" China Olimpíadas'] },
-  { id: 'pesquisa', name: 'Pesquisa Acadêmica', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Acadêmico', visible: true, queries: ['Brazil China research partnership universities', 'cooperação acadêmica Brasil China 2025'] },
-  { id: 'cultural', name: 'Ano Cultural Brasil-China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['festival brasileiro China 2025 samba', 'cultura Brasil China exposição Pequim'] },
-  { id: 'comunidade', name: 'Comunidade Brasileira na China', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Comunidade', visible: true, queries: ['brasileiros em Pequim encontro', '"Brazilian community" Shanghai events'] },
-  { id: 'saude', name: 'Saúde na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Saúde', visible: true, queries: ['seguro saúde China para estrangeiros', 'sistema hospitalar China brasileiros'] },
-  { id: 'turismo', name: 'Turismo & Lazer', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Turismo', visible: true, queries: ['roteiros China brasileiros dicas', 'visto turismo China 2025 requisitos'] },
-  { id: 'eventos', name: 'Eventos em Beijing', active: false, color: '#c4983a', bg: '#fdf8ed', tag: 'Eventos', visible: true, queries: ['agenda cultural Pequim 2025 exposição', 'shows Beijing 2025 programação'] },
-  { id: 'emprego', name: 'Oportunidades de Emprego', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Carreira', visible: true, queries: ['vagas para brasileiros Shanghai 2026', 'emprego China empresas multinacionais Brasil'] },
-  { id: 'tecnologia', name: 'Tecnologia na China', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Tecnologia', visible: true, queries: ['inovação China Brasil startups', 'inteligência artificial China parceria Brasil'] },
-  { id: 'curiosidades', name: 'Curiosidades Cultura Chinesa', active: false, color: '#7a9aba', bg: '#f0f5fc', tag: 'Cultura', visible: true, queries: ['fatos curiosos China tradição', 'Chinese culture festival Brazil expatriates'] }
+  {
+    id: 'emergencias',
+    name: 'Alertas Consulares',
+    queries: [
+      'brasileiros na China alerta hoje',
+      'China new rules foreigners visa problem 2026',
+      'expats China warning travel restriction',
+      'Embaixada Brasil China comunicado urgente',
+      'China policy change foreigners impact 2026'
+    ]
+  },
+  {
+    id: 'imigracao',
+    name: 'Visto & Imigração',
+    queries: [
+      'como renovar visto china brasileiro 2026',
+      'China visa rules change foreigners 2026',
+      'residence permit China new policy expats',
+      'problemas visto China estrangeiros',
+      'work visa China requirements update 2026'
+    ]
+  },
+  {
+    id: 'comunidade',
+    name: 'Comunidade Brasileira',
+    queries: [
+      'evento brasileiros Beijing hoje',
+      'Brazilian community Shanghai events 2026',
+      'grupos brasileiros China encontro',
+      'expats Brazil China meetup',
+      'brasileiros na China dificuldades relato'
+    ]
+  },
+  {
+    id: 'emprego',
+    name: 'Emprego',
+    queries: [
+      'jobs in China for foreigners 2026 hiring',
+      'emprego China estrangeiros requisitos 2026',
+      'companies hiring expats China',
+      'salario China estrangeiros 2026',
+      'layoffs China expats news'
+    ]
+  },
+  {
+    id: 'negocios',
+    name: 'Negócios',
+    queries: [
+      'Brazil China business opportunities 2026',
+      'empresa brasileira China expansão',
+      'China market foreigners restrictions business',
+      'import export Brazil China changes 2026',
+      'small business China expats challenges'
+    ]
+  },
+  {
+    id: 'eventos',
+    name: 'Eventos',
+    queries: [
+      'events Beijing this week expats',
+      'what to do Beijing weekend expats',
+      'agenda cultural Beijing hoje',
+      'events Shanghai expats 2026',
+      'festival China international events'
+    ]
+  },
+  {
+    id: 'saude',
+    name: 'Saúde',
+    queries: [
+      'healthcare China foreigners experience',
+      'seguro saude China estrangeiros vale a pena',
+      'hospital China expats problems',
+      'China health policy foreigners 2026',
+      'medical emergency China expat story'
+    ]
+  },
+  {
+    id: 'tecnologia',
+    name: 'Tecnologia',
+    queries: [
+      'China tech news impact expats',
+      'apps China foreigners restrictions',
+      'AI China news global impact 2026',
+      'digital payments China foreigners issues',
+      'VPN China rules update'
+    ]
+  },
+  {
+    id: 'bilateral',
+    name: 'Brasil-China',
+    queries: [
+      'Brazil China relations impact citizens',
+      'Lula China agreements impact expats',
+      'China Brazil visa agreements',
+      'trade Brazil China impact jobs',
+      'Brazil China flights changes 2026'
+    ]
+  }
 ];
 
 function nextMonday() {
